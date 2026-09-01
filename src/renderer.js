@@ -330,9 +330,13 @@ function setStatus(msg, type) {
   const div = document.createElement('div');
   div.id = 'emptyState';
   div.innerHTML = `
-    <span class="big-icon">📊</span>
-    <p>Enter a symbol and click <strong>Load Data</strong></p>
-    <p style="font-size:12px">Arrow keys step through bars once loaded</p>
+    <svg class="empty-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="4" y="20" width="4" height="8" rx="1" fill="currentColor"/>
+      <rect x="10" y="14" width="4" height="14" rx="1" fill="currentColor"/>
+      <rect x="16" y="8" width="4" height="20" rx="1" fill="currentColor"/>
+      <rect x="22" y="16" width="4" height="12" rx="1" fill="currentColor"/>
+    </svg>
+    <p>Pick a symbol and click <strong>Load Data</strong><br>then use arrow keys to step through bars</p>
   `;
   chartContainer.appendChild(div);
 })();
