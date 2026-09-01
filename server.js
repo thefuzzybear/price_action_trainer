@@ -102,6 +102,39 @@ app.delete('/api/cache/:filename', (req, res) => {
     const safe = path.basename(req.params.filename);
     const fp   = path.join(DATA_DIR, safe);
     if (fs.existsSync(fp)) fs.unlinkSync(fp);
+    // Also remove associated session file if present
+    const sessionFp = fp.replace(/\.json$/, '.session.json');
+    if (fs.existsSync(sessionFp)) fs.unlinkSync(sessionFp);
+    res.json({ ok: true });
+  } catch (err) {
+    res.status(500).json({ ok: false, error: err.message });
+  }
+});
+
+// ── API: Load session state ───────────────────────────────────────────────────
+app.get('/api/session', (req, res) => {
+  const { cacheKey } = req.query;
+  if (!cacheKey) return res.status(400).json({ ok: false, error: 'Missing cacheKey' });
+  const safe = path.basename(cacheKey);
+  const fp   = path.join(DATA_DIR, `${safe}.session.json`);
+  if (!fs.existsSync(fp)) return res.json({ ok: false, exists: false });
+  try {
+    const data = JSON.parse(fs.readFileSync(fp, 'utf8'));
+    res.json({ ok: true, exists: true, data });
+  } catch {
+    res.json({ ok: false, exists: false });
+  }
+});
+
+// ── API: Save session state ───────────────────────────────────────────────────
+app.use(express.json({ limit: '2mb' }));
+app.post('/api/session', (req, res) => {
+  const { cacheKey, state } = req.body;
+  if (!cacheKey || !state) return res.status(400).json({ ok: false, error: 'Missing cacheKey or state' });
+  const safe = path.basename(cacheKey);
+  const fp   = path.join(DATA_DIR, `${safe}.session.json`);
+  try {
+    fs.writeFileSync(fp, JSON.stringify(state), 'utf8');
     res.json({ ok: true });
   } catch (err) {
     res.status(500).json({ ok: false, error: err.message });

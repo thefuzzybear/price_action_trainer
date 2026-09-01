@@ -10,14 +10,12 @@
 
   <!-- ── Sidebar ───────────────────────────────────────────────────── -->
   <aside id="sidebar">
-
     <div class="sidebar-header">
       <div class="app-name">Price Action Trainer</div>
     </div>
 
     <div class="sidebar-body">
 
-      <!-- Symbol -->
       <div class="field-group">
         <div class="field-label">Symbol</div>
         <div class="input-row">
@@ -26,7 +24,6 @@
         </div>
       </div>
 
-      <!-- Interval -->
       <div class="field-group">
         <div class="field-label">Interval</div>
         <select id="intervalSelect">
@@ -39,14 +36,12 @@
         </select>
       </div>
 
-      <!-- Date range -->
       <div class="field-group">
         <div class="field-label">Date range</div>
         <input id="startDate" type="date" value="2020-01-01" />
         <input id="endDate"   type="date" style="margin-top:4px" />
       </div>
 
-      <!-- Starting bars -->
       <div class="field-group">
         <div class="field-label">Starting bars</div>
         <input id="startBar" type="number" value="50" min="5" max="5000" />
@@ -55,12 +50,11 @@
 
       <div class="divider"></div>
 
-      <!-- Blind mode -->
       <div class="field-group">
         <div class="toggle-field">
           <div class="toggle-info">
             <div class="toggle-title">Blind mode</div>
-            <div class="toggle-sub">Hides the ticker symbol</div>
+            <div class="toggle-sub">Hides ticker symbol</div>
           </div>
           <label class="switch">
             <input type="checkbox" id="blindToggle" />
@@ -69,7 +63,6 @@
         </div>
       </div>
 
-      <!-- Noise -->
       <div class="field-group">
         <div class="toggle-field">
           <div class="toggle-info">
@@ -86,11 +79,9 @@
 
       <div class="divider"></div>
 
-      <!-- Load -->
       <button id="loadBtn" class="load-btn">Load Data</button>
       <div id="statusMsg" class="status-msg"></div>
 
-      <!-- Cache -->
       <div class="field-group cache-section">
         <div class="cache-header">
           <div class="field-label">Cached</div>
@@ -105,39 +96,94 @@
   <!-- ── Chart area ─────────────────────────────────────────────────── -->
   <main id="chartArea">
 
-    <!-- Top bar: symbol · interval · score strip · OHLC -->
     <div id="topBar">
       <span id="symbolLabel">—</span>
       <span id="intervalLabel"></span>
       <div id="scoreStrip">
-        <span class="score-idle">Press <kbd>B</kbd> Bull · <kbd>L</kbd> Bear before each bar</span>
+        <span class="score-idle">Press <kbd>B</kbd> Bull · <kbd>L</kbd> Bear before a bar</span>
       </div>
+      <span id="tradeStatus"></span>
+      <button id="tradeCloseBtn" class="trade-close-btn" title="Close trade (X)" style="display:none">Close trade</button>
       <span id="ohlcInfo"></span>
       <span id="barInfo"></span>
       <button id="scoreBtn" class="score-btn" title="Session summary (Tab)">Summary</button>
     </div>
 
-    <!-- Chart -->
     <div id="chartContainer">
 
-      <!-- Prediction overlay — shown only after B or L is pressed -->
+      <!-- Prediction overlay — appears after B or L is pressed -->
       <div id="predOverlay" style="display:none">
-
-        <!-- Committed state: user called B or L, waiting for → to reveal -->
         <div class="pred-committed" style="display:none">
           <div class="pred-committed-label bull">▲  Bullish</div>
           <div class="pred-committed-hint">Press → to reveal</div>
         </div>
-
-        <!-- Result state: shown briefly after bar reveals -->
         <div class="pred-result" style="display:none"></div>
-
       </div>
+
+      <!-- Trade result flash -->
+      <div id="tradeFlash" class="trade-flash" style="display:none"></div>
+
+      <!-- Broker-style trade ticket — top-left of chart -->
+      <div id="tradeTicket">
+        <div id="ticketButtons">
+          <button id="buyBtn"  class="ticket-btn buy">Buy</button>
+          <button id="sellBtn" class="ticket-btn sell">Sell</button>
+        </div>
+        <!-- Expands below when Buy or Sell is clicked -->
+        <div id="ticketForm" style="display:none">
+          <div id="ticketDirection" class="ticket-direction-label"></div>
+          <div class="ticket-field-row">
+            <div class="ticket-field">
+              <div class="ticket-field-label">Entry</div>
+              <input id="tradeEntryPrice" type="number" step="0.01" class="ticket-input" />
+            </div>
+          </div>
+          <div class="ticket-field-row">
+            <div class="ticket-field">
+              <div class="ticket-field-label tp-lbl">Take Profit</div>
+              <input id="tradeTpInput" type="number" step="0.01" class="ticket-input tp-input" />
+            </div>
+            <div class="ticket-field">
+              <div class="ticket-field-label sl-lbl">Stop Loss</div>
+              <input id="tradeSlInput" type="number" step="0.01" class="ticket-input sl-input" />
+            </div>
+          </div>
+          <div class="ticket-actions">
+            <button id="tradeConfirmBtn" class="ticket-confirm-btn">Place</button>
+            <button id="tradeCancelBtn"  class="ticket-cancel-btn">✕</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Note panel — anchored bottom-right of chart -->
+      <div id="notePanel" class="note-panel" style="display:none">
+        <div class="panel-title-row">
+          <div class="panel-title">Note</div>
+          <div id="noteBarLabel" class="note-bar-label"></div>
+        </div>
+        <textarea id="noteTextarea" placeholder="What do you see? Structure, context, bias…" rows="4"></textarea>
+        <div class="panel-actions">
+          <button id="noteSaveBtn"   class="panel-confirm-btn">Save <span class="kbd-hint">⌘↵</span></button>
+          <button id="noteCancelBtn" class="panel-cancel-btn">Cancel</button>
+        </div>
+      </div>
+
+      <!-- Resume session prompt — centred overlay -->
+      <div id="resumePrompt" class="resume-prompt" style="display:none">
+        <div class="resume-box">
+          <div class="resume-title">Resume session?</div>
+          <div id="resumeInfo" class="resume-info"></div>
+          <div class="resume-actions">
+            <button id="resumeYesBtn" class="panel-confirm-btn">Resume</button>
+            <button id="resumeNoBtn"  class="panel-cancel-btn">Start fresh</button>
+          </div>
+        </div>
+      </div>
+
     </div>
 
-    <!-- Bottom key hints -->
     <div id="bottomBar">
-      <span class="key-hint"><span class="key">←</span><span class="action">remove</span></span>
+      <span class="key-hint"><span class="key">←</span><span class="action">back</span></span>
       <span class="hint-sep"></span>
       <span class="key-hint"><span class="key">→</span><span class="action">reveal</span></span>
       <span class="hint-sep"></span>
@@ -149,9 +195,15 @@
       <span class="hint-sep"></span>
       <span class="key-hint"><span class="key">S</span><span class="action">skip</span></span>
       <span class="hint-sep"></span>
-      <span class="key-hint"><span class="key">Space</span><span class="action">random</span></span>
+      <span class="key-hint"><span class="key">E</span><span class="action">trade</span></span>
+      <span class="hint-sep"></span>
+      <span class="key-hint"><span class="key">X</span><span class="action">close</span></span>
+      <span class="hint-sep"></span>
+      <span class="key-hint"><span class="key">N</span><span class="action">note</span></span>
       <span class="hint-sep"></span>
       <span class="key-hint"><span class="key">Tab</span><span class="action">summary</span></span>
+      <span class="hint-sep"></span>
+      <span class="key-hint"><span class="key">R</span><span class="action">review</span></span>
     </div>
 
   </main>
