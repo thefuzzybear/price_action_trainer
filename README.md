@@ -29,7 +29,7 @@ npm install
 
 ```bash
 cp .env.local.example .env.local
-# Fill in your three Supabase values
+# Fill in your SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, and SUPABASE_SERVICE_ROLE_KEY
 ```
 
 ### 4. Ingest datasets
@@ -71,7 +71,7 @@ In the Vercel dashboard → your project → Settings → Environment Variables,
 | Key | Value |
 |-----|-------|
 | `SUPABASE_URL` | your project URL |
-| `SUPABASE_ANON_KEY` | anon public key |
+| `SUPABASE_PUBLISHABLE_KEY` | publishable key (from Settings → API) |
 | `SUPABASE_SERVICE_ROLE_KEY` | service role secret key |
 
 Then redeploy:
@@ -119,6 +119,6 @@ vercel --prod
 
 ## Buy Me a Coffee
 
-If this helps your trading — [buy me a coffee ☕](https://buymeacoffee.com/YOUR_USERNAME)
+If this helps your trading — [buy me a coffee ☕](https://buymeacoffee.com/thefuzzybear)
 
 > Update the link in `public/index.html` with your actual buymeacoffee username.
