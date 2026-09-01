@@ -43,36 +43,52 @@
       <div class="field-group">
         <div class="field-label">Date range</div>
         <input id="startDate" type="date" value="2020-01-01" />
-        <input id="endDate" type="date" style="margin-top:4px" />
+        <input id="endDate"   type="date" style="margin-top:4px" />
       </div>
 
-      <!-- Start bar -->
+      <!-- Starting bars -->
       <div class="field-group">
         <div class="field-label">Starting bars</div>
         <input id="startBar" type="number" value="50" min="5" max="5000" />
         <div class="field-hint">Bars visible at session start</div>
       </div>
 
+      <div class="divider"></div>
+
+      <!-- Blind mode -->
+      <div class="field-group">
+        <div class="toggle-field">
+          <div class="toggle-info">
+            <div class="toggle-title">Blind mode</div>
+            <div class="toggle-sub">Hides the ticker symbol</div>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="blindToggle" />
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+
       <!-- Noise -->
       <div class="field-group">
-        <div class="noise-row">
-          <div class="noise-label-group">
-            <span class="noise-title">Noise</span>
-            <span class="noise-sub">OHLC jitter &nbsp;<span id="noiseVal">1.0</span>%</span>
+        <div class="toggle-field">
+          <div class="toggle-info">
+            <div class="toggle-title">Noise <span id="noiseVal">1.0</span>%</div>
+            <div class="toggle-sub">OHLC jitter</div>
           </div>
           <label class="switch">
             <input type="checkbox" id="noiseToggle" />
             <span class="slider"></span>
           </label>
         </div>
-        <input id="noiseRange" type="range" min="0.1" max="5" step="0.1" value="1.0" />
+        <input id="noiseRange" type="range" min="0.1" max="5" step="0.1" value="1.0" style="margin-top:6px" />
       </div>
+
+      <div class="divider"></div>
 
       <!-- Load -->
       <button id="loadBtn" class="load-btn">Load Data</button>
       <div id="statusMsg" class="status-msg"></div>
-
-      <div class="divider"></div>
 
       <!-- Cache -->
       <div class="field-group cache-section">
@@ -89,28 +105,67 @@
   <!-- ── Chart area ─────────────────────────────────────────────────── -->
   <main id="chartArea">
 
+    <!-- Top bar: symbol · interval · score strip · OHLC -->
     <div id="topBar">
       <span id="symbolLabel">—</span>
       <span id="intervalLabel"></span>
-      <span id="barInfo"></span>
+      <div id="scoreStrip">
+        <span class="score-idle">Press <kbd>B</kbd> Bull · <kbd>L</kbd> Bear before each bar</span>
+      </div>
       <span id="ohlcInfo"></span>
+      <span id="barInfo"></span>
+      <button id="scoreBtn" class="score-btn" title="Session summary (Tab)">Summary</button>
     </div>
 
-    <div id="chartContainer"></div>
+    <!-- Chart -->
+    <div id="chartContainer">
 
+      <!-- Prediction overlay — shown only after B or L is pressed -->
+      <div id="predOverlay" style="display:none">
+
+        <!-- Committed state: user called B or L, waiting for → to reveal -->
+        <div class="pred-committed" style="display:none">
+          <div class="pred-committed-label bull">▲  Bullish</div>
+          <div class="pred-committed-hint">Press → to reveal</div>
+        </div>
+
+        <!-- Result state: shown briefly after bar reveals -->
+        <div class="pred-result" style="display:none"></div>
+
+      </div>
+    </div>
+
+    <!-- Bottom key hints -->
     <div id="bottomBar">
       <span class="key-hint"><span class="key">←</span><span class="action">remove</span></span>
       <span class="hint-sep"></span>
       <span class="key-hint"><span class="key">→</span><span class="action">reveal</span></span>
       <span class="hint-sep"></span>
-      <span class="key-hint"><span class="key">↑</span><span class="action">+10</span></span>
+      <span class="key-hint"><span class="key">↑↓</span><span class="action">±10</span></span>
       <span class="hint-sep"></span>
-      <span class="key-hint"><span class="key">↓</span><span class="action">−10</span></span>
+      <span class="key-hint"><span class="key">B</span><span class="action">bull</span></span>
       <span class="hint-sep"></span>
-      <span class="key-hint"><span class="key">space</span><span class="action">random start</span></span>
+      <span class="key-hint"><span class="key">L</span><span class="action">bear</span></span>
+      <span class="hint-sep"></span>
+      <span class="key-hint"><span class="key">S</span><span class="action">skip</span></span>
+      <span class="hint-sep"></span>
+      <span class="key-hint"><span class="key">Space</span><span class="action">random</span></span>
+      <span class="hint-sep"></span>
+      <span class="key-hint"><span class="key">Tab</span><span class="action">summary</span></span>
     </div>
 
   </main>
+
+  <!-- ── Session summary modal ──────────────────────────────────────── -->
+  <div id="sessionModal" style="display:none">
+    <div class="modal-box">
+      <div class="modal-header">
+        <div class="modal-title">Session Summary</div>
+        <button id="sessionModalClose" class="modal-close">✕</button>
+      </div>
+      <div id="modalContent"></div>
+    </div>
+  </div>
 
   <script src="/vendor/lightweight-charts.js"></script>
   <script src="/stocks.js"></script>
