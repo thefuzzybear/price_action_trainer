@@ -1,0 +1,3502 @@
+[
+  {
+    "symbol": "AAPL",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Apple Daily 2020–2025"
+  },
+  {
+    "symbol": "AAPL",
+    "interval": "1wk",
+    "from": "2015-01-01",
+    "to": "2025-01-01",
+    "label": "Apple Weekly 2015–2025"
+  },
+  {
+    "symbol": "AAPL",
+    "interval": "1mo",
+    "from": "2005-01-01",
+    "to": "2025-01-01",
+    "label": "Apple Monthly 2005–2025"
+  },
+  {
+    "symbol": "MSFT",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Microsoft Daily 2020–2025"
+  },
+  {
+    "symbol": "MSFT",
+    "interval": "1wk",
+    "from": "2015-01-01",
+    "to": "2025-01-01",
+    "label": "Microsoft Weekly 2015–2025"
+  },
+  {
+    "symbol": "MSFT",
+    "interval": "1mo",
+    "from": "2005-01-01",
+    "to": "2025-01-01",
+    "label": "Microsoft Monthly 2005–2025"
+  },
+  {
+    "symbol": "NVDA",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Nvidia Daily 2020–2025"
+  },
+  {
+    "symbol": "NVDA",
+    "interval": "1wk",
+    "from": "2015-01-01",
+    "to": "2025-01-01",
+    "label": "Nvidia Weekly 2015–2025"
+  },
+  {
+    "symbol": "NVDA",
+    "interval": "1mo",
+    "from": "2005-01-01",
+    "to": "2025-01-01",
+    "label": "Nvidia Monthly 2005–2025"
+  },
+  {
+    "symbol": "GOOGL",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Google Daily 2020–2025"
+  },
+  {
+    "symbol": "GOOGL",
+    "interval": "1wk",
+    "from": "2015-01-01",
+    "to": "2025-01-01",
+    "label": "Google Weekly 2015–2025"
+  },
+  {
+    "symbol": "GOOGL",
+    "interval": "1mo",
+    "from": "2005-01-01",
+    "to": "2025-01-01",
+    "label": "Google Monthly 2005–2025"
+  },
+  {
+    "symbol": "AMZN",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Amazon Daily 2020–2025"
+  },
+  {
+    "symbol": "AMZN",
+    "interval": "1wk",
+    "from": "2015-01-01",
+    "to": "2025-01-01",
+    "label": "Amazon Weekly 2015–2025"
+  },
+  {
+    "symbol": "AMZN",
+    "interval": "1mo",
+    "from": "2005-01-01",
+    "to": "2025-01-01",
+    "label": "Amazon Monthly 2005–2025"
+  },
+  {
+    "symbol": "META",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Meta Daily 2020–2025"
+  },
+  {
+    "symbol": "META",
+    "interval": "1wk",
+    "from": "2015-01-01",
+    "to": "2025-01-01",
+    "label": "Meta Weekly 2015–2025"
+  },
+  {
+    "symbol": "TSLA",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Tesla Daily 2020–2025"
+  },
+  {
+    "symbol": "TSLA",
+    "interval": "1wk",
+    "from": "2015-01-01",
+    "to": "2025-01-01",
+    "label": "Tesla Weekly 2015–2025"
+  },
+  {
+    "symbol": "TSLA",
+    "interval": "1mo",
+    "from": "2010-01-01",
+    "to": "2025-01-01",
+    "label": "Tesla Monthly 2010–2025"
+  },
+  {
+    "symbol": "AVGO",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Broadcom Daily 2020–2025"
+  },
+  {
+    "symbol": "AVGO",
+    "interval": "1wk",
+    "from": "2015-01-01",
+    "to": "2025-01-01",
+    "label": "Broadcom Weekly 2015–2025"
+  },
+  {
+    "symbol": "AMD",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "AMD Daily 2020–2025"
+  },
+  {
+    "symbol": "AMD",
+    "interval": "1wk",
+    "from": "2015-01-01",
+    "to": "2025-01-01",
+    "label": "AMD Weekly 2015–2025"
+  },
+  {
+    "symbol": "AMD",
+    "interval": "1mo",
+    "from": "2005-01-01",
+    "to": "2025-01-01",
+    "label": "AMD Monthly 2005–2025"
+  },
+  {
+    "symbol": "QCOM",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Qualcomm Daily 2020–2025"
+  },
+  {
+    "symbol": "QCOM",
+    "interval": "1wk",
+    "from": "2015-01-01",
+    "to": "2025-01-01",
+    "label": "Qualcomm Weekly 2015–2025"
+  },
+  {
+    "symbol": "INTC",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Intel Daily 2020–2025"
+  },
+  {
+    "symbol": "INTC",
+    "interval": "1wk",
+    "from": "2010-01-01",
+    "to": "2025-01-01",
+    "label": "Intel Weekly 2010–2025"
+  },
+  {
+    "symbol": "INTC",
+    "interval": "1mo",
+    "from": "2000-01-01",
+    "to": "2025-01-01",
+    "label": "Intel Monthly 2000–2025"
+  },
+  {
+    "symbol": "MU",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Micron Daily 2020–2025"
+  },
+  {
+    "symbol": "MU",
+    "interval": "1wk",
+    "from": "2015-01-01",
+    "to": "2025-01-01",
+    "label": "Micron Weekly 2015–2025"
+  },
+  {
+    "symbol": "TXN",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Texas Instruments Daily 2020–2025"
+  },
+  {
+    "symbol": "AMAT",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Applied Materials Daily 2020–2025"
+  },
+  {
+    "symbol": "AMAT",
+    "interval": "1wk",
+    "from": "2015-01-01",
+    "to": "2025-01-01",
+    "label": "Applied Materials Weekly 2015–2025"
+  },
+  {
+    "symbol": "LRCX",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Lam Research Daily 2020–2025"
+  },
+  {
+    "symbol": "KLAC",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "KLA Corp Daily 2020–2025"
+  },
+  {
+    "symbol": "MRVL",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Marvell Daily 2020–2025"
+  },
+  {
+    "symbol": "MCHP",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Microchip Tech Daily 2020–2025"
+  },
+  {
+    "symbol": "ADI",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Analog Devices Daily 2020–2025"
+  },
+  {
+    "symbol": "CRM",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Salesforce Daily 2020–2025"
+  },
+  {
+    "symbol": "CRM",
+    "interval": "1wk",
+    "from": "2015-01-01",
+    "to": "2025-01-01",
+    "label": "Salesforce Weekly 2015–2025"
+  },
+  {
+    "symbol": "NOW",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "ServiceNow Daily 2020–2025"
+  },
+  {
+    "symbol": "NOW",
+    "interval": "1wk",
+    "from": "2015-01-01",
+    "to": "2025-01-01",
+    "label": "ServiceNow Weekly 2015–2025"
+  },
+  {
+    "symbol": "ADBE",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Adobe Daily 2020–2025"
+  },
+  {
+    "symbol": "ADBE",
+    "interval": "1wk",
+    "from": "2015-01-01",
+    "to": "2025-01-01",
+    "label": "Adobe Weekly 2015–2025"
+  },
+  {
+    "symbol": "INTU",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Intuit Daily 2020–2025"
+  },
+  {
+    "symbol": "WDAY",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Workday Daily 2020–2025"
+  },
+  {
+    "symbol": "SNOW",
+    "interval": "1d",
+    "from": "2021-01-01",
+    "to": "2025-01-01",
+    "label": "Snowflake Daily 2021–2025"
+  },
+  {
+    "symbol": "DDOG",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Datadog Daily 2020–2025"
+  },
+  {
+    "symbol": "CRWD",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "CrowdStrike Daily 2020–2025"
+  },
+  {
+    "symbol": "PANW",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Palo Alto Networks Daily 2020–2025"
+  },
+  {
+    "symbol": "PANW",
+    "interval": "1wk",
+    "from": "2015-01-01",
+    "to": "2025-01-01",
+    "label": "Palo Alto Networks Weekly 2015–2025"
+  },
+  {
+    "symbol": "ZS",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Zscaler Daily 2020–2025"
+  },
+  {
+    "symbol": "NET",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Cloudflare Daily 2020–2025"
+  },
+  {
+    "symbol": "OKTA",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Okta Daily 2020–2025"
+  },
+  {
+    "symbol": "MDB",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "MongoDB Daily 2020–2025"
+  },
+  {
+    "symbol": "TEAM",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Atlassian Daily 2020–2025"
+  },
+  {
+    "symbol": "SHOP",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Shopify Daily 2020–2025"
+  },
+  {
+    "symbol": "SHOP",
+    "interval": "1wk",
+    "from": "2015-01-01",
+    "to": "2025-01-01",
+    "label": "Shopify Weekly 2015–2025"
+  },
+  {
+    "symbol": "NFLX",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Netflix Daily 2020–2025"
+  },
+  {
+    "symbol": "NFLX",
+    "interval": "1wk",
+    "from": "2015-01-01",
+    "to": "2025-01-01",
+    "label": "Netflix Weekly 2015–2025"
+  },
+  {
+    "symbol": "NFLX",
+    "interval": "1mo",
+    "from": "2005-01-01",
+    "to": "2025-01-01",
+    "label": "Netflix Monthly 2005–2025"
+  },
+  {
+    "symbol": "DIS",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Disney Daily 2020–2025"
+  },
+  {
+    "symbol": "DIS",
+    "interval": "1wk",
+    "from": "2010-01-01",
+    "to": "2025-01-01",
+    "label": "Disney Weekly 2010–2025"
+  },
+  {
+    "symbol": "CMCSA",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Comcast Daily 2020–2025"
+  },
+  {
+    "symbol": "UBER",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Uber Daily 2020–2025"
+  },
+  {
+    "symbol": "UBER",
+    "interval": "1wk",
+    "from": "2019-01-01",
+    "to": "2025-01-01",
+    "label": "Uber Weekly 2019–2025"
+  },
+  {
+    "symbol": "LYFT",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Lyft Daily 2020–2025"
+  },
+  {
+    "symbol": "ABNB",
+    "interval": "1d",
+    "from": "2021-01-01",
+    "to": "2025-01-01",
+    "label": "Airbnb Daily 2021–2025"
+  },
+  {
+    "symbol": "DASH",
+    "interval": "1d",
+    "from": "2021-01-01",
+    "to": "2025-01-01",
+    "label": "DoorDash Daily 2021–2025"
+  },
+  {
+    "symbol": "COIN",
+    "interval": "1d",
+    "from": "2021-01-01",
+    "to": "2025-01-01",
+    "label": "Coinbase Daily 2021–2025"
+  },
+  {
+    "symbol": "HOOD",
+    "interval": "1d",
+    "from": "2021-01-01",
+    "to": "2025-01-01",
+    "label": "Robinhood Daily 2021–2025"
+  },
+  {
+    "symbol": "SQ",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Block Daily 2020–2025"
+  },
+  {
+    "symbol": "SQ",
+    "interval": "1wk",
+    "from": "2016-01-01",
+    "to": "2025-01-01",
+    "label": "Block Weekly 2016–2025"
+  },
+  {
+    "symbol": "PYPL",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "PayPal Daily 2020–2025"
+  },
+  {
+    "symbol": "PYPL",
+    "interval": "1wk",
+    "from": "2015-01-01",
+    "to": "2025-01-01",
+    "label": "PayPal Weekly 2015–2025"
+  },
+  {
+    "symbol": "AFRM",
+    "interval": "1d",
+    "from": "2021-01-01",
+    "to": "2025-01-01",
+    "label": "Affirm Daily 2021–2025"
+  },
+  {
+    "symbol": "SOFI",
+    "interval": "1d",
+    "from": "2021-01-01",
+    "to": "2025-01-01",
+    "label": "SoFi Daily 2021–2025"
+  },
+  {
+    "symbol": "V",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Visa Daily 2020–2025"
+  },
+  {
+    "symbol": "V",
+    "interval": "1wk",
+    "from": "2010-01-01",
+    "to": "2025-01-01",
+    "label": "Visa Weekly 2010–2025"
+  },
+  {
+    "symbol": "MA",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Mastercard Daily 2020–2025"
+  },
+  {
+    "symbol": "MA",
+    "interval": "1wk",
+    "from": "2010-01-01",
+    "to": "2025-01-01",
+    "label": "Mastercard Weekly 2010–2025"
+  },
+  {
+    "symbol": "JPM",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "JP Morgan Daily 2020–2025"
+  },
+  {
+    "symbol": "JPM",
+    "interval": "1wk",
+    "from": "2010-01-01",
+    "to": "2025-01-01",
+    "label": "JP Morgan Weekly 2010–2025"
+  },
+  {
+    "symbol": "JPM",
+    "interval": "1mo",
+    "from": "2000-01-01",
+    "to": "2025-01-01",
+    "label": "JP Morgan Monthly 2000–2025"
+  },
+  {
+    "symbol": "GS",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Goldman Sachs Daily 2020–2025"
+  },
+  {
+    "symbol": "GS",
+    "interval": "1wk",
+    "from": "2010-01-01",
+    "to": "2025-01-01",
+    "label": "Goldman Sachs Weekly 2010–2025"
+  },
+  {
+    "symbol": "MS",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Morgan Stanley Daily 2020–2025"
+  },
+  {
+    "symbol": "BAC",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Bank of America Daily 2020–2025"
+  },
+  {
+    "symbol": "BAC",
+    "interval": "1wk",
+    "from": "2010-01-01",
+    "to": "2025-01-01",
+    "label": "Bank of America Weekly 2010–2025"
+  },
+  {
+    "symbol": "BAC",
+    "interval": "1mo",
+    "from": "2000-01-01",
+    "to": "2025-01-01",
+    "label": "Bank of America Monthly 2000–2025"
+  },
+  {
+    "symbol": "WFC",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Wells Fargo Daily 2020–2025"
+  },
+  {
+    "symbol": "C",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Citigroup Daily 2020–2025"
+  },
+  {
+    "symbol": "C",
+    "interval": "1mo",
+    "from": "2000-01-01",
+    "to": "2025-01-01",
+    "label": "Citigroup Monthly 2000–2025"
+  },
+  {
+    "symbol": "AXP",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "American Express Daily 2020–2025"
+  },
+  {
+    "symbol": "BLK",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "BlackRock Daily 2020–2025"
+  },
+  {
+    "symbol": "SCHW",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Schwab Daily 2020–2025"
+  },
+  {
+    "symbol": "BRK-B",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Berkshire B Daily 2020–2025"
+  },
+  {
+    "symbol": "BRK-B",
+    "interval": "1wk",
+    "from": "2010-01-01",
+    "to": "2025-01-01",
+    "label": "Berkshire B Weekly 2010–2025"
+  },
+  {
+    "symbol": "BRK-B",
+    "interval": "1mo",
+    "from": "2000-01-01",
+    "to": "2025-01-01",
+    "label": "Berkshire B Monthly 2000–2025"
+  },
+  {
+    "symbol": "LLY",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Eli Lilly Daily 2020–2025"
+  },
+  {
+    "symbol": "LLY",
+    "interval": "1wk",
+    "from": "2015-01-01",
+    "to": "2025-01-01",
+    "label": "Eli Lilly Weekly 2015–2025"
+  },
+  {
+    "symbol": "UNH",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "UnitedHealth Daily 2020–2025"
+  },
+  {
+    "symbol": "UNH",
+    "interval": "1wk",
+    "from": "2015-01-01",
+    "to": "2025-01-01",
+    "label": "UnitedHealth Weekly 2015–2025"
+  },
+  {
+    "symbol": "JNJ",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Johnson & Johnson Daily 2020–2025"
+  },
+  {
+    "symbol": "JNJ",
+    "interval": "1wk",
+    "from": "2010-01-01",
+    "to": "2025-01-01",
+    "label": "Johnson & Johnson Weekly 2010–2025"
+  },
+  {
+    "symbol": "JNJ",
+    "interval": "1mo",
+    "from": "2000-01-01",
+    "to": "2025-01-01",
+    "label": "Johnson & Johnson Monthly 2000–2025"
+  },
+  {
+    "symbol": "ABBV",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "AbbVie Daily 2020–2025"
+  },
+  {
+    "symbol": "MRK",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Merck Daily 2020–2025"
+  },
+  {
+    "symbol": "PFE",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Pfizer Daily 2020–2025"
+  },
+  {
+    "symbol": "PFE",
+    "interval": "1mo",
+    "from": "2000-01-01",
+    "to": "2025-01-01",
+    "label": "Pfizer Monthly 2000–2025"
+  },
+  {
+    "symbol": "MRNA",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Moderna Daily 2020–2025"
+  },
+  {
+    "symbol": "BNTX",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "BioNTech Daily 2020–2025"
+  },
+  {
+    "symbol": "AMGN",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Amgen Daily 2020–2025"
+  },
+  {
+    "symbol": "GILD",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Gilead Daily 2020–2025"
+  },
+  {
+    "symbol": "REGN",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Regeneron Daily 2020–2025"
+  },
+  {
+    "symbol": "VRTX",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Vertex Daily 2020–2025"
+  },
+  {
+    "symbol": "ISRG",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Intuitive Surgical Daily 2020–2025"
+  },
+  {
+    "symbol": "TMO",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Thermo Fisher Daily 2020–2025"
+  },
+  {
+    "symbol": "DHR",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Danaher Daily 2020–2025"
+  },
+  {
+    "symbol": "ABT",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Abbott Daily 2020–2025"
+  },
+  {
+    "symbol": "BMY",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Bristol-Myers Daily 2020–2025"
+  },
+  {
+    "symbol": "CVS",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "CVS Health Daily 2020–2025"
+  },
+  {
+    "symbol": "WMT",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Walmart Daily 2020–2025"
+  },
+  {
+    "symbol": "WMT",
+    "interval": "1wk",
+    "from": "2010-01-01",
+    "to": "2025-01-01",
+    "label": "Walmart Weekly 2010–2025"
+  },
+  {
+    "symbol": "WMT",
+    "interval": "1mo",
+    "from": "2000-01-01",
+    "to": "2025-01-01",
+    "label": "Walmart Monthly 2000–2025"
+  },
+  {
+    "symbol": "COST",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Costco Daily 2020–2025"
+  },
+  {
+    "symbol": "COST",
+    "interval": "1wk",
+    "from": "2015-01-01",
+    "to": "2025-01-01",
+    "label": "Costco Weekly 2015–2025"
+  },
+  {
+    "symbol": "HD",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Home Depot Daily 2020–2025"
+  },
+  {
+    "symbol": "HD",
+    "interval": "1wk",
+    "from": "2010-01-01",
+    "to": "2025-01-01",
+    "label": "Home Depot Weekly 2010–2025"
+  },
+  {
+    "symbol": "LOW",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Lowe's Daily 2020–2025"
+  },
+  {
+    "symbol": "TGT",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Target Daily 2020–2025"
+  },
+  {
+    "symbol": "MCD",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "McDonald's Daily 2020–2025"
+  },
+  {
+    "symbol": "MCD",
+    "interval": "1wk",
+    "from": "2010-01-01",
+    "to": "2025-01-01",
+    "label": "McDonald's Weekly 2010–2025"
+  },
+  {
+    "symbol": "SBUX",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Starbucks Daily 2020–2025"
+  },
+  {
+    "symbol": "NKE",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Nike Daily 2020–2025"
+  },
+  {
+    "symbol": "NKE",
+    "interval": "1wk",
+    "from": "2015-01-01",
+    "to": "2025-01-01",
+    "label": "Nike Weekly 2015–2025"
+  },
+  {
+    "symbol": "TJX",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "TJX Companies Daily 2020–2025"
+  },
+  {
+    "symbol": "AMZN",
+    "interval": "1mo",
+    "from": "2000-01-01",
+    "to": "2025-01-01",
+    "label": "Amazon Monthly 2000–2025"
+  },
+  {
+    "symbol": "PG",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Procter & Gamble Daily 2020–2025"
+  },
+  {
+    "symbol": "PG",
+    "interval": "1wk",
+    "from": "2010-01-01",
+    "to": "2025-01-01",
+    "label": "Procter & Gamble Weekly 2010–2025"
+  },
+  {
+    "symbol": "PG",
+    "interval": "1mo",
+    "from": "2000-01-01",
+    "to": "2025-01-01",
+    "label": "Procter & Gamble Monthly 2000–2025"
+  },
+  {
+    "symbol": "KO",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Coca-Cola Daily 2020–2025"
+  },
+  {
+    "symbol": "KO",
+    "interval": "1wk",
+    "from": "2010-01-01",
+    "to": "2025-01-01",
+    "label": "Coca-Cola Weekly 2010–2025"
+  },
+  {
+    "symbol": "KO",
+    "interval": "1mo",
+    "from": "2000-01-01",
+    "to": "2025-01-01",
+    "label": "Coca-Cola Monthly 2000–2025"
+  },
+  {
+    "symbol": "PEP",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "PepsiCo Daily 2020–2025"
+  },
+  {
+    "symbol": "PEP",
+    "interval": "1wk",
+    "from": "2010-01-01",
+    "to": "2025-01-01",
+    "label": "PepsiCo Weekly 2010–2025"
+  },
+  {
+    "symbol": "PM",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Philip Morris Daily 2020–2025"
+  },
+  {
+    "symbol": "MO",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Altria Daily 2020–2025"
+  },
+  {
+    "symbol": "XOM",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "ExxonMobil Daily 2020–2025"
+  },
+  {
+    "symbol": "XOM",
+    "interval": "1wk",
+    "from": "2010-01-01",
+    "to": "2025-01-01",
+    "label": "ExxonMobil Weekly 2010–2025"
+  },
+  {
+    "symbol": "XOM",
+    "interval": "1mo",
+    "from": "2000-01-01",
+    "to": "2025-01-01",
+    "label": "ExxonMobil Monthly 2000–2025"
+  },
+  {
+    "symbol": "CVX",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Chevron Daily 2020–2025"
+  },
+  {
+    "symbol": "CVX",
+    "interval": "1wk",
+    "from": "2010-01-01",
+    "to": "2025-01-01",
+    "label": "Chevron Weekly 2010–2025"
+  },
+  {
+    "symbol": "COP",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "ConocoPhillips Daily 2020–2025"
+  },
+  {
+    "symbol": "SLB",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "SLB Daily 2020–2025"
+  },
+  {
+    "symbol": "OXY",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Occidental Daily 2020–2025"
+  },
+  {
+    "symbol": "HAL",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Halliburton Daily 2020–2025"
+  },
+  {
+    "symbol": "DVN",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Devon Energy Daily 2020–2025"
+  },
+  {
+    "symbol": "GE",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "GE Aerospace Daily 2020–2025"
+  },
+  {
+    "symbol": "GE",
+    "interval": "1wk",
+    "from": "2010-01-01",
+    "to": "2025-01-01",
+    "label": "GE Aerospace Weekly 2010–2025"
+  },
+  {
+    "symbol": "GE",
+    "interval": "1mo",
+    "from": "2000-01-01",
+    "to": "2025-01-01",
+    "label": "GE Monthly 2000–2025"
+  },
+  {
+    "symbol": "CAT",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Caterpillar Daily 2020–2025"
+  },
+  {
+    "symbol": "CAT",
+    "interval": "1wk",
+    "from": "2015-01-01",
+    "to": "2025-01-01",
+    "label": "Caterpillar Weekly 2015–2025"
+  },
+  {
+    "symbol": "DE",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Deere & Co Daily 2020–2025"
+  },
+  {
+    "symbol": "HON",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Honeywell Daily 2020–2025"
+  },
+  {
+    "symbol": "RTX",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Raytheon Daily 2020–2025"
+  },
+  {
+    "symbol": "LMT",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Lockheed Martin Daily 2020–2025"
+  },
+  {
+    "symbol": "LMT",
+    "interval": "1wk",
+    "from": "2015-01-01",
+    "to": "2025-01-01",
+    "label": "Lockheed Martin Weekly 2015–2025"
+  },
+  {
+    "symbol": "NOC",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Northrop Grumman Daily 2020–2025"
+  },
+  {
+    "symbol": "BA",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Boeing Daily 2020–2025"
+  },
+  {
+    "symbol": "BA",
+    "interval": "1wk",
+    "from": "2015-01-01",
+    "to": "2025-01-01",
+    "label": "Boeing Weekly 2015–2025"
+  },
+  {
+    "symbol": "BA",
+    "interval": "1mo",
+    "from": "2000-01-01",
+    "to": "2025-01-01",
+    "label": "Boeing Monthly 2000–2025"
+  },
+  {
+    "symbol": "MMM",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "3M Daily 2020–2025"
+  },
+  {
+    "symbol": "UPS",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "UPS Daily 2020–2025"
+  },
+  {
+    "symbol": "FDX",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "FedEx Daily 2020–2025"
+  },
+  {
+    "symbol": "NEE",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "NextEra Energy Daily 2020–2025"
+  },
+  {
+    "symbol": "NEE",
+    "interval": "1wk",
+    "from": "2015-01-01",
+    "to": "2025-01-01",
+    "label": "NextEra Energy Weekly 2015–2025"
+  },
+  {
+    "symbol": "DUK",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Duke Energy Daily 2020–2025"
+  },
+  {
+    "symbol": "SO",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Southern Company Daily 2020–2025"
+  },
+  {
+    "symbol": "ENPH",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Enphase Daily 2020–2025"
+  },
+  {
+    "symbol": "FSLR",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "First Solar Daily 2020–2025"
+  },
+  {
+    "symbol": "AMT",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "American Tower Daily 2020–2025"
+  },
+  {
+    "symbol": "PLD",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Prologis Daily 2020–2025"
+  },
+  {
+    "symbol": "EQIX",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Equinix Daily 2020–2025"
+  },
+  {
+    "symbol": "SPY",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "S&P 500 ETF Daily 2020–2025"
+  },
+  {
+    "symbol": "SPY",
+    "interval": "1d",
+    "from": "2015-01-01",
+    "to": "2020-01-01",
+    "label": "S&P 500 ETF Daily 2015–2020"
+  },
+  {
+    "symbol": "SPY",
+    "interval": "1d",
+    "from": "2010-01-01",
+    "to": "2015-01-01",
+    "label": "S&P 500 ETF Daily 2010–2015"
+  },
+  {
+    "symbol": "SPY",
+    "interval": "1wk",
+    "from": "2010-01-01",
+    "to": "2025-01-01",
+    "label": "S&P 500 ETF Weekly 2010–2025"
+  },
+  {
+    "symbol": "SPY",
+    "interval": "1wk",
+    "from": "2000-01-01",
+    "to": "2010-01-01",
+    "label": "S&P 500 ETF Weekly 2000–2010"
+  },
+  {
+    "symbol": "SPY",
+    "interval": "1mo",
+    "from": "1995-01-01",
+    "to": "2025-01-01",
+    "label": "S&P 500 ETF Monthly 1995–2025"
+  },
+  {
+    "symbol": "QQQ",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Nasdaq 100 ETF Daily 2020–2025"
+  },
+  {
+    "symbol": "QQQ",
+    "interval": "1d",
+    "from": "2015-01-01",
+    "to": "2020-01-01",
+    "label": "Nasdaq 100 ETF Daily 2015–2020"
+  },
+  {
+    "symbol": "QQQ",
+    "interval": "1wk",
+    "from": "2010-01-01",
+    "to": "2025-01-01",
+    "label": "Nasdaq 100 ETF Weekly 2010–2025"
+  },
+  {
+    "symbol": "QQQ",
+    "interval": "1mo",
+    "from": "2000-01-01",
+    "to": "2025-01-01",
+    "label": "Nasdaq 100 ETF Monthly 2000–2025"
+  },
+  {
+    "symbol": "IWM",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Russell 2000 ETF Daily 2020–2025"
+  },
+  {
+    "symbol": "IWM",
+    "interval": "1wk",
+    "from": "2010-01-01",
+    "to": "2025-01-01",
+    "label": "Russell 2000 ETF Weekly 2010–2025"
+  },
+  {
+    "symbol": "DIA",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Dow Jones ETF Daily 2020–2025"
+  },
+  {
+    "symbol": "DIA",
+    "interval": "1wk",
+    "from": "2010-01-01",
+    "to": "2025-01-01",
+    "label": "Dow Jones ETF Weekly 2010–2025"
+  },
+  {
+    "symbol": "DIA",
+    "interval": "1mo",
+    "from": "2000-01-01",
+    "to": "2025-01-01",
+    "label": "Dow Jones ETF Monthly 2000–2025"
+  },
+  {
+    "symbol": "XLK",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Tech Sector ETF Daily 2020–2025"
+  },
+  {
+    "symbol": "XLF",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Financial Sector ETF Daily 2020–2025"
+  },
+  {
+    "symbol": "XLV",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Health Care Sector ETF Daily 2020–2025"
+  },
+  {
+    "symbol": "XLE",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Energy Sector ETF Daily 2020–2025"
+  },
+  {
+    "symbol": "XLI",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Industrial Sector ETF Daily 2020–2025"
+  },
+  {
+    "symbol": "XLY",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Consumer Disc ETF Daily 2020–2025"
+  },
+  {
+    "symbol": "XLP",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Consumer Staples ETF Daily 2020–2025"
+  },
+  {
+    "symbol": "XLU",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Utilities Sector ETF Daily 2020–2025"
+  },
+  {
+    "symbol": "XLRE",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Real Estate ETF Daily 2020–2025"
+  },
+  {
+    "symbol": "XLB",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Materials Sector ETF Daily 2020–2025"
+  },
+  {
+    "symbol": "XLC",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Comm Services ETF Daily 2020–2025"
+  },
+  {
+    "symbol": "GLD",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Gold ETF Daily 2020–2025"
+  },
+  {
+    "symbol": "GLD",
+    "interval": "1wk",
+    "from": "2010-01-01",
+    "to": "2025-01-01",
+    "label": "Gold ETF Weekly 2010–2025"
+  },
+  {
+    "symbol": "GLD",
+    "interval": "1mo",
+    "from": "2005-01-01",
+    "to": "2025-01-01",
+    "label": "Gold ETF Monthly 2005–2025"
+  },
+  {
+    "symbol": "SLV",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Silver ETF Daily 2020–2025"
+  },
+  {
+    "symbol": "SLV",
+    "interval": "1wk",
+    "from": "2010-01-01",
+    "to": "2025-01-01",
+    "label": "Silver ETF Weekly 2010–2025"
+  },
+  {
+    "symbol": "USO",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Oil ETF Daily 2020–2025"
+  },
+  {
+    "symbol": "UNG",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Natural Gas ETF Daily 2020–2025"
+  },
+  {
+    "symbol": "PDBC",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Commodities ETF Daily 2020–2025"
+  },
+  {
+    "symbol": "TLT",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "20yr Treasury ETF Daily 2020–2025"
+  },
+  {
+    "symbol": "TLT",
+    "interval": "1wk",
+    "from": "2010-01-01",
+    "to": "2025-01-01",
+    "label": "20yr Treasury ETF Weekly 2010–2025"
+  },
+  {
+    "symbol": "HYG",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "High Yield Bond ETF Daily 2020–2025"
+  },
+  {
+    "symbol": "LQD",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Investment Grade Bond ETF Daily 2020–2025"
+  },
+  {
+    "symbol": "BTC-USD",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Bitcoin Daily 2020–2025"
+  },
+  {
+    "symbol": "BTC-USD",
+    "interval": "1d",
+    "from": "2017-01-01",
+    "to": "2020-01-01",
+    "label": "Bitcoin Daily 2017–2020"
+  },
+  {
+    "symbol": "BTC-USD",
+    "interval": "1wk",
+    "from": "2017-01-01",
+    "to": "2025-01-01",
+    "label": "Bitcoin Weekly 2017–2025"
+  },
+  {
+    "symbol": "BTC-USD",
+    "interval": "1mo",
+    "from": "2015-01-01",
+    "to": "2025-01-01",
+    "label": "Bitcoin Monthly 2015–2025"
+  },
+  {
+    "symbol": "ETH-USD",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Ethereum Daily 2020–2025"
+  },
+  {
+    "symbol": "ETH-USD",
+    "interval": "1wk",
+    "from": "2017-01-01",
+    "to": "2025-01-01",
+    "label": "Ethereum Weekly 2017–2025"
+  },
+  {
+    "symbol": "SOL-USD",
+    "interval": "1d",
+    "from": "2021-01-01",
+    "to": "2025-01-01",
+    "label": "Solana Daily 2021–2025"
+  },
+  {
+    "symbol": "BNB-USD",
+    "interval": "1d",
+    "from": "2021-01-01",
+    "to": "2025-01-01",
+    "label": "BNB Daily 2021–2025"
+  },
+  {
+    "symbol": "XRP-USD",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Ripple Daily 2020–2025"
+  },
+  {
+    "symbol": "^GSPC",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "S&P 500 Index Daily 2020–2025"
+  },
+  {
+    "symbol": "^GSPC",
+    "interval": "1wk",
+    "from": "2010-01-01",
+    "to": "2025-01-01",
+    "label": "S&P 500 Index Weekly 2010–2025"
+  },
+  {
+    "symbol": "^GSPC",
+    "interval": "1mo",
+    "from": "1990-01-01",
+    "to": "2025-01-01",
+    "label": "S&P 500 Index Monthly 1990–2025"
+  },
+  {
+    "symbol": "^IXIC",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Nasdaq Composite Daily 2020–2025"
+  },
+  {
+    "symbol": "^IXIC",
+    "interval": "1wk",
+    "from": "2010-01-01",
+    "to": "2025-01-01",
+    "label": "Nasdaq Composite Weekly 2010–2025"
+  },
+  {
+    "symbol": "^DJI",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Dow Jones Daily 2020–2025"
+  },
+  {
+    "symbol": "^DJI",
+    "interval": "1mo",
+    "from": "1990-01-01",
+    "to": "2025-01-01",
+    "label": "Dow Jones Monthly 1990–2025"
+  },
+  {
+    "symbol": "^RUT",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Russell 2000 Daily 2020–2025"
+  },
+  {
+    "symbol": "^VIX",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "VIX Daily 2020–2025"
+  },
+  {
+    "symbol": "^TNX",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "10yr Treasury Yield Daily 2020–2025"
+  },
+  {
+    "symbol": "EURUSD=X",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "EUR/USD Daily 2020–2025"
+  },
+  {
+    "symbol": "EURUSD=X",
+    "interval": "1wk",
+    "from": "2010-01-01",
+    "to": "2025-01-01",
+    "label": "EUR/USD Weekly 2010–2025"
+  },
+  {
+    "symbol": "GBPUSD=X",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "GBP/USD Daily 2020–2025"
+  },
+  {
+    "symbol": "GBPUSD=X",
+    "interval": "1wk",
+    "from": "2010-01-01",
+    "to": "2025-01-01",
+    "label": "GBP/USD Weekly 2010–2025"
+  },
+  {
+    "symbol": "USDJPY=X",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "USD/JPY Daily 2020–2025"
+  },
+  {
+    "symbol": "USDJPY=X",
+    "interval": "1wk",
+    "from": "2010-01-01",
+    "to": "2025-01-01",
+    "label": "USD/JPY Weekly 2010–2025"
+  },
+  {
+    "symbol": "AUDUSD=X",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "AUD/USD Daily 2020–2025"
+  },
+  {
+    "symbol": "USDCAD=X",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "USD/CAD Daily 2020–2025"
+  },
+  {
+    "symbol": "USDCHF=X",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "USD/CHF Daily 2020–2025"
+  },
+  {
+    "symbol": "NZDUSD=X",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "NZD/USD Daily 2020–2025"
+  },
+  {
+    "symbol": "EURGBP=X",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "EUR/GBP Daily 2020–2025"
+  },
+  {
+    "symbol": "EEM",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Emerging Markets ETF Daily 2020–2025"
+  },
+  {
+    "symbol": "EFA",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Developed Markets ETF Daily 2020–2025"
+  },
+  {
+    "symbol": "BABA",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Alibaba ADR Daily 2020–2025"
+  },
+  {
+    "symbol": "BABA",
+    "interval": "1wk",
+    "from": "2015-01-01",
+    "to": "2025-01-01",
+    "label": "Alibaba ADR Weekly 2015–2025"
+  },
+  {
+    "symbol": "JD",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "JD.com ADR Daily 2020–2025"
+  },
+  {
+    "symbol": "PDD",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "PDD Holdings Daily 2020–2025"
+  },
+  {
+    "symbol": "BIDU",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Baidu ADR Daily 2020–2025"
+  },
+  {
+    "symbol": "NIO",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "NIO ADR Daily 2020–2025"
+  },
+  {
+    "symbol": "MELI",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "MercadoLibre Daily 2020–2025"
+  },
+  {
+    "symbol": "MELI",
+    "interval": "1wk",
+    "from": "2015-01-01",
+    "to": "2025-01-01",
+    "label": "MercadoLibre Weekly 2015–2025"
+  },
+  {
+    "symbol": "NU",
+    "interval": "1d",
+    "from": "2021-01-01",
+    "to": "2025-01-01",
+    "label": "Nu Holdings Daily 2021–2025"
+  },
+  {
+    "symbol": "ASML",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "ASML Daily 2020–2025"
+  },
+  {
+    "symbol": "ASML",
+    "interval": "1wk",
+    "from": "2015-01-01",
+    "to": "2025-01-01",
+    "label": "ASML Weekly 2015–2025"
+  },
+  {
+    "symbol": "SAP",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "SAP Daily 2020–2025"
+  },
+  {
+    "symbol": "NVO",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Novo Nordisk Daily 2020–2025"
+  },
+  {
+    "symbol": "NVO",
+    "interval": "1wk",
+    "from": "2015-01-01",
+    "to": "2025-01-01",
+    "label": "Novo Nordisk Weekly 2015–2025"
+  },
+  {
+    "symbol": "LVMUY",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "LVMH ADR Daily 2020–2025"
+  },
+  {
+    "symbol": "TSM",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "TSMC ADR Daily 2020–2025"
+  },
+  {
+    "symbol": "TSM",
+    "interval": "1wk",
+    "from": "2015-01-01",
+    "to": "2025-01-01",
+    "label": "TSMC ADR Weekly 2015–2025"
+  },
+  {
+    "symbol": "SONY",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Sony ADR Daily 2020–2025"
+  },
+  {
+    "symbol": "TM",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Toyota ADR Daily 2020–2025"
+  },
+  {
+    "symbol": "RIVN",
+    "interval": "1d",
+    "from": "2022-01-01",
+    "to": "2025-01-01",
+    "label": "Rivian Daily 2022–2025"
+  },
+  {
+    "symbol": "LCID",
+    "interval": "1d",
+    "from": "2021-01-01",
+    "to": "2025-01-01",
+    "label": "Lucid Daily 2021–2025"
+  },
+  {
+    "symbol": "GM",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "General Motors Daily 2020–2025"
+  },
+  {
+    "symbol": "F",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Ford Daily 2020–2025"
+  },
+  {
+    "symbol": "F",
+    "interval": "1wk",
+    "from": "2010-01-01",
+    "to": "2025-01-01",
+    "label": "Ford Weekly 2010–2025"
+  },
+  {
+    "symbol": "CSCO",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Cisco Daily 2020–2025"
+  },
+  {
+    "symbol": "CSCO",
+    "interval": "1mo",
+    "from": "2000-01-01",
+    "to": "2025-01-01",
+    "label": "Cisco Monthly 2000–2025"
+  },
+  {
+    "symbol": "ORCL",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Oracle Daily 2020–2025"
+  },
+  {
+    "symbol": "ORCL",
+    "interval": "1wk",
+    "from": "2015-01-01",
+    "to": "2025-01-01",
+    "label": "Oracle Weekly 2015–2025"
+  },
+  {
+    "symbol": "IBM",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "IBM Daily 2020–2025"
+  },
+  {
+    "symbol": "IBM",
+    "interval": "1mo",
+    "from": "2000-01-01",
+    "to": "2025-01-01",
+    "label": "IBM Monthly 2000–2025"
+  },
+  {
+    "symbol": "HPQ",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "HP Inc Daily 2020–2025"
+  },
+  {
+    "symbol": "DELL",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Dell Daily 2020–2025"
+  },
+  {
+    "symbol": "ANET",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Arista Networks Daily 2020–2025"
+  },
+  {
+    "symbol": "PINS",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Pinterest Daily 2020–2025"
+  },
+  {
+    "symbol": "SNAP",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Snap Daily 2020–2025"
+  },
+  {
+    "symbol": "RDDT",
+    "interval": "1d",
+    "from": "2024-01-01",
+    "to": "2025-01-01",
+    "label": "Reddit Daily 2024–2025"
+  },
+  {
+    "symbol": "SPOT",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Spotify Daily 2020–2025"
+  },
+  {
+    "symbol": "ZM",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Zoom Daily 2020–2025"
+  },
+  {
+    "symbol": "DOCU",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "DocuSign Daily 2020–2025"
+  },
+  {
+    "symbol": "TWLO",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Twilio Daily 2020–2025"
+  },
+  {
+    "symbol": "HUBS",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "HubSpot Daily 2020–2025"
+  },
+  {
+    "symbol": "BILL",
+    "interval": "1d",
+    "from": "2021-01-01",
+    "to": "2025-01-01",
+    "label": "Bill.com Daily 2021–2025"
+  },
+  {
+    "symbol": "PATH",
+    "interval": "1d",
+    "from": "2021-01-01",
+    "to": "2025-01-01",
+    "label": "UiPath Daily 2021–2025"
+  },
+  {
+    "symbol": "AI",
+    "interval": "1d",
+    "from": "2021-01-01",
+    "to": "2025-01-01",
+    "label": "C3.ai Daily 2021–2025"
+  },
+  {
+    "symbol": "PLTR",
+    "interval": "1d",
+    "from": "2021-01-01",
+    "to": "2025-01-01",
+    "label": "Palantir Daily 2021–2025"
+  },
+  {
+    "symbol": "PLTR",
+    "interval": "1wk",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Palantir Weekly 2020–2025"
+  },
+  {
+    "symbol": "RBLX",
+    "interval": "1d",
+    "from": "2021-01-01",
+    "to": "2025-01-01",
+    "label": "Roblox Daily 2021–2025"
+  },
+  {
+    "symbol": "U",
+    "interval": "1d",
+    "from": "2021-01-01",
+    "to": "2025-01-01",
+    "label": "Unity Daily 2021–2025"
+  },
+  {
+    "symbol": "ETSY",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Etsy Daily 2020–2025"
+  },
+  {
+    "symbol": "W",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Wayfair Daily 2020–2025"
+  },
+  {
+    "symbol": "CHWY",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Chewy Daily 2020–2025"
+  },
+  {
+    "symbol": "LULU",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Lululemon Daily 2020–2025"
+  },
+  {
+    "symbol": "CROX",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Crocs Daily 2020–2025"
+  },
+  {
+    "symbol": "DECK",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Deckers Daily 2020–2025"
+  },
+  {
+    "symbol": "BOOT",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Boot Barn Daily 2020–2025"
+  },
+  {
+    "symbol": "FIVE",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Five Below Daily 2020–2025"
+  },
+  {
+    "symbol": "CELH",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Celsius Daily 2020–2025"
+  },
+  {
+    "symbol": "CAVA",
+    "interval": "1d",
+    "from": "2023-01-01",
+    "to": "2025-01-01",
+    "label": "Cava Daily 2023–2025"
+  },
+  {
+    "symbol": "CMG",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Chipotle Daily 2020–2025"
+  },
+  {
+    "symbol": "YUM",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Yum! Brands Daily 2020–2025"
+  },
+  {
+    "symbol": "CME",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "CME Group Daily 2020–2025"
+  },
+  {
+    "symbol": "ICE",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "ICE Daily 2020–2025"
+  },
+  {
+    "symbol": "SPGI",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "S&P Global Daily 2020–2025"
+  },
+  {
+    "symbol": "MCO",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Moody's Daily 2020–2025"
+  },
+  {
+    "symbol": "AON",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Aon Daily 2020–2025"
+  },
+  {
+    "symbol": "CB",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Chubb Daily 2020–2025"
+  },
+  {
+    "symbol": "MET",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "MetLife Daily 2020–2025"
+  },
+  {
+    "symbol": "PRU",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Prudential Daily 2020–2025"
+  },
+  {
+    "symbol": "USB",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "US Bancorp Daily 2020–2025"
+  },
+  {
+    "symbol": "PNC",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "PNC Financial Daily 2020–2025"
+  },
+  {
+    "symbol": "TFC",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Truist Financial Daily 2020–2025"
+  },
+  {
+    "symbol": "NEM",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Newmont Daily 2020–2025"
+  },
+  {
+    "symbol": "FCX",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Freeport-McMoRan Daily 2020–2025"
+  },
+  {
+    "symbol": "ALB",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Albemarle Daily 2020–2025"
+  },
+  {
+    "symbol": "MP",
+    "interval": "1d",
+    "from": "2021-01-01",
+    "to": "2025-01-01",
+    "label": "MP Materials Daily 2021–2025"
+  },
+  {
+    "symbol": "LAC",
+    "interval": "1d",
+    "from": "2021-01-01",
+    "to": "2025-01-01",
+    "label": "Lithium Americas Daily 2021–2025"
+  },
+  {
+    "symbol": "LIN",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Linde Daily 2020–2025"
+  },
+  {
+    "symbol": "APD",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Air Products Daily 2020–2025"
+  },
+  {
+    "symbol": "SHW",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Sherwin-Williams Daily 2020–2025"
+  },
+  {
+    "symbol": "EMR",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Emerson Electric Daily 2020–2025"
+  },
+  {
+    "symbol": "ETN",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Eaton Daily 2020–2025"
+  },
+  {
+    "symbol": "PH",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Parker-Hannifin Daily 2020–2025"
+  },
+  {
+    "symbol": "ROK",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Rockwell Automation Daily 2020–2025"
+  },
+  {
+    "symbol": "ITW",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Illinois Tool Works Daily 2020–2025"
+  },
+  {
+    "symbol": "GD",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "General Dynamics Daily 2020–2025"
+  },
+  {
+    "symbol": "WM",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Waste Management Daily 2020–2025"
+  },
+  {
+    "symbol": "RSG",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Republic Services Daily 2020–2025"
+  },
+  {
+    "symbol": "CARR",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Carrier Global Daily 2020–2025"
+  },
+  {
+    "symbol": "OTIS",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Otis Worldwide Daily 2020–2025"
+  },
+  {
+    "symbol": "SYK",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Stryker Daily 2020–2025"
+  },
+  {
+    "symbol": "MDT",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Medtronic Daily 2020–2025"
+  },
+  {
+    "symbol": "BSX",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Boston Scientific Daily 2020–2025"
+  },
+  {
+    "symbol": "EW",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Edwards Lifesciences Daily 2020–2025"
+  },
+  {
+    "symbol": "HUM",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Humana Daily 2020–2025"
+  },
+  {
+    "symbol": "CI",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Cigna Daily 2020–2025"
+  },
+  {
+    "symbol": "ELV",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Elevance Health Daily 2020–2025"
+  },
+  {
+    "symbol": "COR",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Cencora Daily 2020–2025"
+  },
+  {
+    "symbol": "MCK",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "McKesson Daily 2020–2025"
+  },
+  {
+    "symbol": "VEEV",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Veeva Systems Daily 2020–2025"
+  },
+  {
+    "symbol": "IDXX",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "IDEXX Labs Daily 2020–2025"
+  },
+  {
+    "symbol": "ILMN",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Illumina Daily 2020–2025"
+  },
+  {
+    "symbol": "BIIB",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Biogen Daily 2020–2025"
+  },
+  {
+    "symbol": "INCY",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Incyte Daily 2020–2025"
+  },
+  {
+    "symbol": "ALNY",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Alnylam Daily 2020–2025"
+  },
+  {
+    "symbol": "SRPT",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Sarepta Daily 2020–2025"
+  },
+  {
+    "symbol": "SMCI",
+    "interval": "1d",
+    "from": "2023-01-01",
+    "to": "2025-01-01",
+    "label": "Super Micro Computer Daily 2023–2025"
+  },
+  {
+    "symbol": "ARM",
+    "interval": "1d",
+    "from": "2023-01-01",
+    "to": "2025-01-01",
+    "label": "Arm Holdings Daily 2023–2025"
+  },
+  {
+    "symbol": "NXPI",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "NXP Semi Daily 2020–2025"
+  },
+  {
+    "symbol": "ON",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "ON Semiconductor Daily 2020–2025"
+  },
+  {
+    "symbol": "MPWR",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Monolithic Power Daily 2020–2025"
+  },
+  {
+    "symbol": "SWKS",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Skyworks Daily 2020–2025"
+  },
+  {
+    "symbol": "ENTG",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Entegris Daily 2020–2025"
+  },
+  {
+    "symbol": "ONTO",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Onto Innovation Daily 2020–2025"
+  },
+  {
+    "symbol": "WOLF",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Wolfspeed Daily 2020–2025"
+  },
+  {
+    "symbol": "GEHC",
+    "interval": "1d",
+    "from": "2023-01-01",
+    "to": "2025-01-01",
+    "label": "GE HealthCare Daily 2023–2025"
+  },
+  {
+    "symbol": "VLTO",
+    "interval": "1d",
+    "from": "2023-01-01",
+    "to": "2025-01-01",
+    "label": "Veralto Daily 2023–2025"
+  },
+  {
+    "symbol": "KVUE",
+    "interval": "1d",
+    "from": "2023-01-01",
+    "to": "2025-01-01",
+    "label": "Kenvue Daily 2023–2025"
+  },
+  {
+    "symbol": "SOLV",
+    "interval": "1d",
+    "from": "2023-01-01",
+    "to": "2025-01-01",
+    "label": "Solventum Daily 2023–2025"
+  },
+  {
+    "symbol": "NTRA",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Natera Daily 2020–2025"
+  },
+  {
+    "symbol": "EXAS",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Exact Sciences Daily 2020–2025"
+  },
+  {
+    "symbol": "AXSM",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Axsome Daily 2020–2025"
+  },
+  {
+    "symbol": "HRMY",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Harmony Biosciences Daily 2020–2025"
+  },
+  {
+    "symbol": "SMAR",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Smartsheet Daily 2020–2025"
+  },
+  {
+    "symbol": "GTLB",
+    "interval": "1d",
+    "from": "2021-01-01",
+    "to": "2025-01-01",
+    "label": "GitLab Daily 2021–2025"
+  },
+  {
+    "symbol": "CFLT",
+    "interval": "1d",
+    "from": "2021-01-01",
+    "to": "2025-01-01",
+    "label": "Confluent Daily 2021–2025"
+  },
+  {
+    "symbol": "ESTC",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Elastic Daily 2020–2025"
+  },
+  {
+    "symbol": "FSLY",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Fastly Daily 2020–2025"
+  },
+  {
+    "symbol": "JAMF",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Jamf Daily 2020–2025"
+  },
+  {
+    "symbol": "BRZE",
+    "interval": "1d",
+    "from": "2021-01-01",
+    "to": "2025-01-01",
+    "label": "Braze Daily 2021–2025"
+  },
+  {
+    "symbol": "SEMR",
+    "interval": "1d",
+    "from": "2021-01-01",
+    "to": "2025-01-01",
+    "label": "SEMrush Daily 2021–2025"
+  },
+  {
+    "symbol": "PCVX",
+    "interval": "1d",
+    "from": "2021-01-01",
+    "to": "2025-01-01",
+    "label": "Vaxcyte Daily 2021–2025"
+  },
+  {
+    "symbol": "GFS",
+    "interval": "1d",
+    "from": "2021-01-01",
+    "to": "2025-01-01",
+    "label": "GlobalFoundries Daily 2021–2025"
+  },
+  {
+    "symbol": "MBLY",
+    "interval": "1d",
+    "from": "2022-01-01",
+    "to": "2025-01-01",
+    "label": "Mobileye Daily 2022–2025"
+  },
+  {
+    "symbol": "IONQ",
+    "interval": "1d",
+    "from": "2021-01-01",
+    "to": "2025-01-01",
+    "label": "IonQ Daily 2021–2025"
+  },
+  {
+    "symbol": "RGTI",
+    "interval": "1d",
+    "from": "2022-01-01",
+    "to": "2025-01-01",
+    "label": "Rigetti Computing Daily 2022–2025"
+  },
+  {
+    "symbol": "QBTS",
+    "interval": "1d",
+    "from": "2022-01-01",
+    "to": "2025-01-01",
+    "label": "D-Wave Quantum Daily 2022–2025"
+  },
+  {
+    "symbol": "ACHR",
+    "interval": "1d",
+    "from": "2021-01-01",
+    "to": "2025-01-01",
+    "label": "Archer Aviation Daily 2021–2025"
+  },
+  {
+    "symbol": "JOBY",
+    "interval": "1d",
+    "from": "2021-01-01",
+    "to": "2025-01-01",
+    "label": "Joby Aviation Daily 2021–2025"
+  },
+  {
+    "symbol": "MSTR",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "MicroStrategy Daily 2020–2025"
+  },
+  {
+    "symbol": "MSTR",
+    "interval": "1wk",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "MicroStrategy Weekly 2020–2025"
+  },
+  {
+    "symbol": "GME",
+    "interval": "1d",
+    "from": "2021-01-01",
+    "to": "2025-01-01",
+    "label": "GameStop Daily 2021–2025"
+  },
+  {
+    "symbol": "GME",
+    "interval": "1wk",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "GameStop Weekly 2020–2025"
+  },
+  {
+    "symbol": "AMC",
+    "interval": "1d",
+    "from": "2021-01-01",
+    "to": "2025-01-01",
+    "label": "AMC Daily 2021–2025"
+  },
+  {
+    "symbol": "BBBY",
+    "interval": "1d",
+    "from": "2021-01-01",
+    "to": "2023-01-01",
+    "label": "Bed Bath & Beyond Daily 2021–2023"
+  },
+  {
+    "symbol": "XPEV",
+    "interval": "1d",
+    "from": "2021-01-01",
+    "to": "2025-01-01",
+    "label": "XPeng Daily 2021–2025"
+  },
+  {
+    "symbol": "LI",
+    "interval": "1d",
+    "from": "2021-01-01",
+    "to": "2025-01-01",
+    "label": "Li Auto Daily 2021–2025"
+  },
+  {
+    "symbol": "GRAB",
+    "interval": "1d",
+    "from": "2021-01-01",
+    "to": "2025-01-01",
+    "label": "Grab Holdings Daily 2021–2025"
+  },
+  {
+    "symbol": "SEA",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Sea Limited Daily 2020–2025"
+  },
+  {
+    "symbol": "GLOB",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Globant Daily 2020–2025"
+  },
+  {
+    "symbol": "PGR",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Progressive Daily 2020–2025"
+  },
+  {
+    "symbol": "ALL",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Allstate Daily 2020–2025"
+  },
+  {
+    "symbol": "TRV",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Travelers Daily 2020–2025"
+  },
+  {
+    "symbol": "HIG",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Hartford Financial Daily 2020–2025"
+  },
+  {
+    "symbol": "AFL",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Aflac Daily 2020–2025"
+  },
+  {
+    "symbol": "MPC",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Marathon Petroleum Daily 2020–2025"
+  },
+  {
+    "symbol": "PSX",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Phillips 66 Daily 2020–2025"
+  },
+  {
+    "symbol": "VLO",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Valero Energy Daily 2020–2025"
+  },
+  {
+    "symbol": "EOG",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "EOG Resources Daily 2020–2025"
+  },
+  {
+    "symbol": "PXD",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2023-01-01",
+    "label": "Pioneer Natural Resources Daily 2020–2023"
+  },
+  {
+    "symbol": "FANG",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Diamondback Energy Daily 2020–2025"
+  },
+  {
+    "symbol": "APA",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "APA Corp Daily 2020–2025"
+  },
+  {
+    "symbol": "MRO",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Marathon Oil Daily 2020–2025"
+  },
+  {
+    "symbol": "HES",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Hess Daily 2020–2025"
+  },
+  {
+    "symbol": "CTRA",
+    "interval": "1d",
+    "from": "2021-01-01",
+    "to": "2025-01-01",
+    "label": "Coterra Energy Daily 2021–2025"
+  },
+  {
+    "symbol": "GWW",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "W.W. Grainger Daily 2020–2025"
+  },
+  {
+    "symbol": "FAST",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Fastenal Daily 2020–2025"
+  },
+  {
+    "symbol": "CSGP",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "CoStar Group Daily 2020–2025"
+  },
+  {
+    "symbol": "VRSK",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Verisk Analytics Daily 2020–2025"
+  },
+  {
+    "symbol": "CPRT",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Copart Daily 2020–2025"
+  },
+  {
+    "symbol": "EXPD",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Expeditors Daily 2020–2025"
+  },
+  {
+    "symbol": "CHRW",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "C.H. Robinson Daily 2020–2025"
+  },
+  {
+    "symbol": "JBHT",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "J.B. Hunt Daily 2020–2025"
+  },
+  {
+    "symbol": "ODFL",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Old Dominion Freight Daily 2020–2025"
+  },
+  {
+    "symbol": "CSX",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "CSX Daily 2020–2025"
+  },
+  {
+    "symbol": "NSC",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Norfolk Southern Daily 2020–2025"
+  },
+  {
+    "symbol": "UNP",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Union Pacific Daily 2020–2025"
+  },
+  {
+    "symbol": "DAL",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Delta Air Lines Daily 2020–2025"
+  },
+  {
+    "symbol": "UAL",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "United Airlines Daily 2020–2025"
+  },
+  {
+    "symbol": "AAL",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "American Airlines Daily 2020–2025"
+  },
+  {
+    "symbol": "LUV",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Southwest Airlines Daily 2020–2025"
+  },
+  {
+    "symbol": "CCL",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Carnival Corp Daily 2020–2025"
+  },
+  {
+    "symbol": "RCL",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Royal Caribbean Daily 2020–2025"
+  },
+  {
+    "symbol": "MAR",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Marriott Daily 2020–2025"
+  },
+  {
+    "symbol": "HLT",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Hilton Daily 2020–2025"
+  },
+  {
+    "symbol": "BKNG",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Booking Holdings Daily 2020–2025"
+  },
+  {
+    "symbol": "EXPE",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Expedia Daily 2020–2025"
+  },
+  {
+    "symbol": "EURJPY=X",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "EUR/JPY Daily 2020–2025"
+  },
+  {
+    "symbol": "GBPJPY=X",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "GBP/JPY Daily 2020–2025"
+  },
+  {
+    "symbol": "CADJPY=X",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "CAD/JPY Daily 2020–2025"
+  },
+  {
+    "symbol": "CHFJPY=X",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "CHF/JPY Daily 2020–2025"
+  },
+  {
+    "symbol": "AUDJPY=X",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "AUD/JPY Daily 2020–2025"
+  },
+  {
+    "symbol": "EURUSD=X",
+    "interval": "1mo",
+    "from": "2000-01-01",
+    "to": "2025-01-01",
+    "label": "EUR/USD Monthly 2000–2025"
+  },
+  {
+    "symbol": "USDJPY=X",
+    "interval": "1mo",
+    "from": "2000-01-01",
+    "to": "2025-01-01",
+    "label": "USD/JPY Monthly 2000–2025"
+  },
+  {
+    "symbol": "GC=F",
+    "interval": "1wk",
+    "from": "2010-01-01",
+    "to": "2025-01-01",
+    "label": "Gold Futures Weekly 2010–2025"
+  },
+  {
+    "symbol": "SI=F",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Silver Futures Daily 2020–2025"
+  },
+  {
+    "symbol": "CL=F",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Crude Oil Futures Daily 2020–2025"
+  },
+  {
+    "symbol": "CL=F",
+    "interval": "1wk",
+    "from": "2010-01-01",
+    "to": "2025-01-01",
+    "label": "Crude Oil Futures Weekly 2010–2025"
+  },
+  {
+    "symbol": "NG=F",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Natural Gas Futures Daily 2020–2025"
+  },
+  {
+    "symbol": "ES=F",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "S&P 500 Futures Daily 2020–2025"
+  },
+  {
+    "symbol": "NQ=F",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Nasdaq Futures Daily 2020–2025"
+  },
+  {
+    "symbol": "^FTSE",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "FTSE 100 Daily 2020–2025"
+  },
+  {
+    "symbol": "^FTSE",
+    "interval": "1wk",
+    "from": "2010-01-01",
+    "to": "2025-01-01",
+    "label": "FTSE 100 Weekly 2010–2025"
+  },
+  {
+    "symbol": "^GDAXI",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "DAX Daily 2020–2025"
+  },
+  {
+    "symbol": "^GDAXI",
+    "interval": "1wk",
+    "from": "2010-01-01",
+    "to": "2025-01-01",
+    "label": "DAX Weekly 2010–2025"
+  },
+  {
+    "symbol": "^N225",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Nikkei 225 Daily 2020–2025"
+  },
+  {
+    "symbol": "^N225",
+    "interval": "1wk",
+    "from": "2010-01-01",
+    "to": "2025-01-01",
+    "label": "Nikkei 225 Weekly 2010–2025"
+  },
+  {
+    "symbol": "^HSI",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Hang Seng Daily 2020–2025"
+  },
+  {
+    "symbol": "^AXJO",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "ASX 200 Daily 2020–2025"
+  },
+  {
+    "symbol": "EWJ",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Japan ETF Daily 2020–2025"
+  },
+  {
+    "symbol": "EWG",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Germany ETF Daily 2020–2025"
+  },
+  {
+    "symbol": "EWU",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "UK ETF Daily 2020–2025"
+  },
+  {
+    "symbol": "EWC",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Canada ETF Daily 2020–2025"
+  },
+  {
+    "symbol": "EWA",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Australia ETF Daily 2020–2025"
+  },
+  {
+    "symbol": "EWZ",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Brazil ETF Daily 2020–2025"
+  },
+  {
+    "symbol": "FXI",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "China Large-Cap ETF Daily 2020–2025"
+  },
+  {
+    "symbol": "EPI",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "India ETF Daily 2020–2025"
+  },
+  {
+    "symbol": "SQQQ",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "ProShares UltraPro Short QQQ Daily 2020–2025"
+  },
+  {
+    "symbol": "TQQQ",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "ProShares UltraPro QQQ Daily 2020–2025"
+  },
+  {
+    "symbol": "SPXS",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Direxion Bear 3x S&P Daily 2020–2025"
+  },
+  {
+    "symbol": "SPXL",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Direxion Bull 3x S&P Daily 2020–2025"
+  },
+  {
+    "symbol": "TMF",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Direxion Bull 3x Treasury Daily 2020–2025"
+  },
+  {
+    "symbol": "UVXY",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "ProShares VIX Short-Term Daily 2020–2025"
+  },
+  {
+    "symbol": "BOIL",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "ProShares Ultra Nat Gas Daily 2020–2025"
+  },
+  {
+    "symbol": "KOLD",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "ProShares Short Nat Gas Daily 2020–2025"
+  },
+  {
+    "symbol": "LABU",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Direxion Bull 3x Biotech Daily 2020–2025"
+  },
+  {
+    "symbol": "LABD",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Direxion Bear 3x Biotech Daily 2020–2025"
+  },
+  {
+    "symbol": "SOXL",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Direxion Bull 3x Semi Daily 2020–2025"
+  },
+  {
+    "symbol": "SOXS",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Direxion Bear 3x Semi Daily 2020–2025"
+  },
+  {
+    "symbol": "IBB",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Biotech ETF Daily 2020–2025"
+  },
+  {
+    "symbol": "SMH",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Semiconductor ETF Daily 2020–2025"
+  },
+  {
+    "symbol": "ARKK",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "ARK Innovation ETF Daily 2020–2025"
+  },
+  {
+    "symbol": "ARKG",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "ARK Genomic Revolution ETF Daily 2020–2025"
+  },
+  {
+    "symbol": "ARKW",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "ARK Next Gen Internet ETF Daily 2020–2025"
+  },
+  {
+    "symbol": "DOGE-USD",
+    "interval": "1d",
+    "from": "2021-01-01",
+    "to": "2025-01-01",
+    "label": "Dogecoin Daily 2021–2025"
+  },
+  {
+    "symbol": "ADA-USD",
+    "interval": "1d",
+    "from": "2021-01-01",
+    "to": "2025-01-01",
+    "label": "Cardano Daily 2021–2025"
+  },
+  {
+    "symbol": "AVAX-USD",
+    "interval": "1d",
+    "from": "2021-01-01",
+    "to": "2025-01-01",
+    "label": "Avalanche Daily 2021–2025"
+  },
+  {
+    "symbol": "LINK-USD",
+    "interval": "1d",
+    "from": "2021-01-01",
+    "to": "2025-01-01",
+    "label": "Chainlink Daily 2021–2025"
+  },
+  {
+    "symbol": "DOT-USD",
+    "interval": "1d",
+    "from": "2021-01-01",
+    "to": "2025-01-01",
+    "label": "Polkadot Daily 2021–2025"
+  },
+  {
+    "symbol": "MATIC-USD",
+    "interval": "1d",
+    "from": "2021-01-01",
+    "to": "2025-01-01",
+    "label": "Polygon Daily 2021–2025"
+  },
+  {
+    "symbol": "UNI7083-USD",
+    "interval": "1d",
+    "from": "2021-01-01",
+    "to": "2025-01-01",
+    "label": "Uniswap Daily 2021–2025"
+  },
+  {
+    "symbol": "GBPJPY=X",
+    "interval": "1wk",
+    "from": "2010-01-01",
+    "to": "2025-01-01",
+    "label": "GBP/JPY Weekly 2010–2025"
+  },
+  {
+    "symbol": "GC=F",
+    "interval": "1wk",
+    "from": "2015-01-01",
+    "to": "2025-01-01",
+    "label": "Gold Futures Weekly 2015–2025"
+  },
+  {
+    "symbol": "CADUSD=X",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "CAD/USD Daily 2020–2025"
+  },
+  {
+    "symbol": "^STOXX50E",
+    "interval": "1d",
+    "from": "2020-01-01",
+    "to": "2025-01-01",
+    "label": "Euro Stoxx 50 Daily 2020–2025"
+  }
+]

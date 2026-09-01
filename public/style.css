@@ -284,7 +284,6 @@ input[type="range"] { width: 100%; accent-color: var(--focus); cursor: pointer; 
 .ticket-cancel-btn:hover { color: var(--text); border-color: var(--text-muted); }
 
 
-.note-panel {
   position: absolute; bottom: 20px; right: 20px; z-index: 15;
   background: var(--bg-panel); border: 1px solid var(--border);
   border-radius: var(--radius); padding: 14px;
@@ -508,4 +507,102 @@ input[type="range"] { width: 100%; accent-color: var(--focus); cursor: pointer; 
   color: #1a1a1a;
   letter-spacing: 0.01em;
   white-space: nowrap;
+}
+.user-badge {
+  display: flex; align-items: center; gap: 8px; margin-top: 6px;
+  padding-top: 8px; border-top: 1px solid var(--border);
+}
+.user-email { font-size: 10px; color: var(--text-muted); font-family: var(--font-mono); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; }
+.logout-btn { background: none; border: none; color: var(--text-faint); font-size: 10px; cursor: pointer; padding: 0; transition: color 0.1s; white-space: nowrap; }
+.logout-btn:hover { color: var(--bear); }
+
+.auth-prompt-block { display: flex; flex-direction: column; gap: 8px; padding: 10px 0; }
+.auth-prompt-block p { font-size: 11px; color: var(--text-faint); line-height: 1.5; }
+.auth-cta-btn {
+  background: var(--bg-hover); border: 1px solid var(--border); border-radius: var(--radius-sm);
+  color: var(--text-muted); font-size: 11px; font-family: inherit; padding: 6px 0;
+  cursor: pointer; transition: color 0.1s, border-color 0.1s;
+}
+.auth-cta-btn:hover { color: var(--text); border-color: var(--text-muted); }
+
+/* Auth modal */
+.auth-modal-box { width: 320px; }
+.auth-body { padding: 20px 16px; display: flex; flex-direction: column; gap: 14px; }
+.auth-error { font-size: 11px; color: var(--bear); background: var(--bear-dim); border: 1px solid var(--bear); border-radius: var(--radius-sm); padding: 8px 10px; line-height: 1.4; }
+.auth-switch { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--text-faint); }
+.auth-switch-btn { background: none; border: none; color: var(--focus); font-size: 11px; cursor: pointer; padding: 0; text-decoration: underline; }
+
+/* ── Sidebar footer / Buy Me a Coffee ──────────────────────────────── */
+.sidebar-footer {
+  padding: 12px 14px;
+  border-top: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.bmc-link {
+  display: flex; align-items: center; gap: 7px;
+  font-size: 11px; color: var(--text-faint);
+  text-decoration: none;
+  padding: 6px 8px; border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  transition: color 0.1s, border-color 0.1s, background 0.1s;
+}
+.bmc-link:hover { color: var(--text); border-color: var(--text-muted); background: var(--bg-hover); }
+.bmc-icon { font-size: 13px; }
+
+/* ── Dataset picker enhancements ───────────────────────────────────── */
+#datasetSelect {
+  /* Multi-row select — let it breathe */
+  height: 130px;
+  font-size: 11px;
+  font-family: var(--font-mono);
+  border-radius: var(--radius-sm);
+  margin-top: 4px;
+}
+
+#datasetSelect optgroup {
+  color: var(--text-faint);
+  font-size: 10px;
+  font-family: inherit;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+#datasetSelect option {
+  color: var(--text);
+  padding: 2px 4px;
+}
+
+/* Loading spinner */
+.dataset-spinner {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: var(--text-faint);
+  padding: 4px 0;
+}
+
+.spinner-ring {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border: 2px solid var(--border);
+  border-top-color: var(--focus);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Auth success message */
+.auth-success {
+  font-size: 12px;
+  color: var(--bull);
+  background: var(--bull-dim);
+  border: 1px solid var(--bull);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  line-height: 1.5;
+  text-align: center;
 }

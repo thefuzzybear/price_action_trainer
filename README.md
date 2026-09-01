@@ -1,37 +1,124 @@
 # Price Action Trainer
 
-A standalone Electron app for training price action reading skills.
+Train your price action reading skills — candlestick replay, predictions, trade mapping, bar notes, and session persistence.
+
+Built with vanilla JS + [lightweight-charts](https://github.com/tradingview/lightweight-charts), deployed on Vercel, data stored in Supabase.
+
+---
 
 ## Setup
 
+### 1. Clone and install
+
 ```bash
+git clone <your-repo>
+cd price_trainer
 npm install
-npm start
 ```
 
-## Usage
+### 2. Create a Supabase project
 
-1. Enter a ticker symbol (or click 🎲 for a random one from the 500-stock seed list)
-2. Choose an interval (default: daily), start/end dates, and how many bars to start with
-3. Click **Load Data** — data is fetched from Yahoo Finance and cached locally
-4. Use the keyboard to step through bars:
+1. Go to [supabase.com](https://supabase.com) → New project
+2. Open **SQL Editor** → paste the contents of `scripts/schema.sql` → Run
+3. Go to **Settings → API** and copy:
+   - Project URL
+   - `anon` public key
+   - `service_role` secret key
+
+### 3. Configure environment
+
+```bash
+cp .env.local.example .env.local
+# Fill in your three Supabase values
+```
+
+### 4. Ingest datasets
+
+```bash
+# Single dataset
+node scripts/ingest.js --symbol AAPL --interval 1d --from 2020-01-01 --to 2025-01-01
+
+# Bulk ingest from the starter list
+node scripts/ingest.js --file scripts/datasets.json
+```
+
+This runs locally and pushes OHLCV data to Supabase. Users never call Yahoo Finance directly.
+
+### 5. Local dev
+
+The existing Express server still works for local testing:
+
+```bash
+npm run dev
+# Open http://localhost:3000
+```
+
+---
+
+## Deploy to Vercel
+
+### First deploy
+
+```bash
+npm i -g vercel
+vercel
+```
+
+### Set environment variables
+
+In the Vercel dashboard → your project → Settings → Environment Variables, add:
+
+| Key | Value |
+|-----|-------|
+| `SUPABASE_URL` | your project URL |
+| `SUPABASE_ANON_KEY` | anon public key |
+| `SUPABASE_SERVICE_ROLE_KEY` | service role secret key |
+
+Then redeploy:
+
+```bash
+vercel --prod
+```
+
+---
+
+## How it works
+
+| Layer | Technology |
+|-------|-----------|
+| Frontend | Vanilla HTML/CSS/JS, served as Vercel static output |
+| API | Vercel serverless functions (`/api/*.js`) |
+| Auth | Supabase Auth (email + password) |
+| Data storage | Supabase Postgres |
+| Charts | TradingView lightweight-charts v4 |
+| Data ingest | yahoo-finance2 (local script only) |
+
+### Data model
+
+- **datasets** — OHLCV bars for curated instruments. You populate this via `scripts/ingest.js`. Row-level security: anonymous users see `is_public = true` rows; authenticated users see all.
+- **sessions** — per-user, per-dataset state: bar position, predictions, trades, notes. RLS ensures users can only access their own rows.
+
+### Controls
 
 | Key | Action |
 |-----|--------|
 | → | Reveal next bar |
 | ← | Remove last bar |
-| ↑ | Jump forward 10 bars |
-| ↓ | Jump back 10 bars |
+| ↑ / ↓ | Jump ±10 bars |
+| B | Predict bullish |
+| L | Predict bearish |
+| S | Skip prediction |
+| E | Open trade ticket (long) |
+| X | Close active trade |
+| N | Add bar note |
+| R | Open session summary / exit review |
+| Tab | Session summary |
 | Space | Randomise start position |
 
-## Noise injection
+---
 
-Toggle on to perturb OHLC values by a configurable percentage (0.1–5%). 
-This randomises the chart enough to prevent recognition of exact historical moves.
-Noise is applied on top of the cached raw data — toggling off restores the original.
+## Buy Me a Coffee
 
-## Cached data
+If this helps your trading — [buy me a coffee ☕](https://buymeacoffee.com/YOUR_USERNAME)
 
-Downloaded datasets are stored as JSON in `src/data/`. 
-Re-loading the same symbol/interval/date range will use the cache without hitting Yahoo Finance.
-You can delete individual datasets from the cache list in the sidebar.
+> Update the link in `public/index.html` with your actual buymeacoffee username.

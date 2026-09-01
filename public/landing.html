@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Price Action Trainer — Practice Reading Charts Without Waiting for the Market</title>
+  <meta name="description" content="Step through real historical candlestick data bar by bar, predict the next move, map trades with TP/SL lines, and track your accuracy. Free price action practice tool used by thousands of traders." />
+  <meta name="keywords" content="price action training, candlestick chart practice, trading simulator, technical analysis training, stock chart reading, forex chart practice, cryptocurrency trading practice, candlestick patterns, support resistance, price action trading" />
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:title"       content="Price Action Trainer — Practice Reading Charts Like a Pro" />
+  <meta property="og:description" content="Step through real historical candlestick data bar by bar. Predict the next move, map trades, track your accuracy. Free and browser-based." />
+  <meta property="og:image"       content="/og-image.png" />
+  <meta property="og:url"         content="https://your-domain.vercel.app" />
+  <meta property="og:site_name"   content="Price Action Trainer" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="Price Action Trainer — Practice Reading Charts" />
+  <meta name="twitter:description" content="Step through real historical candlestick data bar by bar. Predict the next move, map trades, track your accuracy. Free." />
+  <meta name="twitter:image"       content="/og-image.png" />
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://your-domain.vercel.app/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+  <!-- JSON-LD: SoftwareApplication -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Price Action Trainer",
+    "description": "A free browser-based tool for practising price action reading. Step through real historical candlestick data bar by bar, predict the next move, map trades with take profit and stop loss levels, and track your accuracy over time.",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Any",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "url": "https://your-domain.vercel.app",
+    "author": {
+      "@type": "Person",
+      "name": "Price Action Trainer"
+    },
+    "featureList": [
+      "Candlestick chart replay with hard right edge",
+      "Prediction mode with accuracy tracking",
+      "Trade mapping with TP/SL price lines",
+      "Bar-by-bar notes",
+      "Session persistence",
+      "Blind mode to remove ticker bias",
+      "500+ curated historical datasets",
+      "Noise injection to prevent pattern memorisation"
+    ]
+  }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #0d1117;
+      --bg2:      #161b22;
+      --bg3:      #1c2128;
+      --border:   #21262d;
+      --text:     #e6edf3;
+      --muted:    #7d8590;
+      --faint:    #484f58;
+      --bull:     #3fb950;
+      --bear:     #f85149;
+      --accent:   #58a6ff;
+      --yellow:   #FFDD00;
+      --font:     -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', system-ui, sans-serif;
+      --mono:     'SF Mono', 'Fira Code', 'Consolas', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── NAV ──────────────────────────────────────────────────────── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(13,17,23,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5vw; height: 56px;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      font-weight: 700; font-size: 15px; color: var(--text);
+      text-decoration: none;
+    }
+    .nav-logo svg { width: 28px; height: 28px; }
+    .nav-links { display: flex; align-items: center; gap: 28px; }
+    .nav-links a { font-size: 14px; color: var(--muted); transition: color 0.15s; }
+    .nav-links a:hover { color: var(--text); text-decoration: none; }
+    .nav-cta {
+      background: var(--bull); color: #000 !important; font-weight: 700;
+      padding: 7px 18px; border-radius: 6px;
+      transition: filter 0.15s !important;
+    }
+    .nav-cta:hover { filter: brightness(1.1); text-decoration: none !important; }
+
+    /* ── HERO ─────────────────────────────────────────────────────── */
+    .hero {
+      text-align: center;
+      padding: 96px 5vw 80px;
+      max-width: 860px; margin: 0 auto;
+    }
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 12px; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--bull);
+      background: rgba(63,185,80,0.1);
+      border: 1px solid rgba(63,185,80,0.3);
+      border-radius: 20px; padding: 4px 14px;
+      margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      font-weight: 800; line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+    }
+    .hero h1 em { font-style: normal; color: var(--accent); }
+    .hero p {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: var(--muted); max-width: 600px; margin: 0 auto 40px;
+    }
+    .hero-actions {
+      display: flex; align-items: center; justify-content: center;
+      gap: 14px; flex-wrap: wrap;
+    }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--bull); color: #000;
+      font-size: 15px; font-weight: 700;
+      padding: 13px 28px; border-radius: 8px;
+      transition: filter 0.15s, transform 0.1s;
+      text-decoration: none;
+    }
+    .btn-primary:hover { filter: brightness(1.1); transform: translateY(-1px); text-decoration: none; }
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--bg2); color: var(--text);
+      border: 1px solid var(--border);
+      font-size: 15px; font-weight: 600;
+      padding: 13px 28px; border-radius: 8px;
+      transition: border-color 0.15s, background 0.15s;
+      text-decoration: none;
+    }
+    .btn-secondary:hover { border-color: var(--muted); background: var(--bg3); text-decoration: none; }
+    .hero-sub {
+      font-size: 13px; color: var(--faint); margin-top: 18px;
+    }
+
+    /* ── CHART PREVIEW ────────────────────────────────────────────── */
+    .preview {
+      max-width: 900px; margin: 0 auto 80px;
+      padding: 0 5vw;
+    }
+    .preview-frame {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .preview-bar {
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+      padding: 10px 16px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dot-r { background: #f85149; }
+    .dot-y { background: #d29922; }
+    .dot-g { background: #3fb950; }
+    .preview-body {
+      padding: 24px;
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 16px;
+      min-height: 260px;
+    }
+    .preview-sidebar {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 14px;
+      display: flex; flex-direction: column; gap: 12px;
+    }
+    .ps-label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--faint); }
+    .ps-val   { font-size: 12px; color: var(--muted); font-family: var(--mono); margin-top: 3px; }
+    .ps-bull  { color: var(--bull); font-weight: 700; font-size: 11px; }
+    .ps-bear  { color: var(--bear); font-weight: 700; font-size: 11px; }
+    .ps-score { font-size: 18px; font-weight: 700; color: var(--bull); font-family: var(--mono); }
+    .preview-chart {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      display: flex; align-items: flex-end;
+      padding: 16px 10px 8px;
+      gap: 3px;
+    }
+    .candle {
+      display: flex; flex-direction: column;
+      align-items: center; flex: 1;
+    }
+    .wick  { width: 1px; background: var(--border); }
+    .body  { width: 100%; max-width: 14px; border-radius: 1px; }
+    .bull-c .body { background: var(--bull); }
+    .bear-c .body { background: var(--bear); }
+    .bull-c .wick { background: var(--bull); }
+    .bear-c .wick { background: var(--bear); }
+
+    /* ── STATS STRIP ─────────────────────────────────────────────── */
+    .stats {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 40px 5vw;
+      display: flex; justify-content: center; gap: 0;
+      flex-wrap: wrap;
+    }
+    .stat-item {
+      text-align: center;
+      padding: 16px 48px;
+      border-right: 1px solid var(--border);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-num {
+      font-size: 2rem; font-weight: 800;
+      font-family: var(--mono); color: var(--text);
+    }
+    .stat-lbl { font-size: 13px; color: var(--muted); margin-top: 4px; }
+
+    /* ── FEATURES ─────────────────────────────────────────────────── */
+    section { padding: 80px 5vw; max-width: 1100px; margin: 0 auto; }
+    .section-eyebrow {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--accent);
+      margin-bottom: 12px;
+    }
+    h2 {
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      font-weight: 800; line-height: 1.2;
+      letter-spacing: -0.01em; margin-bottom: 16px;
+    }
+    .section-sub {
+      font-size: 1.05rem; color: var(--muted);
+      max-width: 560px; margin-bottom: 56px;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .feature-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 24px;
+      transition: border-color 0.15s;
+    }
+    .feature-card:hover { border-color: var(--faint); }
+    .feature-icon {
+      font-size: 24px; margin-bottom: 14px;
+      display: block;
+    }
+    .feature-card h3 {
+      font-size: 15px; font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .feature-card p {
+      font-size: 13px; color: var(--muted); line-height: 1.6;
+    }
+
+    /* ── HOW IT WORKS ─────────────────────────────────────────────── */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 0;
+      counter-reset: steps;
+    }
+    .step {
+      padding: 32px 28px;
+      border-right: 1px solid var(--border);
+      counter-increment: steps;
+      position: relative;
+    }
+    .step:last-child { border-right: none; }
+    .step::before {
+      content: counter(steps);
+      display: block;
+      font-size: 11px; font-weight: 700;
+      font-family: var(--mono);
+      color: var(--accent);
+      background: rgba(88,166,255,0.1);
+      border: 1px solid rgba(88,166,255,0.2);
+      border-radius: 50%;
+      width: 28px; height: 28px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 14px;
+    }
+    .step h3 { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
+    .step p  { font-size: 13px; color: var(--muted); }
+    .steps-wrap {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 10px; overflow: hidden;
+    }
+
+    /* ── KEYBOARD SHORTCUTS ───────────────────────────────────────── */
+    .shortcuts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 10px;
+    }
+    .shortcut {
+      display: flex; align-items: center; gap: 12px;
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 8px; padding: 12px 16px;
+    }
+    kbd {
+      font-family: var(--mono); font-size: 11px;
+      background: var(--bg3); border: 1px solid var(--border);
+      border-bottom-width: 2px; border-radius: 4px;
+      padding: 3px 8px; color: var(--text);
+      white-space: nowrap; flex-shrink: 0;
+    }
+    .shortcut-desc { font-size: 13px; color: var(--muted); }
+
+    /* ── DATASETS ─────────────────────────────────────────────────── */
+    .dataset-pills {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      margin-bottom: 32px;
+    }
+    .pill {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 20px; padding: 4px 14px;
+      font-size: 12px; font-family: var(--mono);
+      color: var(--muted);
+    }
+    .pill.highlight {
+      border-color: rgba(88,166,255,0.3);
+      color: var(--accent);
+      background: rgba(88,166,255,0.08);
+    }
+
+    /* ── FAQ ──────────────────────────────────────────────────────── */
+    .faq { display: flex; flex-direction: column; gap: 2px; }
+    details {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 8px; padding: 0;
+    }
+    details + details { margin-top: 4px; }
+    summary {
+      padding: 18px 20px;
+      font-size: 15px; font-weight: 600;
+      cursor: pointer; list-style: none;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    summary::after { content: '+'; font-size: 18px; color: var(--faint); transition: transform 0.2s; }
+    details[open] summary::after { content: '−'; }
+    details[open] { border-color: var(--faint); }
+    .faq-body { padding: 0 20px 18px; font-size: 14px; color: var(--muted); line-height: 1.7; }
+
+    /* ── CTA BOTTOM ───────────────────────────────────────────────── */
+    .cta-section {
+      text-align: center;
+      background: linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
+      border-top: 1px solid var(--border);
+      padding: 96px 5vw;
+    }
+    .cta-section h2 { margin-bottom: 16px; }
+    .cta-section p  { color: var(--muted); max-width: 500px; margin: 0 auto 40px; }
+
+    /* ── FOOTER ───────────────────────────────────────────────────── */
+    footer {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      padding: 40px 5vw;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 20px;
+    }
+    .footer-brand { font-size: 14px; font-weight: 700; }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a { font-size: 13px; color: var(--muted); }
+    .footer-links a:hover { color: var(--text); text-decoration: none; }
+    .footer-copy { font-size: 12px; color: var(--faint); }
+
+    /* ── RESPONSIVE ───────────────────────────────────────────────── */
+    @media (max-width: 640px) {
+      .preview-body { grid-template-columns: 1fr; }
+      .stat-item { padding: 16px 24px; border-right: none; border-bottom: 1px solid var(--border); }
+      .stat-item:last-child { border-bottom: none; }
+      .step { border-right: none; border-bottom: 1px solid var(--border); }
+      .step:last-child { border-bottom: none; }
+      nav .nav-links { display: none; }
+      footer { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Nav ──────────────────────────────────────────────────────── -->
+  <nav>
+    <a href="/" class="nav-logo">
+      <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="32" height="32" rx="6" fill="#0d1117"/>
+        <rect x="4"  y="20" width="4" height="8"  rx="1" fill="#3fb950"/>
+        <rect x="10" y="14" width="4" height="14" rx="1" fill="#3fb950"/>
+        <rect x="16" y="8"  width="4" height="20" rx="1" fill="#3fb950"/>
+        <rect x="22" y="16" width="4" height="12" rx="1" fill="#f85149"/>
+      </svg>
+      Price Action Trainer
+    </a>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#how-it-works">How it works</a>
+      <a href="#datasets">Datasets</a>
+      <a href="/blog/">Blog</a>
+      <a href="/app/" class="nav-cta">Start training →</a>
+    </div>
+  </nav>
+
+  <!-- ── Hero ─────────────────────────────────────────────────────── -->
+  <div class="hero">
+    <span class="hero-eyebrow">Free · Browser-based · No sign-up required</span>
+    <h1>Train your price action reading <em>without waiting for the market</em></h1>
+    <p>Step through real historical candlestick data bar by bar. Predict the next move before it reveals. Map trades with take profit and stop loss levels. Track your accuracy and find your biases.</p>
+    <div class="hero-actions">
+      <a href="/app/" class="btn-primary">Start training free →</a>
+      <a href="#how-it-works" class="btn-secondary">See how it works</a>
+    </div>
+    <p class="hero-sub">500+ curated datasets · Stocks · Forex · Crypto · Indices · ETFs</p>
+  </div>
+
+  <!-- ── App Preview ───────────────────────────────────────────────── -->
+  <div class="preview">
+    <div class="preview-frame">
+      <div class="preview-bar">
+        <div class="dot dot-r"></div>
+        <div class="dot dot-y"></div>
+        <div class="dot dot-g"></div>
+        <span style="font-size:11px;color:#484f58;margin-left:8px;font-family:'SF Mono',monospace">Price Action Trainer — AAPL · 1d</span>
+      </div>
+      <div class="preview-body">
+        <div class="preview-sidebar">
+          <div>
+            <div class="ps-label">Accuracy</div>
+            <div class="ps-score">67%</div>
+          </div>
+          <div>
+            <div class="ps-label">Calls</div>
+            <div class="ps-val">21 / 31 correct</div>
+          </div>
+          <div>
+            <div class="ps-label">Bull calls</div>
+            <div class="ps-bull">▲ 71%</div>
+          </div>
+          <div>
+            <div class="ps-label">Bear calls</div>
+            <div class="ps-bear">▼ 60%</div>
+          </div>
+          <div>
+            <div class="ps-label">Active trade</div>
+            <div class="ps-bull">▲ BUY @ 182.40</div>
+          </div>
+          <div>
+            <div class="ps-label">R:R</div>
+            <div class="ps-val">1 : 2.4</div>
+          </div>
+        </div>
+        <div class="preview-chart">
+          <!-- Simplified fake candle chart -->
+          <div class="candle bull-c"><div class="wick" style="height:18px"></div><div class="body" style="height:22px"></div><div class="wick" style="height:8px"></div></div>
+          <div class="candle bear-c"><div class="wick" style="height:10px"></div><div class="body" style="height:28px"></div><div class="wick" style="height:12px"></div></div>
+          <div class="candle bull-c"><div class="wick" style="height:8px"></div><div class="body" style="height:16px"></div><div class="wick" style="height:6px"></div></div>
+          <div class="candle bull-c"><div class="wick" style="height:14px"></div><div class="body" style="height:32px"></div><div class="wick" style="height:10px"></div></div>
+          <div class="candle bear-c"><div class="wick" style="height:20px"></div><div class="body" style="height:18px"></div><div class="wick" style="height:14px"></div></div>
+          <div class="candle bear-c"><div class="wick" style="height:8px"></div><div class="body" style="height:24px"></div><div class="wick" style="height:6px"></div></div>
+          <div class="candle bull-c"><div class="wick" style="height:10px"></div><div class="body" style="height:14px"></div><div class="wick" style="height:8px"></div></div>
+          <div class="candle bull-c"><div class="wick" style="height:16px"></div><div class="body" style="height:36px"></div><div class="wick" style="height:12px"></div></div>
+          <div class="candle bull-c"><div class="wick" style="height:6px"></div><div class="body" style="height:20px"></div><div class="wick" style="height:8px"></div></div>
+          <div class="candle bear-c"><div class="wick" style="height:22px"></div><div class="body" style="height:30px"></div><div class="wick" style="height:16px"></div></div>
+          <div class="candle bull-c"><div class="wick" style="height:12px"></div><div class="body" style="height:18px"></div><div class="wick" style="height:10px"></div></div>
+          <div class="candle bear-c" style="opacity:0.3"><div class="wick" style="height:10px"></div><div class="body" style="height:22px"></div><div class="wick" style="height:8px"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Stats ─────────────────────────────────────────────────────── -->
+  <div class="stats">
+    <div class="stat-item">
+      <div class="stat-num">500+</div>
+      <div class="stat-lbl">Curated datasets</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">7</div>
+      <div class="stat-lbl">Asset classes</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">4</div>
+      <div class="stat-lbl">Timeframes</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">Free</div>
+      <div class="stat-lbl">Always</div>
+    </div>
+  </div>
+
+  <!-- ── Features ──────────────────────────────────────────────────── -->
+  <section id="features">
+    <div class="section-eyebrow">Features</div>
+    <h2>Everything you need to build real pattern recognition</h2>
+    <p class="section-sub">Not a quiz, not a passive video. Active deliberate practice with the accountability loop that actually builds skill.</p>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <span class="feature-icon">📊</span>
+        <h3>Hard right edge replay</h3>
+        <p>See only what was visible at that moment in time. No peeking at what came next. Step forward one bar at a time with your arrow keys.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">🎯</span>
+        <h3>Prediction mode</h3>
+        <p>Press <kbd>B</kbd> for bullish or <kbd>L</kbd> for bearish before revealing the next bar. Your accuracy is tracked in real time with a running score strip.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">📈</span>
+        <h3>Trade mapping</h3>
+        <p>Place a long or short with entry, take profit, and stop loss. Price lines draw on the chart. The trade auto-resolves when price hits either level.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">🗒️</span>
+        <h3>Bar notes</h3>
+        <p>Press <kbd>N</kbd> to annotate any bar with your reasoning. Notes are saved with your session so you can review your thinking later.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">🔍</span>
+        <h3>Trade review mode</h3>
+        <p>After a trade resolves, open the trade log and click Review. The chart jumps back to your entry bar with reference lines, and you step forward through the move.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">👤</span>
+        <h3>Blind mode</h3>
+        <p>Hide the ticker symbol. Removes the cognitive bias of knowing you're looking at Tesla or Apple. Read the structure, not the name.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">🔀</span>
+        <h3>Noise injection</h3>
+        <p>Add configurable OHLC jitter to prevent recognition of specific historical moves you've already studied. Keeps every session fresh.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">💾</span>
+        <h3>Session persistence</h3>
+        <p>Sign in free to save your position, predictions, trades, and notes. Pick up exactly where you left off across any device.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">📋</span>
+        <h3>Session summary</h3>
+        <p>Bias detection built in. After every session, see your bull vs bear accuracy split. If you're calling one direction 70% of the time, you'll know.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── How it works ───────────────────────────────────────────────── -->
+  <section id="how-it-works" style="padding-top:0">
+    <div class="section-eyebrow">How it works</div>
+    <h2>The deliberate practice loop</h2>
+    <p class="section-sub">Each session follows a tight feedback cycle that forces active engagement rather than passive chart watching.</p>
+
+    <div class="steps-wrap">
+      <div class="steps">
+        <div class="step">
+          <h3>Pick a dataset</h3>
+          <p>Choose from 500+ curated datasets across stocks, forex, crypto, commodities, and indices. Daily, weekly, or monthly timeframes.</p>
+        </div>
+        <div class="step">
+          <h3>Read the structure</h3>
+          <p>The chart loads at a random point in history showing 50 bars by default. You're at the hard right edge — no future bars visible.</p>
+        </div>
+        <div class="step">
+          <h3>Commit a prediction</h3>
+          <p>Before revealing the next bar, press B for bullish or L for bearish. No taking it back. Then press → to reveal the outcome.</p>
+        </div>
+        <div class="step">
+          <h3>Map a trade</h3>
+          <p>When you see a setup, click Buy or Sell, set your TP and SL levels. The trade auto-resolves as you step forward through history.</p>
+        </div>
+        <div class="step">
+          <h3>Review your decisions</h3>
+          <p>Open the session summary to see accuracy, bias, and your full trade log. Click any trade to review it bar by bar.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Keyboard shortcuts ─────────────────────────────────────────── -->
+  <section style="padding-top:0">
+    <div class="section-eyebrow">Controls</div>
+    <h2>Keyboard-first. Stay in flow.</h2>
+    <p class="section-sub">Every action has a keyboard shortcut so you never have to take your eyes off the chart.</p>
+    <div class="shortcuts-grid">
+      <div class="shortcut"><kbd>→</kbd><span class="shortcut-desc">Reveal next bar</span></div>
+      <div class="shortcut"><kbd>←</kbd><span class="shortcut-desc">Remove last bar</span></div>
+      <div class="shortcut"><kbd>↑ / ↓</kbd><span class="shortcut-desc">Jump ±10 bars</span></div>
+      <div class="shortcut"><kbd>B</kbd><span class="shortcut-desc">Predict bullish</span></div>
+      <div class="shortcut"><kbd>L</kbd><span class="shortcut-desc">Predict bearish</span></div>
+      <div class="shortcut"><kbd>S</kbd><span class="shortcut-desc">Skip prediction</span></div>
+      <div class="shortcut"><kbd>E</kbd><span class="shortcut-desc">Open trade ticket</span></div>
+      <div class="shortcut"><kbd>X</kbd><span class="shortcut-desc">Close active trade</span></div>
+      <div class="shortcut"><kbd>N</kbd><span class="shortcut-desc">Add bar note</span></div>
+      <div class="shortcut"><kbd>R</kbd><span class="shortcut-desc">Review trades</span></div>
+      <div class="shortcut"><kbd>Tab</kbd><span class="shortcut-desc">Session summary</span></div>
+      <div class="shortcut"><kbd>Space</kbd><span class="shortcut-desc">Randomise start</span></div>
+    </div>
+  </section>
+
+  <!-- ── Datasets ───────────────────────────────────────────────────── -->
+  <section id="datasets" style="padding-top:0">
+    <div class="section-eyebrow">Datasets</div>
+    <h2>500+ curated datasets across 7 asset classes</h2>
+    <p class="section-sub">All data is pre-loaded — no API keys, no rate limits. You get decades of clean OHLCV data ready to train on.</p>
+    <div class="dataset-pills">
+      <span class="pill highlight">S&amp;P 500 components</span>
+      <span class="pill highlight">Nasdaq 100</span>
+      <span class="pill highlight">Sector ETFs</span>
+      <span class="pill highlight">Forex majors &amp; crosses</span>
+      <span class="pill highlight">Bitcoin &amp; Ethereum</span>
+      <span class="pill highlight">Gold &amp; Silver</span>
+      <span class="pill highlight">Crude Oil</span>
+      <span class="pill">AAPL · MSFT · NVDA · TSLA · AMZN</span>
+      <span class="pill">SPY · QQQ · IWM · DIA</span>
+      <span class="pill">EUR/USD · GBP/USD · USD/JPY</span>
+      <span class="pill">BTC · ETH · SOL · BNB</span>
+      <span class="pill">Daily · Weekly · Monthly</span>
+      <span class="pill">2000–2025 historical range</span>
+    </div>
+    <a href="/app/" class="btn-primary">Browse all 500+ datasets →</a>
+  </section>
+
+  <!-- ── FAQ ────────────────────────────────────────────────────────── -->
+  <section style="padding-top:0">
+    <div class="section-eyebrow">FAQ</div>
+    <h2>Common questions</h2>
+    <p class="section-sub" style="margin-bottom:32px"></p>
+    <div class="faq">
+      <details>
+        <summary>Is Price Action Trainer free?</summary>
+        <div class="faq-body">Yes. The core tool is completely free with no sign-up required. Creating a free account lets you save your session progress across devices so you can pick up where you left off.</div>
+      </details>
+      <details>
+        <summary>What is price action trading?</summary>
+        <div class="faq-body">Price action trading is a methodology that makes trading decisions based solely on the movement of price, without relying on lagging indicators like moving averages or RSI. Practitioners read raw candlestick patterns, support and resistance levels, market structure (higher highs/lows), and momentum to anticipate the next likely move.</div>
+      </details>
+      <details>
+        <summary>How is this different from paper trading?</summary>
+        <div class="faq-body">Paper trading in real time means waiting for bars to form — that's 6.5 hours a day for a daily trader. Price Action Trainer lets you practice hundreds of setups in an hour by replaying historical data. The prediction system also forces you to commit before seeing the outcome, which builds genuine skill rather than hindsight bias.</div>
+      </details>
+      <details>
+        <summary>What assets can I practice on?</summary>
+        <div class="faq-body">The dataset library covers US stocks (S&P 500 components), sector ETFs, forex pairs (9 majors and crosses), cryptocurrencies (BTC, ETH, SOL, and others), gold, silver, crude oil, and major global indices including the FTSE, DAX, and Nikkei.</div>
+      </details>
+      <details>
+        <summary>What timeframes are available?</summary>
+        <div class="faq-body">Daily, weekly, and monthly candles are available, with historical ranges going back to 2000 or earlier for major instruments. This lets you practice reading both intraday structure patterns and macro trend analysis.</div>
+      </details>
+      <details>
+        <summary>What is blind mode?</summary>
+        <div class="faq-body">Blind mode hides the ticker symbol so you can't use prior knowledge about a stock's history to bias your read. You're forced to read the pure price structure — which is exactly what you'd do trading an unfamiliar instrument in live markets.</div>
+      </details>
+      <details>
+        <summary>What does noise injection do?</summary>
+        <div class="faq-body">Noise adds small random perturbations to each bar's OHLC values. This prevents you from recognising specific historical price sequences you've already studied, keeping every session novel even on datasets you've used before.</div>
+      </details>
+    </div>
+  </section>
+
+  <!-- ── Blog preview ────────────────────────────────────────────────── -->
+  <section style="padding-top:0">
+    <div class="section-eyebrow">Learn</div>
+    <h2>Price action fundamentals</h2>
+    <p class="section-sub">Short guides to build the vocabulary you need to read charts effectively.</p>
+    <div class="features-grid">
+      <a href="/blog/how-to-read-candlestick-charts.html" style="text-decoration:none">
+        <div class="feature-card" style="cursor:pointer">
+          <span class="feature-icon">🕯️</span>
+          <h3>How to read candlestick charts</h3>
+          <p style="color:#7d8590">Learn what each part of a candlestick tells you about the battle between buyers and sellers in that time period.</p>
+          <div style="font-size:12px;color:#58a6ff;margin-top:12px">Read article →</div>
+        </div>
+      </a>
+      <a href="/blog/price-action-vs-indicators.html" style="text-decoration:none">
+        <div class="feature-card" style="cursor:pointer">
+          <span class="feature-icon">⚖️</span>
+          <h3>Price action vs technical indicators</h3>
+          <p style="color:#7d8590">Why experienced traders often strip their charts bare — and what they can see that indicator users miss.</p>
+          <div style="font-size:12px;color:#58a6ff;margin-top:12px">Read article →</div>
+        </div>
+      </a>
+      <a href="/blog/deliberate-practice-trading.html" style="text-decoration:none">
+        <div class="feature-card" style="cursor:pointer">
+          <span class="feature-icon">🧠</span>
+          <h3>Deliberate practice for traders</h3>
+          <p style="color:#7d8590">Why watching charts passively doesn't build skill — and the specific practice structure that actually improves your reads.</p>
+          <div style="font-size:12px;color:#58a6ff;margin-top:12px">Read article →</div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ── CTA ────────────────────────────────────────────────────────── -->
+  <div class="cta-section">
+    <h2>Start building your edge today</h2>
+    <p>No download. No sign-up. Just open the trainer and start stepping through charts.</p>
+    <a href="/app/" class="btn-primary" style="font-size:16px;padding:15px 36px">Start training free →</a>
+    <p style="font-size:13px;color:#484f58;margin-top:20px">If this improves your trading, consider buying me a coffee ☕</p>
+    <a href="https://buymeacoffee.com/YOUR_BMC_USERNAME" target="_blank" rel="noopener noreferrer"
+       style="display:inline-flex;align-items:center;gap:8px;margin-top:12px;
+              background:#FFDD00;color:#1a1a1a;font-weight:700;font-size:13px;
+              padding:9px 20px;border-radius:8px;text-decoration:none;
+              transition:filter 0.15s"
+       onmouseover="this.style.filter='brightness(1.1)'"
+       onmouseout="this.style.filter=''">
+      ☕ Buy me a coffee
+    </a>
+  </div>
+
+  <!-- ── Footer ─────────────────────────────────────────────────────── -->
+  <footer>
+    <div>
+      <div class="footer-brand">Price Action Trainer</div>
+      <div class="footer-copy" style="margin-top:6px">© 2025 · Free for personal use</div>
+    </div>
+    <div class="footer-links">
+      <a href="/app/">Train</a>
+      <a href="/blog/">Blog</a>
+      <a href="#faq">FAQ</a>
+      <a href="https://buymeacoffee.com/YOUR_BMC_USERNAME" target="_blank" rel="noopener noreferrer">☕ Support</a>
+    </div>
+  </footer>
+
+</body>
+</html>
