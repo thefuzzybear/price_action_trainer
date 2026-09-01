@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Price Action Trainer</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ── Sidebar config panel ──────────────────────────────────────── -->
+  <aside id="sidebar">
+    <div class="logo">📈 Price Trainer</div>
+
+    <section class="panel-section">
+      <label>Symbol</label>
+      <div class="input-row">
+        <input id="symbolInput" type="text" value="AAPL" spellcheck="false" />
+        <button id="randomBtn" title="Random stock from seed list">🎲</button>
+      </div>
+    </section>
+
+    <section class="panel-section">
+      <label>Interval</label>
+      <select id="intervalSelect">
+        <option value="1d" selected>Daily (1d)</option>
+        <option value="1wk">Weekly (1wk)</option>
+        <option value="1mo">Monthly (1mo)</option>
+        <option value="1h">Hourly (1h)</option>
+        <option value="15m">15 min</option>
+        <option value="5m">5 min</option>
+      </select>
+    </section>
+
+    <section class="panel-section">
+      <label>Start date</label>
+      <input id="startDate" type="date" value="2020-01-01" />
+      <label style="margin-top:8px">End date</label>
+      <input id="endDate" type="date" />
+    </section>
+
+    <section class="panel-section">
+      <label>Start at bar #</label>
+      <input id="startBar" type="number" value="50" min="5" max="5000" />
+      <small>Bars visible when session starts</small>
+    </section>
+
+    <section class="panel-section noise-section">
+      <div class="toggle-row">
+        <label>Noise injection</label>
+        <label class="switch">
+          <input type="checkbox" id="noiseToggle" />
+          <span class="slider"></span>
+        </label>
+      </div>
+      <label>Amount <span id="noiseVal">1.0</span>%</label>
+      <input id="noiseRange" type="range" min="0.1" max="5" step="0.1" value="1.0" />
+    </section>
+
+    <button id="loadBtn" class="primary-btn">Load Data</button>
+
+    <div id="statusMsg" class="status-msg"></div>
+
+    <section class="panel-section cache-section">
+      <div class="section-header">
+        <label>Cached datasets</label>
+        <button id="refreshCacheBtn" class="icon-btn" title="Refresh">↺</button>
+      </div>
+      <ul id="cacheList"></ul>
+    </section>
+  </aside>
+
+  <!-- ── Main chart area ───────────────────────────────────────────── -->
+  <main id="chartArea">
+    <div id="topBar">
+      <span id="symbolLabel">—</span>
+      <span id="intervalLabel"></span>
+      <span id="barInfo"></span>
+      <span id="ohlcInfo"></span>
+    </div>
+
+    <div id="chartContainer"></div>
+
+    <div id="bottomBar">
+      <span class="key-hint">← Remove bar</span>
+      <span class="key-hint">→ Reveal next bar</span>
+      <span class="key-hint">↑ Jump +10 bars</span>
+      <span class="key-hint">↓ Jump −10 bars</span>
+      <span class="key-hint">Space Randomise start</span>
+    </div>
+  </main>
+
+  <!-- lightweight-charts served by Express from node_modules -->
+  <script src="/vendor/lightweight-charts.js"></script>
+  <script src="/stocks.js"></script>
+  <script src="/renderer.js"></script>
+</body>
+</html>
