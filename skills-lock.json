@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "anti-ui-slop": {
+      "source": "davepoon/buildwithclaude",
+      "sourceType": "github",
+      "skillPath": "plugins/all-skills/skills/anti-ui-slop/SKILL.md",
+      "computedHash": "26d4336064ca5f73819eb3ca0ed28d6dc8d3c3066523c90ca46a17fd5480a1e9"
+    }
+  }
+}

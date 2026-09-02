@@ -9,7 +9,7 @@
      node scripts/ingest.js --file scripts/datasets.json   # bulk ingest from a list
 
    Requires:
-     SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY in .env.local
+     SUPABASE_URL and SUPABASE_SECRET_KEY in .env.local
    ───────────────────────────────────────────────────────────────────────────── */
 
 'use strict';
@@ -23,13 +23,16 @@ import { config }        from 'dotenv';
 // Load .env.local
 config({ path: resolve(process.cwd(), '.env.local') });
 
-const { SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY } = process.env;
-if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY) {
-  console.error('❌  Missing SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY in .env.local');
+// Support both old name (SUPABASE_SERVICE_ROLE_KEY) and new name (SUPABASE_SECRET_KEY)
+const SUPABASE_URL  = process.env.SUPABASE_URL;
+const ADMIN_KEY     = process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+if (!SUPABASE_URL || !ADMIN_KEY) {
+  console.error('❌  Missing SUPABASE_URL or SUPABASE_SECRET_KEY in .env.local');
   process.exit(1);
 }
 
-const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, {
+const supabase = createClient(SUPABASE_URL, ADMIN_KEY, {
   auth: { persistSession: false },
 });
 
