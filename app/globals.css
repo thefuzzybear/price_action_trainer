@@ -1,3 +1,6 @@
-/* Global resets only — trainer-specific styles live in trainer.css */
+/* Tailwind v4 — must be the first import */
+@import "tailwindcss";
+
+/* Global resets — trainer-specific styles live in trainer.css */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { -webkit-font-smoothing: antialiased; }
