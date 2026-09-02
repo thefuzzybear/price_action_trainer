@@ -186,10 +186,21 @@ export default function DashboardPage() {
       setProfile(d.profile);
       setNickname(d.profile?.nickname ?? '');
       setBio(d.profile?.bio ?? '');
-    }).catch(() => {});
+    }).catch((e: Error) => {
+      // If the session expired even after a refresh attempt, sign out
+      if (e.message.includes('expired') || e.message.includes('sign in')) {
+        clearAuth(); setUser(null); setToken(null);
+      }
+    });
     apiFetch('/api/messages?limit=80', {}, token)
       .then(d => setMessages(d.messages ?? []))
-      .catch(e => setMsgErr(e.message))
+      .catch((e: Error) => {
+        if (e.message.includes('expired') || e.message.includes('sign in')) {
+          clearAuth(); setUser(null); setToken(null);
+        } else {
+          setMsgErr(e.message);
+        }
+      })
       .finally(() => setMsgLoad(false));
   }, [token]);
 
