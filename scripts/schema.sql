@@ -93,3 +93,84 @@ create policy "users_own_sessions_delete"
   on sessions for delete
   to authenticated
   using (auth.uid() = user_id);
+
+-- ─────────────────────────────────────────────────────────────────────────────
+-- Empyrean Community — profiles + messages
+-- Run this after the initial schema above.
+-- ─────────────────────────────────────────────────────────────────────────────
+
+-- ── Profiles ──────────────────────────────────────────────────────────────────
+-- One row per auth user. Created on first login by the profile API route.
+create table if not exists profiles (
+  id              uuid primary key references auth.users(id) on delete cascade,
+  nickname        text,
+  bio             text,
+  avatar_initial  text,                 -- single character, derived from nickname or email
+  joined_at       timestamptz not null default now(),
+  updated_at      timestamptz not null default now()
+);
+
+create index if not exists profiles_nickname_idx on profiles(nickname);
+
+-- ── Messages ──────────────────────────────────────────────────────────────────
+-- Community board — text posts linked to a profile.
+create table if not exists messages (
+  id          uuid primary key default uuid_generate_v4(),
+  user_id     uuid not null references auth.users(id) on delete cascade,
+  body        text not null check (char_length(body) >= 1 and char_length(body) <= 2000),
+  created_at  timestamptz not null default now()
+);
+
+create index if not exists messages_created_idx on messages(created_at desc);
+create index if not exists messages_user_idx    on messages(user_id);
+
+-- ── RLS for profiles ──────────────────────────────────────────────────────────
+alter table profiles enable row level security;
+
+-- Anyone authenticated can read all profiles (needed for displaying chat authors)
+create policy "auth_read_profiles"
+  on profiles for select
+  to authenticated
+  using (true);
+
+-- Users can only insert/update their own profile
+create policy "users_own_profile_insert"
+  on profiles for insert
+  to authenticated
+  with check (auth.uid() = id);
+
+create policy "users_own_profile_update"
+  on profiles for update
+  to authenticated
+  using (auth.uid() = id)
+  with check (auth.uid() = id);
+
+-- ── RLS for messages ──────────────────────────────────────────────────────────
+alter table messages enable row level security;
+
+-- Anyone authenticated can read all messages
+create policy "auth_read_messages"
+  on messages for select
+  to authenticated
+  using (true);
+
+-- Users can only insert their own messages
+create policy "users_own_message_insert"
+  on messages for insert
+  to authenticated
+  with check (auth.uid() = user_id);
+
+-- Users can delete their own messages
+create policy "users_own_message_delete"
+  on messages for delete
+  to authenticated
+  using (auth.uid() = user_id);
+
+-- ── Fix: explicit FK from messages.user_id → profiles.id ─────────────────────
+-- This lets Supabase's schema cache follow the relationship for future joins.
+-- Run this after the profiles table exists.
+alter table messages
+  drop constraint if exists messages_profile_fk;
+alter table messages
+  add constraint messages_profile_fk
+  foreign key (user_id) references profiles(id) on delete cascade;

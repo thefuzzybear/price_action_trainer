@@ -172,12 +172,12 @@ export default function LandingPage() {
                 {l}
               </a>
             ))}
-            <a href="/app/" style={{
+            <a href="/dashboard" style={{
               fontSize: 12, fontWeight: 600,
               background: C.maroon, color: '#F5F0E8',
               borderRadius: 4, padding: '5px 14px', textDecoration: 'none',
             }}>
-              Open trainer
+              Open workspace
             </a>
           </div>
         </nav>
@@ -221,13 +221,13 @@ export default function LandingPage() {
             </p>
 
             <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 32 }}>
-              <a href="/app/" style={{
+              <a href="/dashboard" style={{
                 display: 'inline-flex', alignItems: 'center', gap: 8,
                 fontSize: 14, fontWeight: 600,
                 background: C.maroon, color: '#F5F0E8',
                 borderRadius: 5, padding: '11px 24px', textDecoration: 'none',
               }}>
-                Open the trainer
+                Open workspace
                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
                   <path d="M1.5 6h9M6.5 1.5L11 6l-4.5 4.5" stroke="currentColor"
                         strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"/>
@@ -345,13 +345,13 @@ export default function LandingPage() {
             </div>
 
             <div style={{ marginTop: 32, display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-              <a href="/app/" style={{
+              <a href="/dashboard" style={{
                 display: 'inline-flex', alignItems: 'center', gap: 8,
                 fontSize: 13, fontWeight: 600,
                 background: C.maroon, color: '#F5F0E8',
                 borderRadius: 5, padding: '10px 20px', textDecoration: 'none',
               }}>
-                Start training
+                Join the workspace
               </a>
               <a href="#faq" style={{
                 fontSize: 13, color: C.muted, textDecoration: 'none',
@@ -589,13 +589,13 @@ export default function LandingPage() {
             ))}
 
             <div style={{ marginTop: 32, display: 'flex', alignItems: 'center', gap: 20, flexWrap: 'wrap' }}>
-              <a href="/app/" style={{
+              <a href="/dashboard" style={{
                 display: 'inline-flex', alignItems: 'center', gap: 8,
                 fontSize: 13, fontWeight: 600,
                 background: C.maroon, color: '#F5F0E8',
                 borderRadius: 5, padding: '10px 20px', textDecoration: 'none',
               }}>
-                Start training
+                Join the workspace
               </a>
               <span style={{ fontFamily: MONO, fontSize: 10, color: C.faint }}>
                 Leaderboard resets Monday UTC · 30+ calls to qualify
@@ -801,13 +801,13 @@ export default function LandingPage() {
               account so you're in from the start.
             </p>
             <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
-              <a href="/app/" style={{
+              <a href="/dashboard" style={{
                 display: 'inline-flex', alignItems: 'center', gap: 10,
                 fontSize: 15, fontWeight: 600,
                 background: C.maroon, color: '#F5F0E8',
                 borderRadius: 6, padding: '14px 32px', textDecoration: 'none',
               }}>
-                Open the trainer
+                Open workspace
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                   <path d="M2 7h10M7.5 2L13 7l-5.5 5" stroke="currentColor"
                         strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>

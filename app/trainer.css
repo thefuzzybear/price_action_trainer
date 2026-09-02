@@ -29,6 +29,33 @@
   --font-mono:  'SF Mono','Fira Code','Cascadia Code','Consolas',monospace;
 }
 
+/* ── Light theme ────────────────────────────────────────────────────── */
+[data-theme="light"] {
+  --bg:         #F5F0E8;
+  --bg-panel:   #EDE8DF;
+  --bg-input:   #F5F0E8;
+  --bg-hover:   #E5DECE;
+  --border:     rgba(42,26,10,0.16);
+
+  --text:       #1A1208;
+  --text-muted: #6B5E52;
+  --text-faint: #A89880;
+
+  --bull:       #16a34a;
+  --bull-dim:   rgba(22,163,74,0.12);
+  --bear:       #dc2626;
+  --bear-dim:   rgba(220,38,38,0.12);
+  --warn:       #b45309;
+  --focus:      #6B1A2A;
+  --note-color: #6B1A2A;
+}
+
+[data-theme="light"] html,
+[data-theme="light"] body {
+  background: var(--bg);
+  color: var(--text);
+}
+
 html, body {
   height: 100%; background: var(--bg); color: var(--text);
   font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', system-ui, sans-serif;

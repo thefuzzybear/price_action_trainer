@@ -112,8 +112,8 @@ export default function TrainerPage() {
   const [resumeState, setResumeState] = useState<{ session: any; dataset: Dataset; startBar: number } | null>(null);
 
   // Auth
-  const [authUser,        setAuthUser]        = useState<AuthUser | null>(() => getUser());
-  const [authToken,       setAuthToken]       = useState<string | null>(() => getToken());
+  const [authUser,        setAuthUser]        = useState<AuthUser | null>(null);
+  const [authToken,       setAuthToken]       = useState<string | null>(null);
   const [authModalOpen,   setAuthModalOpen]   = useState(false);
   const [authMode,        setAuthMode]        = useState<'login' | 'signup'>('login');
   const [authEmail,       setAuthEmail]       = useState('');
@@ -142,6 +142,50 @@ export default function TrainerPage() {
     setAllBars(noiseEnabled ? applyNoise(rawBars, noisePct) : rawBars.slice());
   }, [rawBars, noiseEnabled, noisePct]);
 
+  // Theme
+  const [theme, setTheme] = useState<'dark' | 'light'>('dark');
+
+  useEffect(() => {
+    const stored = typeof window !== 'undefined' ? localStorage.getItem('pat_theme') : null;
+    if (stored === 'light') setTheme('light');
+  }, []);
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('pat_theme', theme);
+    // Update chart colours to match theme
+    if (chartRef.current) {
+      const isDark = theme === 'dark';
+      chartRef.current.applyOptions({
+        layout: {
+          background: { color: isDark ? '#0d1117' : '#F5F0E8' },
+          textColor:  isDark ? '#e6edf3' : '#1A1208',
+        },
+        grid: {
+          vertLines: { color: isDark ? '#161b22' : '#e8e0d4' },
+          horzLines: { color: isDark ? '#161b22' : '#e8e0d4' },
+        },
+      });
+    }
+  }, [theme]);
+
+  // Dataset cache state
+  const [cachedIds, setCachedIds] = useState<Set<string>>(new Set());
+
+  useEffect(() => {
+    import('@/lib/datasetCache').then(({ getCachedIds }) => {
+      getCachedIds().then(ids => setCachedIds(new Set(ids)));
+    });
+  }, []);
+
+  // ── Hydrate auth from localStorage (avoids SSR/client mismatch) ───────────
+  useEffect(() => {
+    const u = getUser();
+    const t = getToken();
+    if (u) setAuthUser(u);
+    if (t) setAuthToken(t);
+  }, []);
+
   // ── Load dataset list ─────────────────────────────────────────────────────
   useEffect(() => {
     apiFetch('/api/datasets', {}, authToken)
@@ -159,11 +203,17 @@ export default function TrainerPage() {
 
       const chart = LC.createChart(chartContainerRef.current!, {
         autoSize: true,
-        layout: { background: { color: '#0d1117' }, textColor: '#e6edf3' },
-        grid:   { vertLines: { color: '#161b22' }, horzLines: { color: '#161b22' } },
+        layout: {
+          background: { color: theme === 'light' ? '#F5F0E8' : '#0d1117' },
+          textColor:  theme === 'light' ? '#1A1208' : '#e6edf3',
+        },
+        grid: {
+          vertLines: { color: theme === 'light' ? '#e8e0d4' : '#161b22' },
+          horzLines: { color: theme === 'light' ? '#e8e0d4' : '#161b22' },
+        },
         crosshair: { mode: 1 },
-        rightPriceScale: { borderColor: '#21262d' },
-        timeScale: { borderColor: '#21262d', timeVisible: true, secondsVisible: false },
+        rightPriceScale: { borderColor: theme === 'light' ? '#d0c8bc' : '#21262d' },
+        timeScale: { borderColor: theme === 'light' ? '#d0c8bc' : '#21262d', timeVisible: true, secondsVisible: false },
       });
       chartRef.current = chart;
 
@@ -283,7 +333,23 @@ export default function TrainerPage() {
     setLoadingBars(true);
     setStatus({ msg: '', type: '' });
     try {
-      const { dataset } = await apiFetch(`/api/datasets/${selectedDataset}`, {}, authToken);
+      // Check IndexedDB cache first — avoids a network round-trip for pinned datasets
+      const { getCached, setCached } = await import('@/lib/datasetCache');
+      let cachedResult = await getCached(selectedDataset) as { dataset: { bars: Bar[]; id: string; symbol: string; interval: string; label: string } } | null;
+
+      let dataset: { bars: Bar[]; id: string; symbol: string; interval: string; label: string };
+      if (cachedResult) {
+        dataset = cachedResult.dataset;
+        setStatus({ msg: `${dataset.bars.length} bars (cached)`, type: 'ok' });
+      } else {
+        const fetched = await apiFetch(`/api/datasets/${selectedDataset}`, {}, authToken);
+        dataset = fetched.dataset;
+        // Cache it for next time (fire-and-forget)
+        setCached(selectedDataset, fetched).then(() =>
+          setCachedIds(prev => new Set([...prev, selectedDataset]))
+        );
+      }
+
       const raw: Bar[] = dataset.bars;
       setRawBars(raw);
       const bars = noiseEnabled ? applyNoise(raw, noisePct) : raw.slice();
@@ -682,10 +748,11 @@ export default function TrainerPage() {
       {/* ── Sidebar ── */}
       <aside id="sidebar">
         <div className="sidebar-header">
-          <div className="app-name">Price Action Trainer</div>
+          <div className="app-name"><a href="/" style={{ color: 'inherit', textDecoration: 'none' }}>Empyrean</a></div>
           {authUser ? (
             <div className="user-badge">
-              <span className="user-email">{authUser.email}</span>
+              <a href="/dashboard" style={{ fontSize: '11px', color: 'inherit', textDecoration: 'none', opacity: 0.7 }}>{authUser.email}</a>
+              <a href="/dashboard" style={{ fontSize: '11px', color: 'inherit', textDecoration: 'none' }}>Dashboard</a>
               <button className="logout-btn" onClick={logout}>Sign out</button>
             </div>
           ) : null}
@@ -765,6 +832,57 @@ export default function TrainerPage() {
 
           <div className="divider"></div>
 
+          {/* Theme toggle */}
+          <div className="field-group">
+            <div className="toggle-field">
+              <div className="toggle-info">
+                <div className="toggle-title">Light mode</div>
+                <div className="toggle-sub">Switch chart theme</div>
+              </div>
+              <label className="switch">
+                <input type="checkbox" checked={theme === 'light'} onChange={e => setTheme(e.target.checked ? 'light' : 'dark')} />
+                <span className="slider"></span>
+              </label>
+            </div>
+          </div>
+
+          {/* Dataset cache pin */}
+          {selectedDataset && (
+            <div className="field-group">
+              <div className="toggle-field">
+                <div className="toggle-info">
+                  <div className="toggle-title">Pin dataset</div>
+                  <div className="toggle-sub">Cache offline ({cachedIds.size}/15)</div>
+                </div>
+                <label className="switch">
+                  <input
+                    type="checkbox"
+                    checked={cachedIds.has(selectedDataset)}
+                    onChange={async e => {
+                      const { setCached, removeCached, getCachedIds } = await import('@/lib/datasetCache');
+                      if (e.target.checked) {
+                        // Fetch and cache if not already there
+                        if (!cachedIds.has(selectedDataset)) {
+                          try {
+                            const fetched = await apiFetch(`/api/datasets/${selectedDataset}`, {}, authToken);
+                            await setCached(selectedDataset, fetched);
+                          } catch {}
+                        }
+                      } else {
+                        await removeCached(selectedDataset);
+                      }
+                      const ids = await getCachedIds();
+                      setCachedIds(new Set(ids));
+                    }}
+                  />
+                  <span className="slider"></span>
+                </label>
+              </div>
+            </div>
+          )}
+
+          <div className="divider"></div>
+
           <button className="load-btn" disabled={loadingBars} onClick={loadData}>Load Dataset</button>
           <div className={`status-msg ${status.type}`}>{status.msg}</div>
 
@@ -819,6 +937,9 @@ export default function TrainerPage() {
         </div>
 
         <div className="sidebar-footer">
+          <a href="/dashboard" style={{ display: 'block', fontSize: '12px', color: 'inherit', textDecoration: 'none', marginBottom: '10px', opacity: 0.8 }}>
+            ← Community hub
+          </a>
           <a href="https://buymeacoffee.com/thefuzzybear" target="_blank" rel="noopener noreferrer" className="bmc-link">
             <span className="bmc-icon">☕</span>
             <span className="bmc-text">Buy me a coffee</span>
