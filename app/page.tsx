@@ -5,7 +5,7 @@ import ChartBackground from './components/landing/ChartBackgroundLoader';
 export const metadata: Metadata = {
   title: 'Empyrean — Price Action Trainer',
   description:
-    'Commit a directional call before each bar reveals. 200 forced decisions per session. Build the pattern recognition that passive watching never could.',
+    'A price action training tool that tracks your directional accuracy across 200+ decisions per session. Each call is locked before the bar reveals — so you actually learn something.',
   openGraph: {
     title: 'Empyrean Price Action Trainer',
     description: 'Commit before the reveal. 200 decisions per session.',
@@ -18,18 +18,19 @@ export const metadata: Metadata = {
 
 // ─── Tokens ────────────────────────────────────────────────────────────────
 const C = {
-  bg:      '#0D0B09',
-  text:    '#F2EDE6',
-  muted:   '#9A8F84',
-  faint:   '#524840',
-  rule:    'rgba(255,255,255,0.08)',
-  maroon:  '#6B1A2A',
-  cream:   '#F2EDE6',
+  bg:      '#F5F0E8',   // warm parchment — matches chart background
+  text:    '#1A1208',   // near-black with warmth
+  muted:   '#6B5E52',   // warm mid-tone
+  faint:   '#A89880',   // light warm grey
+  rule:    'rgba(42,26,10,0.10)',
+  maroon:  '#6B1A2A',   // primary accent
+  maroonLight: '#8B2A3C',
   bull:    '#22c55e',
   bear:    '#ef4444',
-  // glass panels that float over the chart
-  glass:   'rgba(13,11,9,0.82)',
-  glassBorder: 'rgba(255,255,255,0.10)',
+  // Glass panels: dark parchment over the light chart
+  glass:       'rgba(245,240,232,0.88)',
+  glassDark:   'rgba(26,18,8,0.82)',
+  glassBorder: 'rgba(42,26,10,0.14)',
 } as const;
 
 const SERIF = 'Georgia,"Times New Roman",serif';
@@ -37,13 +38,25 @@ const MONO  = '"SF Mono","Fira Code",Consolas,monospace';
 const SANS  = '-apple-system,BlinkMacSystemFont,"Inter",system-ui,sans-serif';
 const PX    = 'clamp(20px, 5vw, 72px)';
 
-// Shared panel style — semi-transparent glass over the chart
+// Shared panel — warm parchment glass floating over the chart
 function panel(extra?: React.CSSProperties): React.CSSProperties {
   return {
     background: C.glass,
-    backdropFilter: 'blur(18px)',
-    WebkitBackdropFilter: 'blur(18px)',
+    backdropFilter: 'blur(20px)',
+    WebkitBackdropFilter: 'blur(20px)',
     border: `1px solid ${C.glassBorder}`,
+    borderRadius: 8,
+    ...extra,
+  };
+}
+
+// Dark panel variant — used for nav, footer, and the stats section
+function panelDark(extra?: React.CSSProperties): React.CSSProperties {
+  return {
+    background: C.glassDark,
+    backdropFilter: 'blur(20px)',
+    WebkitBackdropFilter: 'blur(20px)',
+    border: `1px solid rgba(255,255,255,0.08)`,
     borderRadius: 8,
     ...extra,
   };
@@ -54,8 +67,8 @@ function Kbd({ ch }: { ch: string }) {
   return (
     <kbd style={{
       fontFamily: MONO, fontSize: 10, color: C.muted,
-      background: 'rgba(255,255,255,0.06)',
-      border: `1px solid ${C.rule}`, borderBottomWidth: 2,
+      background: 'rgba(107,26,42,0.06)',
+      border: `1px solid ${C.glassBorder}`, borderBottomWidth: 2,
       borderRadius: 3, padding: '1px 6px', lineHeight: 1.6,
       display: 'inline-block',
     }}>
@@ -66,11 +79,16 @@ function Kbd({ ch }: { ch: string }) {
 
 // ─── Data ─────────────────────────────────────────────────────────────────
 const STEPS = [
-  { n: '01', title: 'Pick a dataset',        body: '500+ instruments. Stocks, forex, crypto, ETFs, indices. Daily, weekly, monthly.' },
-  { n: '02', title: 'Hard right edge only',  body: "The chart loads at a random point in history. You see 50 bars. Nothing beyond. Blind mode hides the ticker so prior knowledge can't bias your read." },
-  { n: '03', title: 'Commit before reveal',  body: "Press B or L. Then →. Your call is locked the moment you press. There is no amending it after you see the outcome." },
-  { n: '04', title: 'Map the trade',         body: 'Set entry, TP, SL. Lines draw on the chart. They resolve automatically as you step forward.' },
-  { n: '05', title: 'Read the session back', body: 'Accuracy, bull/bear split, streak, trade log. It shows where your reading is systematically off — not just whether this session went well.' },
+  { n: '01', title: 'Pick a dataset',
+    body: 'There are 500+ instruments across stocks, forex, crypto, ETFs, and global indices. Pick anything — daily, weekly, or monthly timeframe.' },
+  { n: '02', title: 'The chart starts somewhere in history',
+    body: "You load in at a random point. You can see the last 50 bars but nothing forward. If you turn on blind mode, the ticker is hidden too — so you can't lean on what you already know about a stock." },
+  { n: '03', title: 'Call the next bar before it reveals',
+    body: "Press B if you think the next bar closes up, L if you think it closes down. Then hit → to reveal. The call is logged the moment you press — there's no changing your mind once you see the outcome." },
+  { n: '04', title: 'Map a trade if you want to',
+    body: 'You can set an entry, take-profit, and stop-loss. The levels appear on the chart as dashed lines and resolve on their own as you keep stepping forward.' },
+  { n: '05', title: 'Review the session at the end',
+    body: "The summary breaks down your accuracy, how your bull calls compare to your bear calls, your streak, and every trade you mapped. The interesting thing is usually the gap between the two call types — that tends to point at something specific." },
 ] as const;
 
 const STATS = [
@@ -93,17 +111,17 @@ const DATASETS = [
 
 const FAQS = [
   { q: 'Is it free?',
-    a: 'Yes. Runs in your browser with no account required. An account lets you save progress across devices and appear on the leaderboard.' },
+    a: "Yes, completely. It runs in your browser and you don't need an account to use it. If you create one, your sessions are saved so you can pick up where you left off across devices, and your results count toward the leaderboard." },
   { q: 'How is this different from paper trading?',
-    a: "Paper trading in real time gives you one bar per trading day. This gives you 200-plus decisions per session. More importantly, you commit a prediction before seeing the outcome — which is what creates a genuine feedback signal. Watching charts in real time lets you stay vague about your expectations, which is why it rarely builds skill." },
+    a: "Paper trading in real time gives you roughly one bar per trading day on a daily chart. That's one decision. Here you get 200-plus per session. The bigger difference is that you have to commit your call before seeing the outcome — real paper trading lets you stay vague about what you expected, which means you never really get a feedback signal. Your brain just fills in the story after the fact." },
   { q: 'What is blind mode?',
-    a: "Blind mode hides the ticker. If you know you're looking at AAPL in 2021, your brain factors in what you already know. Blind mode forces you to read the structure, not the name." },
+    a: "Blind mode hides the ticker symbol. It sounds small but it makes a real difference — if you know you're looking at NVDA in late 2023, you're going to read that chart differently than if you just see an unlabelled series. It forces you to work with what's actually in front of you." },
   { q: 'What does noise injection do?',
-    a: "Adds small random perturbations to OHLC values. Prevents recognising historical sequences you've already studied, keeping sessions novel even on familiar datasets." },
-  { q: 'Can I review trades after a session?',
-    a: 'Yes. Summary shows entry, TP, SL, exit, R:R, and outcome per trade. Click Review to jump back to your entry bar and step through the move against your levels.' },
+    a: "It adds tiny random adjustments to each bar's OHLC values. The chart still behaves like the original dataset but looks slightly different every time. Mainly useful if you've been through a dataset before and don't want to accidentally remember specific sequences." },
+  { q: 'Can I review my trades after a session?',
+    a: 'Yes. The session summary lists every trade you mapped with the entry, TP, SL, exit price, R:R, and outcome. You can click into any trade and it takes you back to the bar where you entered — then you step forward from there and watch how it actually played out.' },
   { q: 'How will the leaderboard work?',
-    a: 'Weekly directional accuracy across sessions with 30-plus predictions. A 30-call floor prevents a single lucky session from gaming rankings. Resets midnight UTC every Monday.' },
+    a: "We're ranking by weekly directional accuracy, but only counting sessions where you made at least 30 calls. One lucky session shouldn't be enough to top the board. The rankings reset every Monday at midnight UTC." },
 ] as const;
 
 // ─── Page ──────────────────────────────────────────────────────────────────
@@ -113,16 +131,15 @@ export default function LandingPage() {
       {/* The chart runs fixed behind everything */}
       <ChartBackground />
 
-      {/* Overlay gradient: dark at the very top (nav legibility), transparent in middle, 
-          dark at bottom — so content panels always have contrast */}
+      {/* Overlay: parchment vignette top/bottom for panel contrast */}
       <div aria-hidden="true" style={{
         position: 'fixed', inset: 0, zIndex: 1, pointerEvents: 'none',
         background: `
           linear-gradient(to bottom,
-            rgba(13,11,9,0.75) 0%,
-            rgba(13,11,9,0.0) 18%,
-            rgba(13,11,9,0.0) 82%,
-            rgba(13,11,9,0.55) 100%
+            rgba(245,240,232,0.72) 0%,
+            rgba(245,240,232,0.0) 15%,
+            rgba(245,240,232,0.0) 85%,
+            rgba(245,240,232,0.55) 100%
           )
         `,
       }} />
@@ -136,10 +153,10 @@ export default function LandingPage() {
           height: 48,
           display: 'flex', alignItems: 'center',
           padding: `0 ${PX}`,
-          background: 'rgba(13,11,9,0.75)',
+          background: 'rgba(245,240,232,0.88)',
           backdropFilter: 'blur(20px)',
           WebkitBackdropFilter: 'blur(20px)',
-          borderBottom: `1px solid rgba(255,255,255,0.07)`,
+          borderBottom: `1px solid ${C.glassBorder}`,
         }}>
           <a href="/" style={{ textDecoration: 'none', marginRight: 'auto' }}>
             <span style={{ fontFamily: SERIF, fontSize: 16, fontWeight: 700,
@@ -148,14 +165,14 @@ export default function LandingPage() {
             </span>
           </a>
           <div style={{ display: 'flex', alignItems: 'center', gap: 28 }}>
-            {[['#method','Method'],['#datasets','Datasets'],['#faq','FAQ'],['/blog/','Blog']].map(([h,l]) => (
+            {[['#method','Method'],['#datasets','Datasets'],['#blog','Blog'],['#faq','FAQ'],['/blog/','All articles']].map(([h,l]) => (
               <a key={h} href={h} style={{ fontSize: 12, color: C.muted, textDecoration: 'none' }}>
                 {l}
               </a>
             ))}
             <a href="/app/" style={{
               fontSize: 12, fontWeight: 600,
-              background: C.maroon, color: C.cream,
+              background: C.maroon, color: '#F5F0E8',
               borderRadius: 4, padding: '5px 14px', textDecoration: 'none',
             }}>
               Open trainer
@@ -191,21 +208,20 @@ export default function LandingPage() {
               fontWeight: 400, letterSpacing: '-0.02em', lineHeight: 1.12,
               color: C.text, marginBottom: 20,
             }}>
-              The market is always moving.<br />
-              Most practice isn't.
+              Most chart practice builds hindsight, not skill.
             </h1>
 
             <p style={{ fontSize: 15, lineHeight: 1.8, color: C.muted, marginBottom: 32 }}>
-              200 decisions per session. Each one committed before the bar reveals.
-              Right or wrong — recorded either way. That's how pattern recognition
-              actually builds.
+              The problem is you never have to commit before the outcome is visible.
+              This trainer changes that — every call is locked before the bar reveals,
+              and your accuracy is tracked across 200-plus decisions per session.
             </p>
 
             <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 32 }}>
               <a href="/app/" style={{
                 display: 'inline-flex', alignItems: 'center', gap: 8,
                 fontSize: 14, fontWeight: 600,
-                background: C.text, color: C.bg,
+                background: C.maroon, color: '#F5F0E8',
                 borderRadius: 5, padding: '11px 24px', textDecoration: 'none',
               }}>
                 Start a session
@@ -217,7 +233,7 @@ export default function LandingPage() {
               <a href="#method" style={{
                 fontSize: 13, color: C.muted, textDecoration: 'none',
                 display: 'inline-flex', alignItems: 'center',
-                border: `1px solid rgba(255,255,255,0.12)`,
+                border: `1px solid ${C.glassBorder}`,
                 borderRadius: 5, padding: '10px 18px',
               }}>
                 How it works
@@ -257,8 +273,7 @@ export default function LandingPage() {
               letterSpacing: '0.12em', textTransform: 'uppercase',
               marginTop: 12, maxWidth: 360,
             }}>
-              Forced predictions per session ·  
-              eight months of daily charts compressed to two hours
+              decisions per session — each one locked before the bar reveals
             </div>
           </div>
         </section>
@@ -283,9 +298,10 @@ export default function LandingPage() {
               fontWeight: 400, lineHeight: 1.6, color: C.text,
               marginBottom: 40,
             }}>
-              Watching a chart is not practice. You can rationalise any move after
-              the fact without ever having committed. The learning signal is zero.
-              This tool forces the commitment.
+              Watching charts feels like practice because it's time-consuming and it requires
+              attention. But you can rationalise any move in hindsight without ever
+              having predicted it — there's no feedback signal unless you're forced to commit
+              first. That's what this does.
             </p>
 
             <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -293,8 +309,8 @@ export default function LandingPage() {
                 <div key={s.n} style={{
                   display: 'grid', gridTemplateColumns: '36px 1fr', gap: 20,
                   padding: '24px 0',
-                  borderTop: `1px solid rgba(255,255,255,0.07)`,
-                  ...(i === STEPS.length - 1 ? { borderBottom: `1px solid rgba(255,255,255,0.07)` } : {}),
+                  borderTop: `1px solid ${C.glassBorder}`,
+                  ...(i === STEPS.length - 1 ? { borderBottom: `1px solid ${C.glassBorder}` } : {}),
                 }}>
                   <span style={{
                     fontFamily: MONO, fontSize: 10, color: C.faint,
@@ -337,22 +353,24 @@ export default function LandingPage() {
               fontSize: 14, lineHeight: 1.7, color: C.muted,
               marginBottom: 32, maxWidth: 440,
             }}>
-              Bull vs bear split is the most useful signal.
-              A 20-point gap is a bias you can fix. You can't fix what you can't see.
+              The most useful number to watch is the gap between your bull accuracy and
+              your bear accuracy. If there's a consistent 15–20 point difference, that's
+              a real pattern in how you're reading the chart — and it's something you can
+              actually work on once you can see it.
             </p>
 
             <div style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))',
               gap: 1,
-              background: 'rgba(255,255,255,0.05)',
-              border: '1px solid rgba(255,255,255,0.06)',
+              background: C.glassBorder,
+              border: `1px solid ${C.glassBorder}`,
               borderRadius: 6, overflow: 'hidden',
             }}>
               {STATS.map(({ label, val, col }) => (
                 <div key={label} style={{
                   padding: '20px 18px',
-                  background: 'rgba(13,11,9,0.85)',
+                  background: 'rgba(245,240,232,0.92)',
                   backdropFilter: 'blur(8px)',
                 }}>
                   <div style={{
@@ -392,8 +410,9 @@ export default function LandingPage() {
               lineHeight: 1.55, color: C.text, marginBottom: 40,
               fontWeight: 400,
             }}>
-              A weekly leaderboard is coming — ranked by directional accuracy,
-              sessions with 30-plus predictions only.
+              We're adding a weekly leaderboard ranked by directional accuracy.
+              Only sessions with 30 or more calls count — so one lucky run
+              doesn't put you at the top.
             </p>
 
             {/* Mock table headers */}
@@ -401,8 +420,8 @@ export default function LandingPage() {
               display: 'grid',
               gridTemplateColumns: '40px 1fr 80px 64px 64px 72px',
               padding: '8px 0',
-              borderTop: `1px solid rgba(255,255,255,0.07)`,
-              borderBottom: `1px solid rgba(255,255,255,0.07)`,
+              borderTop: `1px solid ${C.glassBorder}`,
+              borderBottom: `1px solid ${C.glassBorder}`,
               fontFamily: MONO, fontSize: 9, fontWeight: 600,
               textTransform: 'uppercase', letterSpacing: '0.09em',
               color: C.faint, marginBottom: 0,
@@ -418,9 +437,9 @@ export default function LandingPage() {
                 display: 'grid',
                 gridTemplateColumns: '40px 1fr 80px 64px 64px 72px',
                 padding: '13px 0',
-                borderBottom: `1px solid rgba(255,255,255,0.05)`,
+                borderBottom: `1px solid ${C.glassBorder}`,
                 alignItems: 'center',
-                opacity: 0.18 - i * 0.04,
+                opacity: 0.22 - i * 0.05,
               }}>
                 <span style={{ fontFamily: MONO, fontSize: 12, color: C.faint }}>{n}</span>
                 <span style={{ height: 10, width: 100 - i * 20, background: C.faint, borderRadius: 2, display: 'block' }} />
@@ -435,7 +454,7 @@ export default function LandingPage() {
               <a href="/app/" style={{
                 display: 'inline-flex', alignItems: 'center', gap: 8,
                 fontSize: 13, fontWeight: 600,
-                background: C.maroon, color: C.cream,
+                background: C.maroon, color: '#F5F0E8',
                 borderRadius: 5, padding: '10px 20px', textDecoration: 'none',
               }}>
                 Train now — be first on the board
@@ -463,14 +482,14 @@ export default function LandingPage() {
             <div style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))',
-              gap: 1, background: 'rgba(255,255,255,0.05)',
-              border: '1px solid rgba(255,255,255,0.06)',
+              gap: 1, background: C.glassBorder,
+              border: `1px solid ${C.glassBorder}`,
               borderRadius: 6, overflow: 'hidden', marginBottom: 10,
             }}>
               {DATASETS.map(({ cls, ex, count, range }) => (
                 <div key={cls} style={{
                   padding: '18px 16px',
-                  background: 'rgba(13,11,9,0.85)',
+                  background: 'rgba(245,240,232,0.92)',
                   backdropFilter: 'blur(8px)',
                 }}>
                   <div style={{ fontFamily: MONO, fontSize: 13, fontWeight: 700,
@@ -496,6 +515,95 @@ export default function LandingPage() {
           </div>
         </section>
 
+        {/* ── BLOG ─────────────────────────────────────────────────────── */}
+        <section id="blog" style={{
+          padding: `80px ${PX}`,
+          display: 'flex', justifyContent: 'center',
+        }}>
+          <div style={{ ...panel({ padding: '40px 40px', maxWidth: 740, width: '100%' }) }}>
+            <div style={{
+              display: 'flex', alignItems: 'baseline',
+              justifyContent: 'space-between', marginBottom: 36, flexWrap: 'wrap', gap: 12,
+            }}>
+              <p style={{
+                fontFamily: MONO, fontSize: 9, fontWeight: 600,
+                letterSpacing: '0.18em', textTransform: 'uppercase',
+                color: C.faint,
+              }}>
+                Writing
+              </p>
+              <a href="/blog/" style={{
+                fontFamily: MONO, fontSize: 10, color: C.maroon,
+                letterSpacing: '0.06em', textDecoration: 'none',
+              }}>
+                All articles →
+              </a>
+            </div>
+
+            {[
+              {
+                tag: 'Fundamentals',
+                title: 'How to read candlestick charts — a complete beginner\'s guide',
+                desc: 'Every candlestick is a compressed record of a fight between buyers and sellers. Learn to read the open, high, low, and close, understand what wicks reveal about rejection, and recognise the patterns that show up across every market.',
+                href: '/blog/how-to-read-candlestick-charts.html',
+                time: '8 min',
+              },
+              {
+                tag: 'Methodology',
+                title: 'Price action vs technical indicators — why traders go bare chart',
+                desc: 'Most traders start with indicators. Many of the best eventually strip them off. This explains what indicators actually measure, why they lag, and what you see on a clean chart that gets hidden beneath a forest of lines.',
+                href: '/blog/price-action-vs-indicators.html',
+                time: '10 min',
+              },
+              {
+                tag: 'Skill Building',
+                title: 'Deliberate practice for traders — how to actually get better at reading charts',
+                desc: 'Watching charts for hours feels productive but rarely builds skill in the way deliberate practice does. Here\'s the specific structure — borrowed from cognitive science — that actually improves price action reading.',
+                href: '/blog/deliberate-practice-trading.html',
+                time: '12 min',
+              },
+            ].map((post, i, arr) => (
+              <a key={post.href} href={post.href} style={{ textDecoration: 'none', display: 'block' }}>
+                <div style={{
+                  display: 'grid',
+                  gridTemplateColumns: '1fr 48px',
+                  gap: 20,
+                  padding: '24px 0',
+                  borderTop: `1px solid ${C.glassBorder}`,
+                  ...(i === arr.length - 1 ? { borderBottom: `1px solid ${C.glassBorder}` } : {}),
+                  cursor: 'pointer',
+                }}>
+                  <div>
+                    <p style={{
+                      fontFamily: MONO, fontSize: 9, fontWeight: 600,
+                      textTransform: 'uppercase', letterSpacing: '0.12em',
+                      color: C.maroon, marginBottom: 8,
+                    }}>
+                      {post.tag}
+                    </p>
+                    <p style={{
+                      fontFamily: SERIF, fontSize: 15, fontWeight: 400,
+                      color: C.text, lineHeight: 1.35,
+                      letterSpacing: '-0.01em', marginBottom: 8,
+                    }}>
+                      {post.title}
+                    </p>
+                    <p style={{ fontSize: 13, lineHeight: 1.7, color: C.muted }}>
+                      {post.desc}
+                    </p>
+                  </div>
+                  <div style={{
+                    fontFamily: MONO, fontSize: 10, color: C.faint,
+                    textAlign: 'right', paddingTop: 2,
+                  }}>
+                    {post.time}
+                  </div>
+                </div>
+              </a>
+            ))}
+          </div>
+        </section>
+
         {/* ── FAQ ──────────────────────────────────────────────────────── */}
         <section id="faq" style={{
           padding: `80px ${PX}`,
@@ -511,8 +619,8 @@ export default function LandingPage() {
             </p>
             {FAQS.map(({ q, a }, i) => (
               <details key={q} style={{
-                borderTop: i === 0 ? '1px solid rgba(255,255,255,0.07)' : 'none',
-                borderBottom: '1px solid rgba(255,255,255,0.07)',
+                borderTop: i === 0 ? `1px solid ${C.glassBorder}` : 'none',
+                borderBottom: `1px solid ${C.glassBorder}`,
               }}>
                 <summary style={{
                   display: 'flex', justifyContent: 'space-between', alignItems: 'center',
@@ -545,19 +653,19 @@ export default function LandingPage() {
               fontWeight: 400, letterSpacing: '-0.02em', lineHeight: 1.1,
               color: C.text, marginBottom: 20,
             }}>
-              Pick a dataset.<br />Press →.<br />See where you stand.
+              Pick a dataset and start reading.
             </h2>
             <p style={{
               fontSize: 15, lineHeight: 1.75, color: C.muted,
               marginBottom: 36,
             }}>
-              No download. No sign-up. Your first session tells you more about your
-              chart reading than months of passive watching ever would.
+              No download, no sign-up needed. Your first session will tell you something
+              real about how you read price — probably something you hadn't noticed before.
             </p>
             <a href="/app/" style={{
               display: 'inline-flex', alignItems: 'center', gap: 10,
               fontSize: 15, fontWeight: 600,
-              background: C.text, color: C.bg,
+              background: C.maroon, color: '#F5F0E8',
               borderRadius: 6, padding: '14px 36px', textDecoration: 'none',
             }}>
               Open the trainer
@@ -571,8 +679,8 @@ export default function LandingPage() {
 
         {/* ── FOOTER ───────────────────────────────────────────────────── */}
         <footer style={{
-          borderTop: `1px solid rgba(255,255,255,0.07)`,
-          background: 'rgba(13,11,9,0.92)',
+          borderTop: `1px solid ${C.glassBorder}`,
+          background: 'rgba(245,240,232,0.92)',
           backdropFilter: 'blur(20px)',
           WebkitBackdropFilter: 'blur(20px)',
           padding: `18px ${PX}`,

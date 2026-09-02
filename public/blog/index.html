@@ -3,106 +3,163 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Price Action Trading Blog — Guides, Tips &amp; Training Strategies</title>
-  <meta name="description" content="Learn price action trading through practical guides. How to read candlestick charts, identify support and resistance, build a deliberate practice routine, and more." />
-  <meta name="keywords" content="price action trading, candlestick charts, technical analysis, trading education, chart reading, support resistance, trading psychology, deliberate practice trading" />
-  <link rel="canonical" href="https://your-domain.vercel.app/blog/" />
+  <title>Empyrean Blog — Price Action Trading Guides</title>
+  <meta name="description" content="Practical guides to reading candlestick charts, understanding price action, and building the practice habits that actually improve your trading." />
+  <meta name="keywords" content="price action trading, candlestick charts, technical analysis, trading education, chart reading, deliberate practice trading" />
+  <link rel="canonical" href="https://price-action-trainer.vercel.app/blog/" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Blog",
-    "name": "Price Action Trainer Blog",
-    "description": "Practical guides to reading candlestick charts and building price action trading skills through deliberate practice.",
-    "url": "https://your-domain.vercel.app/blog/"
+    "name": "Empyrean — Price Action Training",
+    "description": "Practical guides to reading candlestick charts and building price action skills through deliberate practice.",
+    "url": "https://price-action-trainer.vercel.app/blog/"
   }
   </script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --bg:#0d1117;--bg2:#161b22;--bg3:#1c2128;--border:#21262d;
-      --text:#e6edf3;--muted:#7d8590;--faint:#484f58;
-      --bull:#3fb950;--accent:#58a6ff;
-      --font:-apple-system,BlinkMacSystemFont,'Inter','Segoe UI',system-ui,sans-serif;
+      --bg:      #F5F0E8;
+      --surface: #EDE8DF;
+      --text:    #1A1208;
+      --muted:   #6B5E52;
+      --faint:   #A89880;
+      --rule:    rgba(42,26,10,0.13);
+      --maroon:  #6B1A2A;
+      --serif:   Georgia, "Times New Roman", serif;
+      --sans:    -apple-system, BlinkMacSystemFont, "Inter", system-ui, sans-serif;
+      --mono:    "SF Mono", "Fira Code", Consolas, monospace;
     }
-    body { font-family:var(--font);background:var(--bg);color:var(--text);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased; }
-    a { color:var(--accent);text-decoration:none; }
-    a:hover { text-decoration:underline; }
-    nav { position:sticky;top:0;z-index:100;background:rgba(13,17,23,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 5vw;height:56px; }
-    .nav-logo { font-weight:700;font-size:15px;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:10px; }
-    .nav-logo svg { width:28px;height:28px; }
-    .nav-links { display:flex;align-items:center;gap:24px; }
-    .nav-links a { font-size:14px;color:var(--muted);transition:color 0.15s; }
-    .nav-links a:hover { color:var(--text);text-decoration:none; }
-    .nav-cta { background:var(--bull);color:#000 !important;font-weight:700;padding:7px 18px;border-radius:6px; }
-    .container { max-width:860px;margin:0 auto;padding:64px 5vw; }
-    h1 { font-size:clamp(1.8rem,4vw,2.6rem);font-weight:800;letter-spacing:-0.02em;margin-bottom:12px; }
-    .page-sub { font-size:1.05rem;color:var(--muted);margin-bottom:56px; }
-    .posts { display:grid;gap:24px; }
-    .post-card { background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:28px;transition:border-color 0.15s; }
-    .post-card:hover { border-color:var(--faint); }
-    .post-tag { font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--bull);margin-bottom:10px;display:block; }
-    .post-card h2 { font-size:1.2rem;font-weight:700;margin-bottom:10px; }
-    .post-card h2 a { color:var(--text); }
-    .post-card h2 a:hover { color:var(--accent);text-decoration:none; }
-    .post-card p { font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:16px; }
-    .post-meta { font-size:12px;color:var(--faint); }
-    footer { background:var(--bg2);border-top:1px solid var(--border);padding:32px 5vw;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px; }
-    .footer-copy { font-size:12px;color:var(--faint); }
-    .footer-links { display:flex;gap:20px; }
-    .footer-links a { font-size:13px;color:var(--muted); }
+    body { font-family: var(--sans); background: var(--bg); color: var(--text); font-size: 16px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    a { color: var(--maroon); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(245,240,232,0.92);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--rule);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5vw; height: 52px;
+    }
+    .nav-logo { font-family: var(--serif); font-weight: 700; font-size: 15px; color: var(--text); text-decoration: none; letter-spacing: 0.04em; }
+    .nav-links { display: flex; align-items: center; gap: 24px; }
+    .nav-links a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color 0.12s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta { background: var(--maroon) !important; color: var(--bg) !important; font-weight: 600; padding: 6px 16px; border-radius: 4px; }
+    .nav-cta:hover { opacity: 0.88; text-decoration: none !important; }
+
+    .container { max-width: 860px; margin: 0 auto; padding: 72px 5vw; }
+
+    .page-header { margin-bottom: 64px; }
+    .page-label { font-family: var(--mono); font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.14em; color: var(--faint); margin-bottom: 14px; display: block; }
+    h1 { font-family: var(--serif); font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 400; letter-spacing: -0.02em; line-height: 1.12; color: var(--text); margin-bottom: 14px; }
+    .page-sub { font-size: 15px; color: var(--muted); line-height: 1.7; max-width: 500px; }
+
+    .posts { display: flex; flex-direction: column; gap: 0; }
+
+    .post-card {
+      display: grid;
+      grid-template-columns: 1fr 80px;
+      gap: 24px;
+      align-items: start;
+      padding: 32px 0;
+      border-top: 1px solid var(--rule);
+      text-decoration: none;
+      color: inherit;
+      transition: background 0.12s;
+    }
+    .post-card:last-child { border-bottom: 1px solid var(--rule); }
+    .post-card:hover { text-decoration: none; }
+    .post-card:hover .post-title { color: var(--maroon); }
+
+    .post-tag {
+      font-family: var(--mono); font-size: 9px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.12em;
+      color: var(--maroon); margin-bottom: 8px; display: block;
+    }
+    .post-title {
+      font-family: var(--serif); font-size: clamp(1.05rem, 2vw, 1.25rem);
+      font-weight: 400; color: var(--text); line-height: 1.3;
+      margin-bottom: 10px; letter-spacing: -0.01em;
+      transition: color 0.12s;
+    }
+    .post-desc { font-size: 14px; color: var(--muted); line-height: 1.7; }
+    .post-meta { font-family: var(--mono); font-size: 11px; color: var(--faint); text-align: right; padding-top: 4px; }
+
+    footer {
+      background: var(--surface); border-top: 1px solid var(--rule);
+      padding: 24px 5vw; display: flex; justify-content: space-between;
+      align-items: center; flex-wrap: wrap; gap: 12px;
+    }
+    .footer-copy { font-family: var(--mono); font-size: 11px; color: var(--faint); }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { font-size: 12px; color: var(--faint); }
+
+    @media (max-width: 600px) {
+      .post-card { grid-template-columns: 1fr; }
+      .post-meta { text-align: left; }
+      nav .nav-links a:not(.nav-cta) { display: none; }
+    }
   </style>
 </head>
 <body>
 
 <nav>
-  <a href="/" class="nav-logo">
-    <svg viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="6" fill="#0d1117"/><rect x="4" y="20" width="4" height="8" rx="1" fill="#3fb950"/><rect x="10" y="14" width="4" height="14" rx="1" fill="#3fb950"/><rect x="16" y="8" width="4" height="20" rx="1" fill="#3fb950"/><rect x="22" y="16" width="4" height="12" rx="1" fill="#f85149"/></svg>
-    Price Action Trainer
-  </a>
+  <a href="/" class="nav-logo">Empyrean</a>
   <div class="nav-links">
     <a href="/">Home</a>
     <a href="/blog/" style="color:var(--text)">Blog</a>
-    <a href="/app/" class="nav-cta">Start training →</a>
+    <a href="/app/" class="nav-cta">Open trainer</a>
   </div>
 </nav>
 
 <div class="container">
-  <h1>Price action trading guides</h1>
-  <p class="page-sub">Practical articles to build the vocabulary and mental models behind reading charts without indicators.</p>
+  <div class="page-header">
+    <span class="page-label">Empyrean · Writing</span>
+    <h1>Price action guides</h1>
+    <p class="page-sub">Practical articles on reading charts, understanding what price is actually telling you, and building the practice habits that make the difference.</p>
+  </div>
 
   <div class="posts">
 
-    <div class="post-card">
-      <span class="post-tag">Fundamentals</span>
-      <h2><a href="/blog/how-to-read-candlestick-charts.html">How to read candlestick charts — a complete beginner's guide</a></h2>
-      <p>Every candlestick is a compressed story of a battle between buyers and sellers. Learn to read the open, high, low, and close, understand what wicks reveal about rejection, and recognise the most significant single-bar patterns that show up across every market and timeframe.</p>
-      <div class="post-meta">8 min read · Price Action Basics</div>
-    </div>
+    <a href="/blog/how-to-read-candlestick-charts.html" class="post-card">
+      <div>
+        <span class="post-tag">Fundamentals</span>
+        <div class="post-title">How to read candlestick charts — a complete beginner's guide</div>
+        <p class="post-desc">Every candlestick is a compressed record of a fight between buyers and sellers. Learn to read the open, high, low, and close, understand what wicks reveal about rejection, and recognise the patterns that show up across every market and timeframe.</p>
+      </div>
+      <div class="post-meta">8 min</div>
+    </a>
 
-    <div class="post-card">
-      <span class="post-tag">Methodology</span>
-      <h2><a href="/blog/price-action-vs-indicators.html">Price action vs technical indicators — why traders go bare chart</a></h2>
-      <p>Most traders start with indicators: RSI, MACD, Bollinger Bands. Many of the best eventually strip them off. This article explains what indicators actually measure, why they lag, and what experienced price action traders see on a clean chart that gets hidden beneath a forest of lines.</p>
-      <div class="post-meta">10 min read · Methodology</div>
-    </div>
+    <a href="/blog/price-action-vs-indicators.html" class="post-card">
+      <div>
+        <span class="post-tag">Methodology</span>
+        <div class="post-title">Price action vs technical indicators — why traders go bare chart</div>
+        <p class="post-desc">Most traders start with indicators. Many of the best eventually strip them off. This explains what indicators actually measure, why they lag, and what an experienced price action trader sees on a clean chart that gets hidden beneath a forest of lines.</p>
+      </div>
+      <div class="post-meta">10 min</div>
+    </a>
 
-    <div class="post-card">
-      <span class="post-tag">Skill Building</span>
-      <h2><a href="/blog/deliberate-practice-trading.html">Deliberate practice for traders — how to actually get better at reading charts</a></h2>
-      <p>Watching charts for hours doesn't build skill the same way deliberate practice does. Borrowed from cognitive science, deliberate practice has a specific structure: difficulty just above your current level, immediate feedback, and forced commitment before the outcome. Here's how to apply it to trading.</p>
-      <div class="post-meta">12 min read · Skill Development</div>
-    </div>
+    <a href="/blog/deliberate-practice-trading.html" class="post-card">
+      <div>
+        <span class="post-tag">Skill Building</span>
+        <div class="post-title">Deliberate practice for traders — how to actually get better at reading charts</div>
+        <p class="post-desc">Watching charts for hours feels productive but rarely builds skill in the way deliberate practice does. Borrowed from cognitive science, deliberate practice has a specific structure: difficulty just above your level, immediate feedback, and forced commitment before the outcome.</p>
+      </div>
+      <div class="post-meta">12 min</div>
+    </a>
 
   </div>
 </div>
 
 <footer>
-  <div class="footer-copy">© 2025 Price Action Trainer</div>
+  <div class="footer-copy">Empyrean · © 2026</div>
   <div class="footer-links">
     <a href="/">Home</a>
     <a href="/app/">Train</a>
-    <a href="https://buymeacoffee.com/thefuzzybear" target="_blank" rel="noopener noreferrer">☕ Support</a>
+    <a href="https://buymeacoffee.com/YOUR_BMC_USERNAME" target="_blank" rel="noopener noreferrer">☕ Support</a>
   </div>
 </footer>
 
