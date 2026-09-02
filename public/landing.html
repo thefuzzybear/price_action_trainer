@@ -39,18 +39,25 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:      #0d1117;
-      --bg2:     #161b22;
-      --bg3:     #1c2128;
-      --border:  #21262d;
-      --text:    #e6edf3;
-      --muted:   #7d8590;
-      --faint:   #484f58;
-      --bull:    #3fb950;
-      --bear:    #f85149;
-      --accent:  #58a6ff;
-      --mono:    'SF Mono','Fira Code','Consolas',monospace;
-      --sans:    -apple-system,BlinkMacSystemFont,'Inter','Segoe UI',system-ui,sans-serif;
+      --bg:       #080c10;
+      --bg2:      #0d1117;
+      --bg3:      #161b22;
+      --bg4:      #1c2128;
+      --border:   #1e2530;
+      --border2:  #252d39;
+      --text:     #e6edf3;
+      --muted:    #7d8590;
+      --faint:    #404855;
+      --bull:     #3fb950;
+      --bull-dim: rgba(63,185,80,0.12);
+      --bear:     #f85149;
+      --bear-dim: rgba(248,81,73,0.12);
+      --accent:   #58a6ff;
+      --accent-dim: rgba(88,166,255,0.1);
+      --gold:     #d29922;
+      --gold-dim: rgba(210,153,34,0.12);
+      --mono:     'SF Mono','Fira Code','Consolas',monospace;
+      --sans:     -apple-system,BlinkMacSystemFont,'Inter','Segoe UI',system-ui,sans-serif;
     }
 
     html { scroll-behavior: smooth; }
@@ -61,14 +68,22 @@
       font-size: 16px;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
     a { color: var(--accent); text-decoration: none; }
     a:hover { text-decoration: underline; }
 
-    /* ── NAV ───────────────────────────────────────────────────────── */
+    /* ── SCROLLBAR ─────────────────────────────────────────── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--faint); border-radius: 3px; }
+
+    /* ── NAV ───────────────────────────────────────────────── */
     nav {
-      position: sticky; top: 0; z-index: 100;
-      background: rgba(13,17,23,0.95);
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      background: rgba(8,12,16,0.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
       display: flex; align-items: center; justify-content: space-between;
       padding: 0 clamp(20px,5vw,80px); height: 52px;
@@ -77,361 +92,746 @@
       font-size: 13px; font-weight: 600;
       font-family: var(--mono); color: var(--muted);
       text-decoration: none; letter-spacing: 0.02em;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .nav-brand::before {
+      content: '';
+      display: inline-block; width: 8px; height: 8px;
+      background: var(--bull); border-radius: 50%;
+      box-shadow: 0 0 8px var(--bull);
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+    @keyframes pulse-dot {
+      0%,100% { opacity: 1; box-shadow: 0 0 8px var(--bull); }
+      50%      { opacity: 0.5; box-shadow: 0 0 3px var(--bull); }
     }
     .nav-brand:hover { color: var(--text); text-decoration: none; }
     .nav-right { display: flex; align-items: center; gap: 24px; }
     .nav-right a { font-size: 13px; color: var(--muted); }
     .nav-right a:hover { color: var(--text); text-decoration: none; }
-    .nav-open {
+    .nav-cta {
       font-size: 13px; font-weight: 600;
-      color: var(--bull) !important;
-      border: 1px solid rgba(63,185,80,0.4);
-      border-radius: 4px; padding: 5px 14px;
-      transition: background 0.1s, border-color 0.1s;
+      color: var(--bg) !important;
+      background: var(--bull);
+      border-radius: 5px; padding: 6px 16px;
+      transition: filter 0.15s, box-shadow 0.15s;
     }
-    .nav-open:hover {
-      background: rgba(63,185,80,0.08);
-      border-color: var(--bull);
+    .nav-cta:hover {
+      filter: brightness(1.1);
+      box-shadow: 0 0 16px rgba(63,185,80,0.35);
       text-decoration: none !important;
     }
 
-    /* ── HERO ──────────────────────────────────────────────────────── */
+    /* ── COMMUNITY TICKER ──────────────────────────────────── */
+    .activity-bar {
+      position: fixed; top: 52px; left: 0; right: 0; z-index: 190;
+      background: var(--bg3);
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+      height: 28px;
+    }
+    .activity-track {
+      display: flex; gap: 48px;
+      animation: scroll-left 40s linear infinite;
+      white-space: nowrap;
+      padding: 0 24px;
+      height: 100%; align-items: center;
+    }
+    .activity-track:hover { animation-play-state: paused; }
+    @keyframes scroll-left {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .act-item {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: var(--mono); font-size: 10px; color: var(--muted);
+      flex-shrink: 0;
+    }
+    .act-dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
+    .act-dot.bull { background: var(--bull); box-shadow: 0 0 4px var(--bull); }
+    .act-dot.bear { background: var(--bear); box-shadow: 0 0 4px var(--bear); }
+    .act-dot.gold { background: var(--gold); box-shadow: 0 0 4px var(--gold); }
+    .act-handle { color: var(--text); font-weight: 600; }
+    .act-val.bull { color: var(--bull); }
+    .act-val.bear { color: var(--bear); }
+    .act-val.gold { color: var(--gold); }
+
+    /* ── HERO ──────────────────────────────────────────────── */
     .hero {
-      max-width: 680px;
-      margin: 0 auto;
-      padding: 100px clamp(20px,5vw,80px) 80px;
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 140px clamp(20px,5vw,80px) 60px;
+      position: relative; overflow: hidden;
     }
+
+    /* subtle grid background */
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 40px 40px;
+      mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, black 30%, transparent 100%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, black 30%, transparent 100%);
+      opacity: 0.35;
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      max-width: 1100px; margin: 0 auto; width: 100%;
+      display: grid; grid-template-columns: 1fr 480px; gap: 64px;
+      align-items: center; position: relative; z-index: 1;
+    }
+
+    .hero-left {}
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--mono); font-size: 11px; font-weight: 600;
+      color: var(--bull); text-transform: uppercase; letter-spacing: 0.1em;
+      border: 1px solid rgba(63,185,80,0.25);
+      background: rgba(63,185,80,0.06);
+      padding: 4px 12px; border-radius: 20px;
+      margin-bottom: 24px;
+    }
+    .hero-eyebrow::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--bull); animation: pulse-dot 2s ease-in-out infinite;
+    }
+
     .hero h1 {
-      font-size: clamp(1.9rem, 4.5vw, 3rem);
+      font-size: clamp(2.2rem, 4.5vw, 3.6rem);
       font-weight: 800;
-      line-height: 1.12;
-      letter-spacing: -0.03em;
-      margin-bottom: 20px;
+      line-height: 1.08;
+      letter-spacing: -0.04em;
+      margin-bottom: 24px;
     }
+    .hero h1 em {
+      font-style: normal;
+      background: linear-gradient(135deg, var(--bull) 0%, #58d68d 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
     .hero-lead {
       font-size: 1.05rem;
       color: var(--muted);
-      line-height: 1.65;
-      max-width: 520px;
+      line-height: 1.7;
+      max-width: 480px;
       margin-bottom: 36px;
     }
-    .hero-cta {
-      display: inline-flex; align-items: center;
+
+    .hero-actions {
+      display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+    .cta-primary {
+      display: inline-flex; align-items: center; gap: 8px;
       background: var(--bull); color: #000;
       font-size: 14px; font-weight: 700;
-      padding: 10px 22px; border-radius: 5px;
+      padding: 12px 28px; border-radius: 6px;
       text-decoration: none;
-      transition: filter 0.1s;
+      transition: filter 0.15s, box-shadow 0.15s, transform 0.1s;
     }
-    .hero-cta:hover { filter: brightness(1.08); text-decoration: none; }
-    .hero-note {
-      display: block;
+    .cta-primary:hover {
+      filter: brightness(1.1);
+      box-shadow: 0 0 24px rgba(63,185,80,0.4);
+      transform: translateY(-1px);
+      text-decoration: none;
+    }
+    .cta-primary svg { transition: transform 0.15s; }
+    .cta-primary:hover svg { transform: translateX(3px); }
+
+    .cta-ghost {
+      display: inline-flex; align-items: center; gap: 8px;
+      color: var(--muted); font-size: 13px; font-weight: 500;
+      border: 1px solid var(--border2);
+      padding: 11px 20px; border-radius: 6px;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .cta-ghost:hover { border-color: var(--muted); color: var(--text); text-decoration: none; }
+
+    .hero-proof {
+      display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+    }
+    .proof-item {
+      display: flex; align-items: center; gap: 8px;
       font-size: 12px; color: var(--faint);
-      margin-top: 14px;
+    }
+    .proof-item svg { color: var(--bull); flex-shrink: 0; }
+
+    /* ── ANIMATED CHART CARD ───────────────────────────────── */
+    .chart-card {
+      background: var(--bg2);
+      border: 1px solid var(--border2);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 32px 64px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.03);
     }
 
-    /* ── TERMINAL DEMO ─────────────────────────────────────────────── */
-    .demo {
-      max-width: 860px;
-      margin: 0 auto;
-      padding: 0 clamp(20px,5vw,80px) 80px;
-    }
-    .terminal {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      overflow: hidden;
-      font-family: var(--mono);
-    }
-    .terminal-bar {
+    .cc-header {
       background: var(--bg3);
       border-bottom: 1px solid var(--border);
-      padding: 8px 14px;
+      padding: 10px 14px;
       display: flex; align-items: center; gap: 10px;
     }
-    .tbar-sym {
-      font-size: 11px; color: var(--text); font-weight: 600;
+    .cc-dot-row { display: flex; gap: 5px; }
+    .cc-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .cc-dot:nth-child(1) { background: #f85149; }
+    .cc-dot:nth-child(2) { background: #d29922; }
+    .cc-dot:nth-child(3) { background: #3fb950; }
+    .cc-sym {
+      margin-left: 8px;
+      font-family: var(--mono); font-size: 12px; font-weight: 600;
+      color: var(--text);
     }
-    .tbar-int {
-      font-size: 10px; color: var(--faint);
-      border: 1px solid var(--border);
-      padding: 1px 6px; border-radius: 3px;
+    .cc-tf {
+      font-family: var(--mono); font-size: 10px; color: var(--faint);
+      border: 1px solid var(--border); padding: 1px 6px; border-radius: 3px;
     }
-    .tbar-ohlc {
+    .cc-live {
       margin-left: auto;
-      display: flex; gap: 12px;
-      font-size: 10px;
+      display: inline-flex; align-items: center; gap: 5px;
+      font-family: var(--mono); font-size: 10px; color: var(--bull);
     }
-    .tbar-ohlc span { color: var(--faint); }
-    .tbar-ohlc span b { color: var(--bull); font-weight: 500; }
-    .tbar-bar { font-size: 10px; color: var(--faint); }
-
-    .terminal-body {
-      display: grid;
-      grid-template-columns: 160px 1fr;
+    .cc-live::before {
+      content: ''; width: 5px; height: 5px; border-radius: 50%;
+      background: var(--bull); animation: pulse-dot 1.5s ease-in-out infinite;
     }
 
-    /* Score column */
-    .score-col {
+    .cc-ohlc-bar {
+      padding: 6px 14px;
+      border-bottom: 1px solid var(--border);
+      display: flex; gap: 16px; align-items: center;
+      font-family: var(--mono); font-size: 10px;
+    }
+    .ohlc-item { display: flex; gap: 4px; }
+    .ohlc-label { color: var(--faint); }
+    .ohlc-val { color: var(--bull); font-weight: 600; }
+
+    .cc-body {
+      display: grid; grid-template-columns: 100px 1fr;
+    }
+
+    /* score sidebar */
+    .cc-score {
       border-right: 1px solid var(--border);
-      padding: 16px 14px;
-      display: flex; flex-direction: column; gap: 14px;
+      padding: 14px 12px;
+      display: flex; flex-direction: column; gap: 12px;
     }
-    .sc-row { display: flex; flex-direction: column; gap: 2px; }
-    .sc-label {
+    .cs-row { display: flex; flex-direction: column; gap: 2px; }
+    .cs-label {
       font-size: 9px; text-transform: uppercase;
       letter-spacing: 0.07em; color: var(--faint);
+      font-family: var(--mono);
     }
-    .sc-val { font-size: 13px; font-weight: 600; color: var(--muted); }
-    .sc-val.big { font-size: 22px; color: var(--bull); }
-    .sc-val.bull { color: var(--bull); }
-    .sc-val.bear { color: var(--bear); }
-    .sc-val.warn { color: #d29922; }
+    .cs-val { font-size: 13px; font-weight: 600; color: var(--muted); font-family: var(--mono); }
+    .cs-val.big { font-size: 24px; color: var(--bull); }
+    .cs-val.bull { color: var(--bull); }
+    .cs-val.bear { color: var(--bear); }
+    .cs-val.warn { color: var(--gold); }
+    .cs-div { height: 1px; background: var(--border); }
 
-    .score-col .divider { height: 1px; background: var(--border); }
-
-    /* Chart area */
-    .chart-col {
-      position: relative;
-      min-height: 220px;
+    /* candle chart */
+    .cc-chart {
+      position: relative; min-height: 180px;
       display: flex; flex-direction: column;
+      padding: 10px 8px 8px;
     }
-    .price-lines {
-      position: absolute; right: 0; top: 0; bottom: 0; width: 100%;
+    .cc-price-lines {
+      position: absolute; inset: 0;
       pointer-events: none;
     }
-    .pline {
-      position: absolute; right: 0; left: 0;
+    .cc-pl {
+      position: absolute; left: 0; right: 0;
       display: flex; align-items: center; justify-content: flex-end;
     }
-    .pline-label {
+    .cc-pl-label {
       font-size: 9px; font-family: var(--mono);
       padding: 1px 6px; margin-right: 4px;
     }
-    .pline-tp { border-top: 1px dashed rgba(63,185,80,0.5); top: 22%; }
-    .pline-tp .pline-label { color: var(--bull); }
-    .pline-entry { border-top: 1px dashed rgba(125,133,144,0.5); top: 48%; }
-    .pline-entry .pline-label { color: var(--muted); }
-    .pline-sl { border-top: 1px dashed rgba(248,81,73,0.5); top: 72%; }
-    .pline-sl .pline-label { color: var(--bear); }
+    .pl-tp   { border-top: 1px dashed rgba(63,185,80,0.4);  top: 18%; }
+    .pl-tp   .cc-pl-label { color: var(--bull); }
+    .pl-ent  { border-top: 1px dashed rgba(125,133,144,0.4); top: 46%; }
+    .pl-ent  .cc-pl-label { color: var(--muted); }
+    .pl-sl   { border-top: 1px dashed rgba(248,81,73,0.4);  top: 70%; }
+    .pl-sl   .cc-pl-label { color: var(--bear); }
 
-    .candles-wrap {
+    .candles {
       flex: 1; display: flex; align-items: flex-end;
-      padding: 12px 10px 8px; gap: 3px;
+      gap: 3px; padding-bottom: 4px;
     }
-    .c { display: flex; flex-direction: column; align-items: center; flex: 1; }
-    .w { width: 1px; }
-    .b { width: 100%; max-width: 12px; border-radius: 1px; }
-    .up .w { background: var(--bull); }
-    .up .b { background: var(--bull); }
-    .dn .w { background: var(--bear); }
-    .dn .b { background: var(--bear); }
+    .candle {
+      display: flex; flex-direction: column;
+      align-items: center; flex: 1; max-width: 14px;
+    }
+    .wick { width: 1px; }
+    .body { width: 100%; max-width: 12px; border-radius: 1px; }
+    .candle.up .wick { background: var(--bull); }
+    .candle.up .body { background: var(--bull); }
+    .candle.dn .wick { background: var(--bear); }
+    .candle.dn .body { background: var(--bear); }
+    /* "next" candle — hidden right edge */
+    .candle.next { opacity: 0.18; filter: blur(1px); }
 
-    .terminal-footer {
+    /* animated forming candle */
+    .candle.forming .body {
+      animation: form-candle 1.8s ease-out forwards;
+    }
+    @keyframes form-candle {
+      0%   { height: 2px; }
+      100% { height: var(--target-h); }
+    }
+
+    .cc-footer {
       border-top: 1px solid var(--border);
       padding: 8px 14px;
-      display: flex; gap: 16px;
+      display: flex; gap: 14px; align-items: center;
     }
-    .kh { display: inline-flex; align-items: center; gap: 5px; font-size: 10px; color: var(--faint); }
+    .kh {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 10px; color: var(--faint);
+    }
     .kh kbd {
       font-family: var(--mono); font-size: 9px;
       color: var(--muted); background: var(--bg);
       border: 1px solid var(--border); border-bottom-width: 2px;
       border-radius: 3px; padding: 1px 5px;
     }
+    .cc-verdict {
+      margin-left: auto;
+      display: inline-flex; align-items: center; gap: 5px;
+      font-family: var(--mono); font-size: 10px;
+    }
+    .cc-verdict.bull { color: var(--bull); }
+    .cc-verdict.bear { color: var(--bear); }
 
-    /* ── PROBLEM STATEMENT ─────────────────────────────────────────── */
-    .problem {
+    /* ── STATS BAR ────────────────────────────────────────── */
+    .stats-bar {
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
       background: var(--bg2);
-      padding: 64px clamp(20px,5vw,80px);
+      padding: 28px clamp(20px,5vw,80px);
     }
-    .problem-inner {
-      max-width: 760px; margin: 0 auto;
-      display: grid; grid-template-columns: 1fr 1fr; gap: 48px;
+    .stats-bar-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 1px; background: var(--border);
+      border: 1px solid var(--border); border-radius: 8px; overflow: hidden;
     }
-    .problem h2 {
-      font-size: 13px; font-weight: 600;
-      text-transform: uppercase; letter-spacing: 0.06em;
-      color: var(--faint); margin-bottom: 16px;
+    .stat-item {
+      background: var(--bg2); padding: 20px 24px;
+      display: flex; flex-direction: column; gap: 4px;
     }
-    .problem p {
-      font-size: 14px; color: var(--muted); line-height: 1.7;
+    .stat-number {
+      font-family: var(--mono); font-size: 28px; font-weight: 700;
+      color: var(--text); letter-spacing: -0.02em;
     }
-    .problem p + p { margin-top: 12px; }
-    .problem strong { color: var(--text); font-weight: 600; }
+    .stat-number.bull { color: var(--bull); }
+    .stat-label { font-size: 12px; color: var(--muted); }
 
-    /* ── HOW ───────────────────────────────────────────────────────── */
-    .how {
-      max-width: 860px; margin: 0 auto;
+    /* ── LEADERBOARD ──────────────────────────────────────── */
+    .leaderboard {
+      padding: 80px clamp(20px,5vw,80px);
+      position: relative; overflow: hidden;
+    }
+    .leaderboard::before {
+      content: '';
+      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 1px; height: 100%; background: var(--border);
+      pointer-events: none;
+    }
+
+    .lb-inner { max-width: 1100px; margin: 0 auto; }
+    .lb-header {
+      display: flex; align-items: flex-end; justify-content: space-between;
+      margin-bottom: 40px; flex-wrap: wrap; gap: 16px;
+    }
+    .lb-eyebrow {
+      font-family: var(--mono); font-size: 11px; font-weight: 600;
+      color: var(--gold); text-transform: uppercase; letter-spacing: 0.1em;
+      margin-bottom: 8px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .lb-eyebrow::before {
+      content: '';width: 6px; height: 6px; border-radius: 50%;
+      background: var(--gold); box-shadow: 0 0 8px var(--gold);
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+    .lb-title {
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 800; letter-spacing: -0.02em; line-height: 1.15;
+    }
+    .lb-refresh {
+      font-family: var(--mono); font-size: 11px; color: var(--faint);
+      display: flex; align-items: center; gap: 6px;
+    }
+    .lb-refresh-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--bull);
+      animation: pulse-dot 3s ease-in-out infinite;
+    }
+
+    .lb-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+    }
+
+    /* individual leaderboard card */
+    .lb-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 8px; overflow: hidden;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .lb-card:hover {
+      border-color: var(--border2);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    }
+    .lb-card.rank-1 {
+      border-color: rgba(210,153,34,0.4);
+      box-shadow: 0 0 0 1px rgba(210,153,34,0.08) inset;
+    }
+    .lb-card.rank-2 { border-color: rgba(88,166,255,0.2); }
+
+    .lb-card-header {
+      padding: 14px 16px;
+      display: flex; align-items: center; gap: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    .lb-rank {
+      font-family: var(--mono); font-size: 11px; font-weight: 700;
+      width: 28px; text-align: center;
+    }
+    .lb-rank.gold  { color: var(--gold); }
+    .lb-rank.silver { color: #8b9dc3; }
+    .lb-rank.bronze { color: #b87333; }
+    .lb-rank.plain  { color: var(--faint); }
+
+    .lb-avatar {
+      width: 36px; height: 36px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--mono); font-size: 13px; font-weight: 700;
+      flex-shrink: 0;
+    }
+    .av-a { background: rgba(63,185,80,0.15);  color: var(--bull); }
+    .av-b { background: rgba(88,166,255,0.15); color: var(--accent); }
+    .av-c { background: rgba(210,153,34,0.15); color: var(--gold); }
+    .av-d { background: rgba(248,81,73,0.15);  color: var(--bear); }
+    .av-e { background: rgba(139,93,201,0.15); color: #a371f7; }
+    .av-f { background: rgba(63,185,80,0.15);  color: var(--bull); }
+
+    .lb-name-col { flex: 1; min-width: 0; }
+    .lb-handle {
+      font-size: 14px; font-weight: 700; color: var(--text);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .lb-sub {
+      font-family: var(--mono); font-size: 10px; color: var(--faint);
+      margin-top: 1px;
+    }
+
+    .lb-accuracy {
+      font-family: var(--mono); font-size: 20px; font-weight: 700;
+      flex-shrink: 0;
+    }
+    .lb-accuracy.elite { color: var(--gold); }
+    .lb-accuracy.great { color: var(--bull); }
+    .lb-accuracy.good  { color: var(--accent); }
+
+    .lb-card-stats {
+      padding: 12px 16px;
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;
+    }
+    .lb-stat { display: flex; flex-direction: column; gap: 2px; }
+    .lb-stat-label {
+      font-family: var(--mono); font-size: 9px;
+      text-transform: uppercase; letter-spacing: 0.06em; color: var(--faint);
+    }
+    .lb-stat-val {
+      font-family: var(--mono); font-size: 12px; font-weight: 600;
+      color: var(--muted);
+    }
+    .lb-stat-val.bull { color: var(--bull); }
+    .lb-stat-val.bear { color: var(--bear); }
+    .lb-stat-val.gold { color: var(--gold); }
+    .lb-stat-val.accent { color: var(--accent); }
+
+    /* sparkline mini chart */
+    .lb-spark {
+      padding: 0 16px 12px;
+    }
+    .spark-label {
+      font-family: var(--mono); font-size: 9px;
+      color: var(--faint); text-transform: uppercase;
+      letter-spacing: 0.06em; margin-bottom: 4px;
+    }
+    .spark-svg { width: 100%; height: 24px; overflow: visible; }
+
+    /* leaderboard bottom strip — recent sessions */
+    .lb-feed {
+      margin-top: 32px;
+      border: 1px solid var(--border);
+      border-radius: 8px; overflow: hidden;
+      background: var(--bg2);
+    }
+    .lb-feed-header {
+      padding: 10px 16px;
+      border-bottom: 1px solid var(--border);
+      font-family: var(--mono); font-size: 10px;
+      color: var(--faint); text-transform: uppercase; letter-spacing: 0.06em;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .lb-feed-header::before {
+      content: ''; width: 5px; height: 5px; border-radius: 50%;
+      background: var(--bull); animation: pulse-dot 2s infinite;
+    }
+    .lb-feed-list { max-height: 220px; overflow: hidden; position: relative; }
+    .lb-feed-list::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0; height: 40px;
+      background: linear-gradient(transparent, var(--bg2));
+      pointer-events: none;
+    }
+    .lb-feed-row {
+      display: flex; align-items: center; gap: 12px;
+      padding: 9px 16px;
+      border-bottom: 1px solid var(--border);
+      font-family: var(--mono); font-size: 11px;
+      animation: slide-in 0.4s ease-out;
+    }
+    .lb-feed-row:last-child { border-bottom: none; }
+    @keyframes slide-in {
+      from { opacity: 0; transform: translateY(-8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .feed-handle { color: var(--text); font-weight: 600; width: 100px; }
+    .feed-sym    { color: var(--muted); width: 60px; }
+    .feed-acc { font-weight: 600; }
+    .feed-acc.bull { color: var(--bull); }
+    .feed-acc.bear { color: var(--bear); }
+    .feed-bar  { color: var(--faint); flex: 1; }
+    .feed-ago  { color: var(--faint); font-size: 10px; white-space: nowrap; }
+    .feed-tag {
+      font-size: 9px; padding: 1px 6px; border-radius: 20px; font-weight: 600;
+      white-space: nowrap;
+    }
+    .tag-streak { background: var(--gold-dim); color: var(--gold); }
+    .tag-pb     { background: var(--bull-dim); color: var(--bull); }
+    .tag-new    { background: var(--accent-dim); color: var(--accent); }
+
+    /* ── METHODOLOGY ──────────────────────────────────────── */
+    .method {
+      border-top: 1px solid var(--border);
+      background: var(--bg2);
       padding: 80px clamp(20px,5vw,80px);
     }
-    .how-title {
-      font-size: 11px; font-weight: 600;
-      text-transform: uppercase; letter-spacing: 0.08em;
-      color: var(--faint); margin-bottom: 32px;
+    .method-inner { max-width: 1100px; margin: 0 auto; }
+    .method-eyebrow {
+      font-family: var(--mono); font-size: 11px; font-weight: 600;
+      color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em;
+      margin-bottom: 12px;
     }
-    .how-steps {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      border: 1px solid var(--border);
-      border-radius: 6px; overflow: hidden;
+    .method-title {
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 800; letter-spacing: -0.02em;
+      margin-bottom: 48px; line-height: 1.2;
     }
-    .hs {
-      padding: 24px 20px;
-      border-right: 1px solid var(--border);
-    }
-    .hs:last-child { border-right: none; }
-    .hs-num {
-      font-family: var(--mono); font-size: 11px;
-      color: var(--faint); margin-bottom: 10px;
-      display: block;
-    }
-    .hs h3 { font-size: 13px; font-weight: 700; margin-bottom: 6px; }
-    .hs p  { font-size: 12px; color: var(--muted); line-height: 1.55; }
 
-    /* ── WHAT YOU TRACK ────────────────────────────────────────────── */
-    .track {
+    .method-cols {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start;
+    }
+
+    .method-left p {
+      font-size: 15px; color: var(--muted); line-height: 1.75; margin-bottom: 16px;
+    }
+    .method-left strong { color: var(--text); }
+
+    .method-steps {
+      display: flex; flex-direction: column; gap: 0;
+      border: 1px solid var(--border); border-radius: 8px; overflow: hidden;
+    }
+    .ms {
+      display: flex; align-items: flex-start; gap: 16px;
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
+    }
+    .ms:last-child { border-bottom: none; }
+    .ms:hover { background: var(--bg3); }
+    .ms-num {
+      font-family: var(--mono); font-size: 10px;
+      color: var(--faint); font-weight: 600;
+      margin-top: 2px; flex-shrink: 0;
+    }
+    .ms-content {}
+    .ms h3 { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+    .ms p  { font-size: 12px; color: var(--muted); line-height: 1.55; }
+
+    /* ── METRICS GRID ─────────────────────────────────────── */
+    .metrics-section {
       border-top: 1px solid var(--border);
       padding: 80px clamp(20px,5vw,80px);
-      background: var(--bg2);
     }
-    .track-inner { max-width: 860px; margin: 0 auto; }
-    .track-title {
-      font-size: 11px; font-weight: 600;
-      text-transform: uppercase; letter-spacing: 0.08em;
-      color: var(--faint); margin-bottom: 8px;
+    .metrics-inner { max-width: 1100px; margin: 0 auto; }
+    .metrics-eyebrow {
+      font-family: var(--mono); font-size: 11px; font-weight: 600;
+      color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em;
+      margin-bottom: 8px;
     }
-    .track h2 {
-      font-size: clamp(1.3rem, 3vw, 1.8rem);
+    .metrics-title {
+      font-size: clamp(1.4rem, 3vw, 2rem);
       font-weight: 800; letter-spacing: -0.02em;
-      margin-bottom: 32px; line-height: 1.2;
+      margin-bottom: 36px; line-height: 1.2;
     }
-    .metrics {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      border-radius: 6px; overflow: hidden;
+    .metrics-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1px; background: var(--border);
+      border: 1px solid var(--border); border-radius: 8px; overflow: hidden;
     }
-    .metric {
-      background: var(--bg2);
-      padding: 20px;
+    .metric-card {
+      background: var(--bg); padding: 24px;
+    }
+    .metric-icon {
+      font-size: 18px; margin-bottom: 12px;
     }
     .metric-key {
       font-family: var(--mono); font-size: 10px;
-      color: var(--faint); margin-bottom: 8px;
       text-transform: uppercase; letter-spacing: 0.06em;
+      color: var(--faint); margin-bottom: 6px;
     }
     .metric-val {
-      font-family: var(--mono); font-size: 22px;
+      font-family: var(--mono); font-size: 26px;
       font-weight: 700; color: var(--text);
+      margin-bottom: 4px;
     }
-    .metric-val.bull { color: var(--bull); }
-    .metric-val.bear { color: var(--bear); }
-    .metric-val.warn { color: #d29922; }
-    .metric-desc { font-size: 11px; color: var(--faint); margin-top: 4px; }
+    .metric-val.bull  { color: var(--bull); }
+    .metric-val.bear  { color: var(--bear); }
+    .metric-val.gold  { color: var(--gold); }
+    .metric-val.accent{ color: var(--accent); }
+    .metric-desc { font-size: 12px; color: var(--faint); line-height: 1.5; }
 
-    /* ── DATASETS ──────────────────────────────────────────────────── */
+    /* ── DATASETS ─────────────────────────────────────────── */
     .datasets {
-      border-top: 1px solid var(--border);
-      padding: 80px clamp(20px,5vw,80px);
-    }
-    .datasets-inner { max-width: 860px; margin: 0 auto; }
-    .datasets-title {
-      font-size: 11px; font-weight: 600;
-      text-transform: uppercase; letter-spacing: 0.08em;
-      color: var(--faint); margin-bottom: 8px;
-    }
-    .datasets h2 {
-      font-size: clamp(1.3rem, 3vw, 1.8rem);
-      font-weight: 800; letter-spacing: -0.02em;
-      margin-bottom: 24px; line-height: 1.2;
-    }
-    .ds-table {
-      width: 100%;
-      border: 1px solid var(--border);
-      border-radius: 6px; overflow: hidden;
-      border-collapse: collapse;
-      font-size: 13px; font-family: var(--mono);
-    }
-    .ds-table th {
-      background: var(--bg3);
-      border-bottom: 1px solid var(--border);
-      padding: 8px 14px; text-align: left;
-      font-size: 10px; text-transform: uppercase;
-      letter-spacing: 0.06em; color: var(--faint);
-      font-weight: 600;
-    }
-    .ds-table td {
-      padding: 8px 14px;
-      border-bottom: 1px solid var(--border);
-      color: var(--muted);
-    }
-    .ds-table tr:last-child td { border-bottom: none; }
-    .ds-table tr:hover td { background: var(--bg3); }
-    .ds-sym { color: var(--text); font-weight: 600; }
-    .ds-cnt { color: var(--accent); }
-    .ds-range { color: var(--faint); font-size: 11px; }
-
-    /* ── FAQ ────────────────────────────────────────────────────────── */
-    .faq {
       border-top: 1px solid var(--border);
       background: var(--bg2);
       padding: 80px clamp(20px,5vw,80px);
     }
-    .faq-inner { max-width: 680px; margin: 0 auto; }
-    .faq-title {
-      font-size: 11px; font-weight: 600;
-      text-transform: uppercase; letter-spacing: 0.08em;
-      color: var(--faint); margin-bottom: 28px;
+    .datasets-inner { max-width: 1100px; margin: 0 auto; }
+    .datasets-eyebrow {
+      font-family: var(--mono); font-size: 11px; font-weight: 600;
+      color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em;
+      margin-bottom: 8px;
+    }
+    .datasets-title {
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 800; letter-spacing: -0.02em;
+      margin-bottom: 32px; line-height: 1.2;
+    }
+    .ds-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1px; background: var(--border);
+      border: 1px solid var(--border); border-radius: 8px; overflow: hidden;
+      margin-bottom: 12px;
+    }
+    .ds-cell {
+      background: var(--bg2); padding: 20px;
+    }
+    .ds-class {
+      font-size: 12px; font-weight: 700; color: var(--text);
+      margin-bottom: 6px;
+    }
+    .ds-examples {
+      font-family: var(--mono); font-size: 10px;
+      color: var(--faint); margin-bottom: 8px; line-height: 1.6;
+    }
+    .ds-meta {
+      display: flex; gap: 12px; align-items: center;
+    }
+    .ds-count {
+      font-family: var(--mono); font-size: 13px;
+      font-weight: 700; color: var(--accent);
+    }
+    .ds-range {
+      font-family: var(--mono); font-size: 10px; color: var(--faint);
+    }
+
+    /* ── FAQ ──────────────────────────────────────────────── */
+    .faq {
+      border-top: 1px solid var(--border);
+      padding: 80px clamp(20px,5vw,80px);
+    }
+    .faq-inner { max-width: 720px; margin: 0 auto; }
+    .faq-eyebrow {
+      font-family: var(--mono); font-size: 11px; font-weight: 600;
+      color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em;
+      margin-bottom: 28px;
     }
     details {
       border-bottom: 1px solid var(--border);
     }
     details:last-child { border-bottom: none; }
     summary {
-      padding: 16px 0;
+      padding: 18px 0;
       font-size: 14px; font-weight: 600;
       cursor: pointer; list-style: none;
       display: flex; justify-content: space-between; align-items: center;
       color: var(--text);
+      transition: color 0.15s;
     }
     summary::-webkit-details-marker { display: none; }
-    summary::after { content: '+'; font-size: 16px; color: var(--faint); }
+    summary:hover { color: var(--bull); }
+    summary::after { content: '+'; font-size: 18px; color: var(--faint); font-weight: 300; }
     details[open] summary::after { content: '−'; }
+    details[open] summary { color: var(--bull); }
     .faq-body {
-      padding: 0 0 16px;
-      font-size: 14px; color: var(--muted); line-height: 1.7;
+      padding: 0 0 18px;
+      font-size: 14px; color: var(--muted); line-height: 1.75;
     }
 
-    /* ── BOTTOM CTA ─────────────────────────────────────────────────── */
+    /* ── BOTTOM CTA ───────────────────────────────────────── */
     .bottom-cta {
       border-top: 1px solid var(--border);
-      padding: 80px clamp(20px,5vw,80px);
+      background: var(--bg2);
+      padding: 100px clamp(20px,5vw,80px);
+      position: relative; overflow: hidden;
+    }
+    .bottom-cta::before {
+      content: '';
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      width: 600px; height: 300px;
+      background: radial-gradient(ellipse, rgba(63,185,80,0.06) 0%, transparent 70%);
+      pointer-events: none;
     }
     .bottom-cta-inner {
-      max-width: 560px;
+      max-width: 600px; margin: 0 auto; text-align: center;
+      position: relative; z-index: 1;
     }
     .bottom-cta h2 {
-      font-size: clamp(1.4rem, 3vw, 2rem);
-      font-weight: 800; letter-spacing: -0.02em;
-      margin-bottom: 14px; line-height: 1.2;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800; letter-spacing: -0.03em;
+      margin-bottom: 16px; line-height: 1.1;
     }
-    .bottom-cta p { font-size: 14px; color: var(--muted); margin-bottom: 28px; }
+    .bottom-cta p {
+      font-size: 15px; color: var(--muted);
+      margin-bottom: 36px; line-height: 1.65;
+    }
+    .bottom-cta-actions {
+      display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;
+    }
 
-    /* ── FOOTER ─────────────────────────────────────────────────────── */
+    /* ── FOOTER ───────────────────────────────────────────── */
     footer {
       border-top: 1px solid var(--border);
-      padding: 24px clamp(20px,5vw,80px);
+      padding: 28px clamp(20px,5vw,80px);
       display: flex; justify-content: space-between;
       align-items: center; flex-wrap: wrap; gap: 16px;
-      background: var(--bg2);
+      background: var(--bg);
     }
-    .footer-left { font-size: 12px; color: var(--faint); font-family: var(--mono); }
-    .footer-right { display: flex; gap: 20px; }
+    .footer-left {
+      font-size: 12px; color: var(--faint); font-family: var(--mono);
+    }
+    .footer-right { display: flex; gap: 20px; align-items: center; }
     .footer-right a { font-size: 12px; color: var(--faint); }
     .footer-right a:hover { color: var(--muted); text-decoration: none; }
     .bmc-footer {
@@ -443,275 +843,365 @@
     }
     .bmc-footer:hover { filter: brightness(1.08); text-decoration: none; }
 
-    /* ── RESPONSIVE ─────────────────────────────────────────────────── */
-    @media (max-width: 680px) {
-      .terminal-body { grid-template-columns: 1fr; }
-      .score-col { border-right: none; border-bottom: 1px solid var(--border); flex-direction: row; flex-wrap: wrap; gap: 16px 24px; }
-      .problem-inner { grid-template-columns: 1fr; gap: 32px; }
-      .hs { border-right: none; border-bottom: 1px solid var(--border); }
-      .hs:last-child { border-bottom: none; }
-      nav .nav-right a:not(.nav-open) { display: none; }
+    /* ── RESPONSIVE ───────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+      .chart-card { max-width: 100%; }
+      .lb-grid { grid-template-columns: 1fr; }
+      .method-cols { grid-template-columns: 1fr; }
+      .metrics-grid { grid-template-columns: 1fr 1fr; }
+      .ds-grid { grid-template-columns: 1fr 1fr; }
+      .stats-bar-inner { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
+      nav .nav-right a:not(.nav-cta) { display: none; }
+      .hero h1 { font-size: 2rem; }
+      .metrics-grid { grid-template-columns: 1fr; }
+      .ds-grid { grid-template-columns: 1fr; }
+      .stats-bar-inner { grid-template-columns: 1fr 1fr; }
+      .cc-body { grid-template-columns: 1fr; }
+      .cc-score { border-right: none; border-bottom: 1px solid var(--border); flex-direction: row; flex-wrap: wrap; gap: 12px 20px; }
+      .lb-card-stats { grid-template-columns: 1fr 1fr; }
       footer { flex-direction: column; align-items: flex-start; }
     }
   </style>
 </head>
 <body>
 
-<!-- ── Nav ────────────────────────────────────────────────────────── -->
+<!-- ── Nav ──────────────────────────────────────────────────────── -->
 <nav>
   <a href="/" class="nav-brand">price-action-trainer</a>
   <div class="nav-right">
+    <a href="#leaderboard">Leaderboard</a>
     <a href="/blog/">Blog</a>
     <a href="#faq">FAQ</a>
-    <a href="/app/" class="nav-open">Open trainer →</a>
+    <a href="/app/" class="nav-cta">Start training →</a>
   </div>
 </nav>
 
-<!-- ── Hero ───────────────────────────────────────────────────────── -->
-<div class="hero">
-  <h1>Stop watching charts.<br>Start reading them.</h1>
-  <p class="hero-lead">
-    Most traders spend years watching price move without building a real skill for reading it.
-    This tool forces you to commit a prediction before each bar reveals — then tracks
-    your accuracy, flags your biases, and lets you replay your trades bar by bar.
-  </p>
-  <a href="/app/" class="hero-cta">Open the trainer →</a>
-  <span class="hero-note">Free · No download · Works in your browser</span>
+<!-- ── Live activity ticker ─────────────────────────────────────── -->
+<div class="activity-bar">
+  <div class="activity-track" id="activityTrack">
+    <!-- populated by JS, duplicated for infinite scroll -->
+  </div>
 </div>
 
-<!-- ── Terminal demo ──────────────────────────────────────────────── -->
-<div class="demo">
-  <div class="terminal">
-    <div class="terminal-bar">
-      <span class="tbar-sym">AAPL</span>
-      <span class="tbar-int">1D</span>
-      <div class="tbar-ohlc">
-        <span>O <b>182.40</b></span>
-        <span>H <b>185.20</b></span>
-        <span>L <b>181.80</b></span>
-        <span>C <b>184.60</b></span>
+<!-- ── Hero ─────────────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-eyebrow">The deliberate practice tool for traders</div>
+      <h1>Read price.<br>Not the news.<br><em>Not hindsight.</em></h1>
+      <p class="hero-lead">
+        200 forced decisions per session, each one committed <em>before</em> the bar reveals.
+        Build the pattern recognition that passive chart-watching never could —
+        then see exactly where you stand against the community.
+      </p>
+      <div class="hero-actions">
+        <a href="/app/" class="cta-primary">
+          Start a free session
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7h9M7 2.5l4.5 4.5L7 11.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="#leaderboard" class="cta-ghost">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><rect x="1" y="5" width="2" height="6" rx="1" fill="currentColor"/><rect x="5" y="2" width="2" height="9" rx="1" fill="currentColor"/><rect x="9" y="4" width="2" height="7" rx="1" fill="currentColor"/></svg>
+          View leaderboard
+        </a>
       </div>
-      <span class="tbar-bar" style="margin-left:12px">Bar 73 / 1258</span>
-    </div>
-
-    <div class="terminal-body">
-      <!-- Score sidebar -->
-      <div class="score-col">
-        <div class="sc-row">
-          <span class="sc-label">Accuracy</span>
-          <span class="sc-val big">67%</span>
+      <div class="hero-proof">
+        <div class="proof-item">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Free — no sign-up required
         </div>
-        <div class="sc-row">
-          <span class="sc-label">Correct</span>
-          <span class="sc-val">21 / 31</span>
+        <div class="proof-item">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          500+ instruments pre-loaded
         </div>
-        <div class="divider"></div>
-        <div class="sc-row">
-          <span class="sc-label">Bull calls</span>
-          <span class="sc-val bull">▲ 71%</span>
-        </div>
-        <div class="sc-row">
-          <span class="sc-label">Bear calls</span>
-          <span class="sc-val bear">▼ 60%</span>
-        </div>
-        <div class="divider"></div>
-        <div class="sc-row">
-          <span class="sc-label">Active trade</span>
-          <span class="sc-val bull" style="font-size:11px">▲ BUY 182.40</span>
-        </div>
-        <div class="sc-row">
-          <span class="sc-label">R:R</span>
-          <span class="sc-val warn">1 : 2.4</span>
-        </div>
-      </div>
-
-      <!-- Candle chart -->
-      <div class="chart-col">
-        <div class="price-lines">
-          <div class="pline pline-tp"><span class="pline-label">TP 187.20</span></div>
-          <div class="pline pline-entry"><span class="pline-label">Entry 182.40</span></div>
-          <div class="pline pline-sl"><span class="pline-label">SL 180.10</span></div>
-        </div>
-        <div class="candles-wrap">
-          <div class="c up"><div class="w" style="height:14px"></div><div class="b" style="height:20px"></div><div class="w" style="height:7px"></div></div>
-          <div class="c dn"><div class="w" style="height:9px"></div><div class="b" style="height:26px"></div><div class="w" style="height:10px"></div></div>
-          <div class="c up"><div class="w" style="height:6px"></div><div class="b" style="height:14px"></div><div class="w" style="height:5px"></div></div>
-          <div class="c up"><div class="w" style="height:12px"></div><div class="b" style="height:30px"></div><div class="w" style="height:8px"></div></div>
-          <div class="c dn"><div class="w" style="height:18px"></div><div class="b" style="height:16px"></div><div class="w" style="height:12px"></div></div>
-          <div class="c up"><div class="w" style="height:8px"></div><div class="b" style="height:22px"></div><div class="w" style="height:6px"></div></div>
-          <div class="c up"><div class="w" style="height:10px"></div><div class="b" style="height:34px"></div><div class="w" style="height:9px"></div></div>
-          <div class="c dn"><div class="w" style="height:20px"></div><div class="b" style="height:28px"></div><div class="w" style="height:14px"></div></div>
-          <div class="c up"><div class="w" style="height:7px"></div><div class="b" style="height:16px"></div><div class="w" style="height:6px"></div></div>
-          <div class="c up"><div class="w" style="height:11px"></div><div class="b" style="height:24px"></div><div class="w" style="height:8px"></div></div>
-          <div class="c dn"><div class="w" style="height:16px"></div><div class="b" style="height:18px"></div><div class="w" style="height:10px"></div></div>
-          <div class="c up" style="opacity:.25"><div class="w" style="height:8px"></div><div class="b" style="height:20px"></div><div class="w" style="height:6px"></div></div>
+        <div class="proof-item">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Works in your browser
         </div>
       </div>
     </div>
 
-    <div class="terminal-footer">
-      <span class="kh"><kbd>→</kbd> reveal</span>
-      <span class="kh"><kbd>B</kbd> bull</span>
-      <span class="kh"><kbd>L</kbd> bear</span>
-      <span class="kh"><kbd>E</kbd> trade</span>
-      <span class="kh"><kbd>N</kbd> note</span>
-      <span class="kh"><kbd>Tab</kbd> summary</span>
+    <!-- Animated chart card -->
+    <div class="chart-card" aria-label="Live trainer preview">
+      <div class="cc-header">
+        <div class="cc-dot-row">
+          <div class="cc-dot"></div>
+          <div class="cc-dot"></div>
+          <div class="cc-dot"></div>
+        </div>
+        <span class="cc-sym" id="demoSym">NVDA</span>
+        <span class="cc-tf">1D</span>
+        <span class="cc-live">LIVE DEMO</span>
+      </div>
+      <div class="cc-ohlc-bar">
+        <span class="ohlc-item"><span class="ohlc-label">O</span><span class="ohlc-val" id="demoO">462.18</span></span>
+        <span class="ohlc-item"><span class="ohlc-label">H</span><span class="ohlc-val" id="demoH">471.40</span></span>
+        <span class="ohlc-item"><span class="ohlc-label">L</span><span class="ohlc-val" id="demoL">459.80</span></span>
+        <span class="ohlc-item"><span class="ohlc-label">C</span><span class="ohlc-val" id="demoC">468.55</span></span>
+        <span style="margin-left:auto;font-family:var(--mono);font-size:10px;color:var(--faint)" id="demoBar">Bar 142 / 1258</span>
+      </div>
+      <div class="cc-body">
+        <div class="cc-score">
+          <div class="cs-row">
+            <span class="cs-label">Accuracy</span>
+            <span class="cs-val big" id="demoAcc">71%</span>
+          </div>
+          <div class="cs-row">
+            <span class="cs-label">Correct</span>
+            <span class="cs-val" id="demoCor">22/31</span>
+          </div>
+          <div class="cs-div"></div>
+          <div class="cs-row">
+            <span class="cs-label">Bull calls</span>
+            <span class="cs-val bull" id="demoBull">▲ 74%</span>
+          </div>
+          <div class="cs-row">
+            <span class="cs-label">Bear calls</span>
+            <span class="cs-val bear" id="demoBear">▼ 63%</span>
+          </div>
+          <div class="cs-div"></div>
+          <div class="cs-row">
+            <span class="cs-label">Streak</span>
+            <span class="cs-val warn" id="demoStreak">6✦</span>
+          </div>
+        </div>
+        <div class="cc-chart">
+          <div class="cc-price-lines">
+            <div class="cc-pl pl-tp"><span class="cc-pl-label">TP 475.00</span></div>
+            <div class="cc-pl pl-ent"><span class="cc-pl-label">Entry 462.18</span></div>
+            <div class="cc-pl pl-sl"><span class="cc-pl-label">SL 455.00</span></div>
+          </div>
+          <div class="candles" id="demoCandles"></div>
+        </div>
+      </div>
+      <div class="cc-footer">
+        <span class="kh"><kbd>→</kbd> reveal</span>
+        <span class="kh"><kbd>B</kbd> bull</span>
+        <span class="kh"><kbd>L</kbd> bear</span>
+        <span class="kh"><kbd>E</kbd> trade</span>
+        <span class="cc-verdict bull" id="demoVerdict">▲ Bull call</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Stats bar ─────────────────────────────────────────────────── -->
+<div class="stats-bar">
+  <div class="stats-bar-inner">
+    <div class="stat-item">
+      <div class="stat-number bull" id="statSessions">2,847</div>
+      <div class="stat-label">Sessions completed today</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">500+</div>
+      <div class="stat-label">Instruments available</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">1.2M+</div>
+      <div class="stat-label">Predictions logged all-time</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number bull">63%</div>
+      <div class="stat-label">Community avg accuracy</div>
     </div>
   </div>
 </div>
 
-<!-- ── Problem / solution ──────────────────────────────────────────── -->
-<div class="problem">
-  <div class="problem-inner">
-    <div>
-      <h2>The problem with passive watching</h2>
-      <p>Watching charts for hours feels like practice. It isn't. You're not building pattern recognition — you're building hindsight rationalisation. Every move looks obvious after it happens.</p>
-      <p>Real-time paper trading is worse: a daily chart produces <strong>one bar a day</strong>. To get 200 meaningful reps, you'd need eight months.</p>
+<!-- ── Leaderboard ───────────────────────────────────────────────── -->
+<section class="leaderboard" id="leaderboard">
+  <div class="lb-inner">
+    <div class="lb-header">
+      <div>
+        <div class="lb-eyebrow">Weekly leaderboard</div>
+        <div class="lb-title">Who's reading price best<br>right now</div>
+      </div>
+      <div class="lb-refresh">
+        <div class="lb-refresh-dot"></div>
+        Updates every 10 min
+      </div>
     </div>
-    <div>
-      <h2>What deliberate practice looks like</h2>
-      <p>You need to commit a prediction <strong>before</strong> the bar reveals. No taking it back. That commitment is what creates a genuine learning signal — your brain has to be right or wrong, not vaguely impressed in hindsight.</p>
-      <p>With historical replay, you get <strong>200 forced decisions per session</strong>. Eight months of daily chart watching compressed into two hours.</p>
+
+    <div class="lb-grid" id="lbGrid">
+      <!-- leaderboard cards injected by JS -->
+    </div>
+
+    <!-- Live feed -->
+    <div class="lb-feed">
+      <div class="lb-feed-header">Recent session completions</div>
+      <div class="lb-feed-list" id="feedList">
+        <!-- feed rows injected by JS -->
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── Methodology ──────────────────────────────────────────────── -->
+<section class="method">
+  <div class="method-inner">
+    <div class="method-eyebrow">Why it works</div>
+    <div class="method-title">Deliberate practice requires a learning signal.<br>Passive watching doesn't give you one.</div>
+    <div class="method-cols">
+      <div class="method-left">
+        <p>Watching a chart — even for hours every day — doesn't build skill because <strong>the outcome is always visible</strong>. You can rationalise every move in hindsight without ever being committed to a prediction.</p>
+        <p>Real-time paper trading is better, but a daily chart produces <strong>one bar per day</strong>. Two hundred reps would take eight months. Your feedback loop is almost non-existent.</p>
+        <p>The trainer collapses time. You step through history bar by bar, <strong>forced to commit before the bar reveals</strong>. Every press of → is a judgment — right or wrong, recorded, scored. That's the feedback loop that builds genuine pattern recognition.</p>
+      </div>
+      <div class="method-steps">
+        <div class="ms">
+          <span class="ms-num">01</span>
+          <div class="ms-content">
+            <h3>Pick a dataset</h3>
+            <p>500+ curated instruments. Stocks, forex, crypto, ETFs, indices. Daily, weekly, monthly timeframes.</p>
+          </div>
+        </div>
+        <div class="ms">
+          <span class="ms-num">02</span>
+          <div class="ms-content">
+            <h3>Read the hard right edge</h3>
+            <p>The chart loads at a random point in history. You see 50 bars. No future. Blind mode hides the ticker so you can't lean on prior knowledge.</p>
+          </div>
+        </div>
+        <div class="ms">
+          <span class="ms-num">03</span>
+          <div class="ms-content">
+            <h3>Commit before revealing</h3>
+            <p>Press B or L for your call. Then → to reveal. Your prediction is locked the moment you press. No undoing it.</p>
+          </div>
+        </div>
+        <div class="ms">
+          <span class="ms-num">04</span>
+          <div class="ms-content">
+            <h3>Map a trade with TP &amp; SL</h3>
+            <p>Set entry, TP, and SL. Price lines draw on the chart and the trade resolves automatically as you step forward.</p>
+          </div>
+        </div>
+        <div class="ms">
+          <span class="ms-num">05</span>
+          <div class="ms-content">
+            <h3>Review bias detection</h3>
+            <p>The session summary surfaces your bull vs bear split, accuracy trend, and streak data — showing exactly which setups you're consistently misreading.</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</div>
+</section>
 
-<!-- ── How it works ────────────────────────────────────────────────── -->
-<div class="how">
-  <p class="how-title">How a session works</p>
-  <div class="how-steps">
-    <div class="hs">
-      <span class="hs-num">01</span>
-      <h3>Pick a dataset</h3>
-      <p>500+ curated instruments. Stocks, forex, crypto, ETFs, indices, commodities. Daily, weekly, monthly.</p>
-    </div>
-    <div class="hs">
-      <span class="hs-num">02</span>
-      <h3>Read the structure</h3>
-      <p>The chart loads at a point in history. You see 50 bars. No future. Hard right edge only.</p>
-    </div>
-    <div class="hs">
-      <span class="hs-num">03</span>
-      <h3>Commit before revealing</h3>
-      <p>Press <kbd style="font-family:monospace;font-size:11px;background:#1c2128;border:1px solid #21262d;border-radius:3px;padding:0 4px">B</kbd> or <kbd style="font-family:monospace;font-size:11px;background:#1c2128;border:1px solid #21262d;border-radius:3px;padding:0 4px">L</kbd> for your call. Then → to reveal. No undoing it.</p>
-    </div>
-    <div class="hs">
-      <span class="hs-num">04</span>
-      <h3>Map a trade</h3>
-      <p>Set entry, TP, and SL. Price lines draw on chart. Trade resolves automatically as you step forward.</p>
-    </div>
-    <div class="hs">
-      <span class="hs-num">05</span>
-      <h3>Review the session</h3>
-      <p>Accuracy, bull vs bear split, bias detection, full trade log. Click any trade to replay it bar by bar.</p>
-    </div>
-  </div>
-</div>
-
-<!-- ── What you track ──────────────────────────────────────────────── -->
-<div class="track">
-  <div class="track-inner">
-    <p class="track-title">What gets tracked</p>
-    <h2>Find the biases you didn't know you had</h2>
-    <div class="metrics">
-      <div class="metric">
+<!-- ── Metrics ───────────────────────────────────────────────────── -->
+<section class="metrics-section">
+  <div class="metrics-inner">
+    <div class="metrics-eyebrow">What gets tracked</div>
+    <div class="metrics-title">Find the biases you didn't know you had</div>
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-icon">🎯</div>
         <div class="metric-key">Overall accuracy</div>
         <div class="metric-val bull">67%</div>
-        <div class="metric-desc">Rolling directional prediction rate</div>
+        <div class="metric-desc">Rolling directional prediction rate across the session</div>
       </div>
-      <div class="metric">
+      <div class="metric-card">
+        <div class="metric-icon">▲</div>
         <div class="metric-key">Bull call accuracy</div>
         <div class="metric-val bull">71%</div>
-        <div class="metric-desc">When you called bullish, were you right?</div>
+        <div class="metric-desc">How often your bullish calls are correct</div>
       </div>
-      <div class="metric">
+      <div class="metric-card">
+        <div class="metric-icon">▼</div>
         <div class="metric-key">Bear call accuracy</div>
         <div class="metric-val bear">52%</div>
-        <div class="metric-desc">Lower than bull — that's a detectable bias</div>
+        <div class="metric-desc">Lower than bull — that's a detectable bias worth fixing</div>
       </div>
-      <div class="metric">
+      <div class="metric-card">
+        <div class="metric-icon">✦</div>
         <div class="metric-key">Current streak</div>
-        <div class="metric-val warn">4✦</div>
-        <div class="metric-desc">Consecutive correct predictions</div>
+        <div class="metric-val gold">4✦</div>
+        <div class="metric-desc">Consecutive correct predictions this session</div>
       </div>
-      <div class="metric">
+      <div class="metric-card">
+        <div class="metric-icon">📊</div>
         <div class="metric-key">Trade log</div>
-        <div class="metric-val">3 / 5</div>
-        <div class="metric-desc">TP hits / total trades this session</div>
+        <div class="metric-val accent">3 / 5</div>
+        <div class="metric-desc">TP hits / total mapped trades this session</div>
       </div>
-      <div class="metric">
+      <div class="metric-card">
+        <div class="metric-icon">⚖️</div>
         <div class="metric-key">Best R:R taken</div>
         <div class="metric-val">1 : 3.1</div>
-        <div class="metric-desc">Risk-reward on resolved trades</div>
+        <div class="metric-desc">Risk-reward ratio on best resolved trade</div>
       </div>
     </div>
   </div>
-</div>
+</section>
 
-<!-- ── Datasets ────────────────────────────────────────────────────── -->
-<div class="datasets">
+<!-- ── Datasets ──────────────────────────────────────────────────── -->
+<section class="datasets">
   <div class="datasets-inner">
-    <p class="datasets-title">Dataset library</p>
-    <h2>500+ instruments, pre-loaded. No API keys.</h2>
-    <table class="ds-table">
-      <thead>
-        <tr>
-          <th>Asset class</th>
-          <th>Examples</th>
-          <th>Datasets</th>
-          <th>Range</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>US Equities</td>
-          <td>AAPL MSFT NVDA TSLA AMZN META</td>
-          <td class="ds-cnt">160+</td>
-          <td class="ds-range">2000–2025</td>
-        </tr>
-        <tr>
-          <td>ETFs &amp; Indices</td>
-          <td>SPY QQQ IWM GLD TLT XLK ARKK</td>
-          <td class="ds-cnt">80+</td>
-          <td class="ds-range">1995–2025</td>
-        </tr>
-        <tr>
-          <td>Forex</td>
-          <td>EUR/USD GBP/USD USD/JPY AUD/USD</td>
-          <td class="ds-cnt">60+</td>
-          <td class="ds-range">2000–2025</td>
-        </tr>
-        <tr>
-          <td>Crypto</td>
-          <td>BTC ETH SOL BNB DOGE XRP</td>
-          <td class="ds-cnt">50+</td>
-          <td class="ds-range">2017–2025</td>
-        </tr>
-        <tr>
-          <td>Commodities</td>
-          <td>Gold Silver Crude Oil Nat Gas</td>
-          <td class="ds-cnt">20+</td>
-          <td class="ds-range">2005–2025</td>
-        </tr>
-        <tr>
-          <td>Global Indices</td>
-          <td>FTSE DAX Nikkei Hang Seng ASX</td>
-          <td class="ds-cnt">15+</td>
-          <td class="ds-range">2010–2025</td>
-        </tr>
-      </tbody>
-    </table>
-    <p style="font-size:12px;color:var(--faint);margin-top:12px">Daily · Weekly · Monthly timeframes. Historical ranges vary by instrument.</p>
+    <div class="datasets-eyebrow">Dataset library</div>
+    <div class="datasets-title">500+ instruments, pre-loaded.<br>No API key. No setup.</div>
+    <div class="ds-grid">
+      <div class="ds-cell">
+        <div class="ds-class">US Equities</div>
+        <div class="ds-examples">AAPL · MSFT · NVDA · TSLA<br>AMZN · META · GOOGL</div>
+        <div class="ds-meta">
+          <span class="ds-count">160+</span>
+          <span class="ds-range">2000–2025</span>
+        </div>
+      </div>
+      <div class="ds-cell">
+        <div class="ds-class">ETFs &amp; Indices</div>
+        <div class="ds-examples">SPY · QQQ · IWM · GLD<br>TLT · XLK · ARKK</div>
+        <div class="ds-meta">
+          <span class="ds-count">80+</span>
+          <span class="ds-range">1995–2025</span>
+        </div>
+      </div>
+      <div class="ds-cell">
+        <div class="ds-class">Forex</div>
+        <div class="ds-examples">EUR/USD · GBP/USD<br>USD/JPY · AUD/USD</div>
+        <div class="ds-meta">
+          <span class="ds-count">60+</span>
+          <span class="ds-range">2000–2025</span>
+        </div>
+      </div>
+      <div class="ds-cell">
+        <div class="ds-class">Crypto</div>
+        <div class="ds-examples">BTC · ETH · SOL · BNB<br>DOGE · XRP · AVAX</div>
+        <div class="ds-meta">
+          <span class="ds-count">50+</span>
+          <span class="ds-range">2017–2025</span>
+        </div>
+      </div>
+      <div class="ds-cell">
+        <div class="ds-class">Commodities</div>
+        <div class="ds-examples">Gold · Silver · Crude Oil<br>Natural Gas · Copper</div>
+        <div class="ds-meta">
+          <span class="ds-count">20+</span>
+          <span class="ds-range">2005–2025</span>
+        </div>
+      </div>
+      <div class="ds-cell">
+        <div class="ds-class">Global Indices</div>
+        <div class="ds-examples">FTSE · DAX · Nikkei<br>Hang Seng · ASX 200</div>
+        <div class="ds-meta">
+          <span class="ds-count">15+</span>
+          <span class="ds-range">2010–2025</span>
+        </div>
+      </div>
+    </div>
+    <p style="font-size:12px;color:var(--faint)">Daily · Weekly · Monthly timeframes. Historical ranges vary by instrument.</p>
   </div>
-</div>
+</section>
 
-<!-- ── FAQ ─────────────────────────────────────────────────────────── -->
-<div class="faq" id="faq">
+<!-- ── FAQ ───────────────────────────────────────────────────────── -->
+<section class="faq" id="faq">
   <div class="faq-inner">
-    <p class="faq-title">Questions</p>
+    <p class="faq-eyebrow">Questions</p>
     <details>
       <summary>Is it free?</summary>
-      <div class="faq-body">Yes. The trainer is free with no sign-up required. Creating an account lets you save session progress across devices — predictions, trades, notes, and your position in the dataset.</div>
+      <div class="faq-body">Yes. The trainer is free with no sign-up required. Creating an account lets you save session progress across devices — predictions, trades, notes, and your position in the dataset. The leaderboard also requires an account to participate.</div>
     </details>
     <details>
       <summary>How is this different from paper trading?</summary>
@@ -730,30 +1220,292 @@
       <div class="faq-body">Yes. The session summary shows your full trade log with entry, TP, SL, exit price, R:R, and outcome. Click Review on any trade and the chart jumps back to your entry bar — you step forward through the move bar by bar and see exactly how it played out against your levels.</div>
     </details>
     <details>
+      <summary>How does the leaderboard work?</summary>
+      <div class="faq-body">The weekly leaderboard ranks users by directional accuracy across completed sessions that week. It only counts sessions with 30 or more predictions to prevent gaming with a single lucky session. Your streak, total sessions, and best R:R are also tracked. The board resets at midnight UTC every Monday.</div>
+    </details>
+    <details>
       <summary>What is price action trading?</summary>
       <div class="faq-body">Price action trading means making decisions based solely on how price moves — without lagging indicators like RSI or MACD. You read candlestick patterns, market structure (higher highs and lows, lower highs and lows), support and resistance levels, and the behaviour of wicks at key levels.</div>
     </details>
   </div>
-</div>
+</section>
 
-<!-- ── Bottom CTA ──────────────────────────────────────────────────── -->
-<div class="bottom-cta">
+<!-- ── Bottom CTA ─────────────────────────────────────────────────── -->
+<section class="bottom-cta">
   <div class="bottom-cta-inner">
-    <h2>200 reps per session.<br>Start now.</h2>
-    <p>No download. No sign-up. Pick a dataset and press → to begin.</p>
-    <a href="/app/" class="hero-cta">Open the trainer →</a>
+    <h2>200 reps.<br>One session.<br>Start now.</h2>
+    <p>No download. No sign-up. Pick a dataset, press →, and begin building the skill that separates traders who read price from those who just watch it.</p>
+    <div class="bottom-cta-actions">
+      <a href="/app/" class="cta-primary">
+        Open the trainer
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7h9M7 2.5l4.5 4.5L7 11.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="#leaderboard" class="cta-ghost">See the leaderboard</a>
+    </div>
   </div>
-</div>
+</section>
 
 <!-- ── Footer ─────────────────────────────────────────────────────── -->
 <footer>
-  <div class="footer-left">© 2025 price-action-trainer.vercel.app</div>
+  <div class="footer-left">© 2026 price-action-trainer.vercel.app</div>
   <div class="footer-right">
     <a href="/blog/">Blog</a>
     <a href="/app/">Train</a>
-    <a href="https://buymeacoffee.com/YOUR_BMC_USERNAME" target="_blank" rel="noopener noreferrer" class="bmc-footer">☕ Buy me a coffee</a>
+    <a href="#leaderboard">Leaderboard</a>
+    <a href="https://buymeacoffee.com/YOUR_BMC_USERNAME" target="_blank" rel="noopener noreferrer" class="bmc-footer">☕ Support</a>
   </div>
 </footer>
 
+<script>
+/* ── Data ───────────────────────────────────────────────────────── */
+const LEADERS = [
+  { rank:1, handle:'chartwhisperer', init:'CW', av:'av-a', sessions:47, acc:78, streak:11, rr:'1:3.4', bull:81, bear:71, sym:'NVDA', sparkUp:true },
+  { rank:2, handle:'silentstructure', init:'SS', av:'av-b', sessions:39, acc:74, streak:7, rr:'1:2.9', bull:76, bear:69, sym:'BTC', sparkUp:true },
+  { rank:3, handle:'plainprice', init:'PP', av:'av-c', sessions:51, acc:71, streak:5, rr:'1:2.6', bull:74, bear:64, sym:'EUR/USD', sparkUp:false },
+  { rank:4, handle:'barebodied', init:'BB', av:'av-d', sessions:33, acc:69, streak:3, rr:'1:2.2', bull:71, bear:62, sym:'TSLA', sparkUp:true },
+  { rank:5, handle:'wickreader', init:'WR', av:'av-e', sessions:28, acc:68, streak:4, rr:'1:2.7', bull:70, bear:61, sym:'GLD', sparkUp:true },
+  { rank:6, handle:'dailydoji', init:'DD', av:'av-f', sessions:41, acc:66, streak:2, rr:'1:1.9', bull:68, bear:60, sym:'SPY', sparkUp:false },
+];
+
+const FEED_ITEMS = [
+  { handle:'chartwhisperer', sym:'NVDA 1D', acc:82, bars:52, ago:'2m ago', tag:'pb', tagLabel:'New PB' },
+  { handle:'keltner_k', sym:'EUR/USD 1D', acc:71, bars:44, ago:'5m ago', tag:'streak', tagLabel:'12 streak' },
+  { handle:'silentstructure', sym:'BTC 1D', acc:74, bars:68, ago:'8m ago', tag:null },
+  { handle:'fib_phantom', sym:'AAPL 1D', acc:65, bars:38, ago:'11m ago', tag:'new', tagLabel:'First session' },
+  { handle:'plainprice', sym:'SPY 1W', acc:77, bars:51, ago:'14m ago', tag:'pb', tagLabel:'New PB' },
+  { handle:'wick_hunter_9', sym:'TSLA 1D', acc:58, bars:40, ago:'18m ago', tag:null },
+  { handle:'structureghost', sym:'GLD 1D', acc:69, bars:35, ago:'21m ago', tag:'streak', tagLabel:'8 streak' },
+  { handle:'barebodied', sym:'DAX 1D', acc:72, bars:60, ago:'24m ago', tag:null },
+];
+
+const ACTIVITY_ITEMS = [
+  { type:'bull', handle:'chartwhisperer', text:'called ▲ NVDA correctly', val:'+1 streak (11)' },
+  { type:'gold', handle:'silentstructure', text:'hit TP on BTC', val:'R:R 1:3.1' },
+  { type:'bull', handle:'plainprice', text:'session accuracy', val:'77%  · EUR/USD 1W' },
+  { type:'bear', handle:'wickreader', text:'bear call correct', val:'GLD 1D' },
+  { type:'gold', handle:'keltner_k', text:'new weekly PB', val:'12-bar streak' },
+  { type:'bull', handle:'fib_phantom', text:'first session complete', val:'65% · AAPL 1D' },
+  { type:'bull', handle:'dailydoji', text:'called ▲ SPY correctly', val:'+1 streak' },
+  { type:'bear', handle:'structureghost', text:'short called correctly', val:'XAU/USD 1D' },
+  { type:'gold', handle:'barebodied', text:'best R:R session', val:'1:4.2' },
+  { type:'bull', handle:'wick_hunter_9', text:'61% accuracy', val:'40 bars · TSLA' },
+];
+
+/* ── Activity ticker ─────────────────────────────────────────────── */
+function buildActivityTicker() {
+  const track = document.getElementById('activityTrack');
+  const items = [...ACTIVITY_ITEMS, ...ACTIVITY_ITEMS]; // duplicate for seamless loop
+  items.forEach(item => {
+    const el = document.createElement('span');
+    el.className = 'act-item';
+    el.innerHTML = `<span class="act-dot ${item.type}"></span><span class="act-handle">${item.handle}</span><span class="act-val ${item.type}">${item.text}</span><span style="color:var(--faint)">·</span><span class="act-val ${item.type}">${item.val}</span>`;
+    track.appendChild(el);
+  });
+}
+
+/* ── Leaderboard cards ───────────────────────────────────────────── */
+function rankClass(r) {
+  if (r === 1) return 'gold'; if (r === 2) return 'silver'; if (r === 3) return 'bronze'; return 'plain';
+}
+function rankLabel(r) {
+  if (r === 1) return '#1 🥇'; if (r === 2) return '#2 🥈'; if (r === 3) return '#3 🥉';
+  return `#${r}`;
+}
+function accClass(a) {
+  if (a >= 75) return 'elite'; if (a >= 68) return 'great'; return 'good';
+}
+function buildSparkline(up) {
+  const pts = up
+    ? [8,7,6,8,5,4,6,3,5,2,4,1]
+    : [2,3,4,2,5,6,4,7,5,8,6,9];
+  const max = Math.max(...pts), min = Math.min(...pts);
+  const w = 220, h = 24;
+  const coords = pts.map((v, i) => {
+    const x = (i / (pts.length - 1)) * w;
+    const y = h - ((v - min) / (max - min)) * (h - 4) - 2;
+    return `${x},${y}`;
+  }).join(' ');
+  const color = up ? '#3fb950' : '#f85149';
+  return `<svg class="spark-svg" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none">
+    <polyline points="${coords}" fill="none" stroke="${color}" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" opacity="0.8"/>
+  </svg>`;
+}
+
+function buildLeaderboard() {
+  const grid = document.getElementById('lbGrid');
+  LEADERS.forEach(l => {
+    const card = document.createElement('div');
+    card.className = `lb-card rank-${l.rank <= 2 ? l.rank : 'other'}`;
+    card.innerHTML = `
+      <div class="lb-card-header">
+        <span class="lb-rank ${rankClass(l.rank)}">${rankLabel(l.rank)}</span>
+        <div class="lb-avatar ${l.av}">${l.init}</div>
+        <div class="lb-name-col">
+          <div class="lb-handle">${l.handle}</div>
+          <div class="lb-sub">${l.sessions} sessions this week · ${l.sym}</div>
+        </div>
+        <div class="lb-accuracy ${accClass(l.acc)}">${l.acc}%</div>
+      </div>
+      <div class="lb-card-stats">
+        <div class="lb-stat">
+          <span class="lb-stat-label">Streak</span>
+          <span class="lb-stat-val gold">${l.streak}✦</span>
+        </div>
+        <div class="lb-stat">
+          <span class="lb-stat-label">Best R:R</span>
+          <span class="lb-stat-val accent">${l.rr}</span>
+        </div>
+        <div class="lb-stat">
+          <span class="lb-stat-label">Bull acc</span>
+          <span class="lb-stat-val bull">▲ ${l.bull}%</span>
+        </div>
+        <div class="lb-stat">
+          <span class="lb-stat-label">Bear acc</span>
+          <span class="lb-stat-val bear">▼ ${l.bear}%</span>
+        </div>
+      </div>
+      <div class="lb-spark">
+        <div class="spark-label">7-day accuracy trend</div>
+        ${buildSparkline(l.sparkUp)}
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+/* ── Feed rows ──────────────────────────────────────────────────── */
+function buildFeed() {
+  const list = document.getElementById('feedList');
+  FEED_ITEMS.forEach(f => {
+    const row = document.createElement('div');
+    row.className = 'lb-feed-row';
+    const accCls = f.acc >= 70 ? 'bull' : 'bear';
+    const tagHtml = f.tag
+      ? `<span class="feed-tag tag-${f.tag}">${f.tagLabel}</span>`
+      : '';
+    row.innerHTML = `
+      <span class="feed-handle">${f.handle}</span>
+      <span class="feed-sym">${f.sym}</span>
+      <span class="feed-acc ${accCls}">${f.acc}%</span>
+      <span class="feed-bar">${f.bars} bars</span>
+      ${tagHtml}
+      <span class="feed-ago">${f.ago}</span>
+    `;
+    list.appendChild(row);
+  });
+}
+
+/* ── Animated demo candles ──────────────────────────────────────── */
+const CANDLE_DATA = [
+  {dir:'up', wick1:12, body:22, wick2:8},
+  {dir:'dn', wick1:8,  body:28, wick2:10},
+  {dir:'up', wick1:6,  body:14, wick2:5},
+  {dir:'up', wick1:14, body:32, wick2:9},
+  {dir:'dn', wick1:20, body:18, wick2:12},
+  {dir:'up', wick1:7,  body:24, wick2:6},
+  {dir:'up', wick1:11, body:36, wick2:10},
+  {dir:'dn', wick1:18, body:20, wick2:14},
+  {dir:'up', wick1:6,  body:16, wick2:5},
+  {dir:'up', wick1:9,  body:26, wick2:7},
+  {dir:'dn', wick1:16, body:22, wick2:11},
+  {dir:'up', wick1:8,  body:18, wick2:6},
+  {dir:'next', wick1:9, body:20, wick2:7},
+];
+
+function buildCandles() {
+  const wrap = document.getElementById('demoCandles');
+  wrap.innerHTML = '';
+  CANDLE_DATA.forEach((c, i) => {
+    const last = i === CANDLE_DATA.length - 2;
+    const next = c.dir === 'next';
+    const div = document.createElement('div');
+    div.className = `candle ${c.dir}${last ? ' forming' : ''}${next ? ' next' : ''}`;
+    if (last) div.style.setProperty('--target-h', c.body + 'px');
+    div.innerHTML = `
+      <div class="wick" style="height:${c.wick1}px"></div>
+      <div class="body" style="height:${last ? '2px' : c.body+'px'}"></div>
+      <div class="wick" style="height:${c.wick2}px"></div>
+    `;
+    wrap.appendChild(div);
+  });
+}
+
+/* cycle through symbols every few seconds for demo vitality */
+const DEMO_SYMS = ['NVDA', 'BTC', 'EUR/USD', 'AAPL', 'GLD', 'SPY'];
+let symIdx = 0;
+function cycleSym() {
+  symIdx = (symIdx + 1) % DEMO_SYMS.length;
+  const el = document.getElementById('demoSym');
+  if (el) el.textContent = DEMO_SYMS[symIdx];
+}
+
+/* live session counter — increments randomly to feel active */
+let sessionCount = 2847;
+function tickSessions() {
+  if (Math.random() < 0.3) {
+    sessionCount += Math.floor(Math.random() * 3) + 1;
+    const el = document.getElementById('statSessions');
+    if (el) el.textContent = sessionCount.toLocaleString();
+  }
+}
+
+/* rotate verdict indicator */
+const VERDICTS = [
+  { label:'▲ Bull call', cls:'bull' },
+  { label:'▲ Bull call', cls:'bull' },
+  { label:'▼ Bear call', cls:'bear' },
+  { label:'▲ Bull call', cls:'bull' },
+];
+let verdictIdx = 0;
+function rotateVerdict() {
+  verdictIdx = (verdictIdx + 1) % VERDICTS.length;
+  const el = document.getElementById('demoVerdict');
+  if (el) {
+    el.textContent = VERDICTS[verdictIdx].label;
+    el.className = `cc-verdict ${VERDICTS[verdictIdx].cls}`;
+  }
+}
+
+/* animate a new feed row appearing */
+let feedNewIdx = 0;
+const NEW_FEED = [
+  { handle:'momentum_monk', sym:'MSFT 1D', acc:73, bars:55, ago:'just now', tag:'pb', tagLabel:'New PB' },
+  { handle:'purewick', sym:'ETH 1D', acc:61, bars:42, ago:'just now', tag:null },
+  { handle:'patientedge', sym:'QQQ 1D', acc:76, bars:48, ago:'just now', tag:'streak', tagLabel:'9 streak' },
+];
+function injectFeedRow() {
+  const list = document.getElementById('feedList');
+  if (!list) return;
+  const f = NEW_FEED[feedNewIdx % NEW_FEED.length];
+  feedNewIdx++;
+  const row = document.createElement('div');
+  row.className = 'lb-feed-row';
+  const accCls = f.acc >= 70 ? 'bull' : 'bear';
+  const tagHtml = f.tag ? `<span class="feed-tag tag-${f.tag}">${f.tagLabel}</span>` : '';
+  row.innerHTML = `
+    <span class="feed-handle">${f.handle}</span>
+    <span class="feed-sym">${f.sym}</span>
+    <span class="feed-acc ${accCls}">${f.acc}%</span>
+    <span class="feed-bar">${f.bars} bars</span>
+    ${tagHtml}
+    <span class="feed-ago">${f.ago}</span>
+  `;
+  list.insertBefore(row, list.firstChild);
+  // trim to 10 rows
+  while (list.children.length > 10) list.removeChild(list.lastChild);
+}
+
+/* ── Init ─────────────────────────────────────────────────────── */
+buildActivityTicker();
+buildLeaderboard();
+buildFeed();
+buildCandles();
+
+setInterval(buildCandles,    6000);   // re-animate hero chart
+setInterval(cycleSym,        8000);   // cycle demo symbol
+setInterval(tickSessions,    4000);   // tick session counter
+setInterval(rotateVerdict,   5000);   // rotate verdict badge
+setInterval(injectFeedRow,  12000);   // inject new feed row
+</script>
 </body>
 </html>
