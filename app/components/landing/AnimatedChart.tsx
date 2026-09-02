@@ -2,201 +2,173 @@
 
 import { useEffect, useState } from 'react';
 
-// Empyrean colour tokens — kept in sync with page.tsx
-const E = {
-  surface: '#13100D',   // chart window background
-  raised:  '#1C1713',   // titlebar / sidebar
-  border:  'rgba(107,26,42,0.25)',  // maroon-tinted border
-  muted:   '#9E8E7A',
-  faint:   '#5A4F43',
-  bull:    '#22c55e',
-  bear:    '#ef4444',
-} as const;
+const BULL = '#22c55e';
+const BEAR = '#ef4444';
+const BG   = '#0D0B09';
+const SURF = '#111118';
+const MONO = '"SF Mono","Fira Code",Consolas,monospace';
 
-const CANDLE_SHAPES = [
-  { dir: 'up', wk1: 10, bd: 18, wk2: 7  },
-  { dir: 'dn', wk1: 7,  bd: 24, wk2: 9  },
-  { dir: 'up', wk1: 5,  bd: 12, wk2: 4  },
-  { dir: 'up', wk1: 12, bd: 28, wk2: 8  },
-  { dir: 'dn', wk1: 16, bd: 16, wk2: 11 },
-  { dir: 'up', wk1: 6,  bd: 20, wk2: 5  },
-  { dir: 'up', wk1: 9,  bd: 32, wk2: 8  },
-  { dir: 'dn', wk1: 17, bd: 18, wk2: 13 },
-  { dir: 'up', wk1: 5,  bd: 14, wk2: 4  },
-  { dir: 'up', wk1: 8,  bd: 22, wk2: 6  },
-  { dir: 'dn', wk1: 14, bd: 20, wk2: 10 },
-  { dir: 'up', wk1: 6,  bd: 16, wk2: 5  }, // forming
-  { dir: 'up', wk1: 7,  bd: 18, wk2: 6  }, // ghost
+const CANDLES = [
+  { dir:'up', wk1:8,  bd:16, wk2:6  },
+  { dir:'dn', wk1:6,  bd:22, wk2:8  },
+  { dir:'up', wk1:4,  bd:10, wk2:3  },
+  { dir:'up', wk1:10, bd:26, wk2:7  },
+  { dir:'dn', wk1:14, bd:14, wk2:10 },
+  { dir:'up', wk1:5,  bd:18, wk2:4  },
+  { dir:'up', wk1:8,  bd:30, wk2:7  },
+  { dir:'dn', wk1:15, bd:16, wk2:11 },
+  { dir:'up', wk1:4,  bd:12, wk2:4  },
+  { dir:'up', wk1:7,  bd:20, wk2:5  },
+  { dir:'dn', wk1:12, bd:18, wk2:9  },
+  { dir:'up', wk1:5,  bd:14, wk2:4  }, // forming
+  { dir:'up', wk1:6,  bd:16, wk2:5  }, // ghost
 ] as const;
 
-const SYMBOLS = ['NVDA · 1D', 'BTC · 1D', 'EUR/USD · 1D', 'AAPL · 1D', 'GLD · 1D', 'SPY · 1W'];
-
-const VERDICTS = [
-  { label: '▲  Bull call', bull: true  },
-  { label: '▲  Bull call', bull: true  },
-  { label: '▼  Bear call', bull: false },
-  { label: '▲  Bull call', bull: true  },
-] as const;
+const SYMS = ['NVDA  1D', 'BTC  1D', 'EUR/USD  1D', 'AAPL  1D', 'GLD  1D', 'SPY  1W'];
 
 export default function AnimatedChart() {
-  const [symIdx,     setSymIdx]     = useState(0);
-  const [verdictIdx, setVerdictIdx] = useState(0);
-  const [tick,       setTick]       = useState(0);
+  const [symIdx, setSymIdx]   = useState(0);
+  const [verdict, setVerdict] = useState<'bull' | 'bear'>('bull');
+  const [tick, setTick]       = useState(0);
 
   useEffect(() => {
-    const s = setInterval(() => setSymIdx(i     => (i + 1) % SYMBOLS.length),  7_000);
-    const v = setInterval(() => setVerdictIdx(i => (i + 1) % VERDICTS.length), 5_500);
-    const f = setInterval(() => setTick(t => t + 1),                            7_000);
+    const s = setInterval(() => setSymIdx(i => (i + 1) % SYMS.length), 7_000);
+    const v = setInterval(() => setVerdict(d => d === 'bull' ? 'bear' : 'bull'), 4_500);
+    const f = setInterval(() => setTick(t => t + 1), 7_000);
     return () => { clearInterval(s); clearInterval(v); clearInterval(f); };
   }, []);
 
-  const verdict = VERDICTS[verdictIdx];
+  const border = 'rgba(255,255,255,0.07)';
 
   return (
-    <div
-      className="w-full max-w-[480px] rounded-[8px] overflow-hidden"
-      style={{
-        background: E.surface,
-        border: `1px solid ${E.border}`,
-        boxShadow: '0 32px 64px rgba(0,0,0,0.65), 0 0 0 1px rgba(245,240,232,0.03)',
-      }}
-    >
-      {/* Titlebar */}
-      <div
-        className="flex items-center gap-3 px-3 py-[9px]"
-        style={{ background: E.raised, borderBottom: `1px solid ${E.border}` }}
-      >
-        {/* Omega mark in maroon instead of OS traffic lights */}
-        <span
-          className="text-[13px] font-bold leading-none select-none"
-          style={{ color: '#6B1A2A', fontFamily: 'Georgia, "Times New Roman", serif' }}
-          aria-hidden="true"
-        >
-          Ω
-        </span>
-        <span
-          className="font-mono text-[10px] tracking-widest uppercase ml-1"
-          style={{ color: E.faint, letterSpacing: '0.12em' }}
-        >
-          EMPYREAN
-        </span>
-        <span className="font-mono text-[10px] ml-1 transition-all duration-300" style={{ color: E.muted }}>
-          · {SYMBOLS[symIdx]}
-        </span>
-        <span
-          className="ml-auto font-mono text-[9px] font-semibold uppercase tracking-widest px-2 py-[2px] rounded-[3px]"
-          style={{
-            color: '#6B1A2A',
-            border: '1px solid rgba(107,26,42,0.4)',
-            background: 'rgba(107,26,42,0.08)',
-          }}
-        >
-          TRAINER
+    <div style={{
+      width: '100%', maxWidth: 480,
+      background: SURF, borderRadius: 8, overflow: 'hidden',
+      border: `1px solid ${border}`,
+      boxShadow: '0 40px 80px rgba(0,0,0,0.7)',
+    }}>
+      {/* Header strip */}
+      <div style={{
+        display: 'flex', alignItems: 'center', gap: 8,
+        padding: '8px 12px',
+        background: 'rgba(255,255,255,0.03)',
+        borderBottom: `1px solid ${border}`,
+        fontFamily: MONO, fontSize: 10,
+      }}>
+        <span style={{ color: 'rgba(255,255,255,0.25)' }}>{SYMS[symIdx]}</span>
+        <span style={{ marginLeft: 'auto', color: 'rgba(255,255,255,0.15)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+          price action trainer
         </span>
       </div>
 
-      {/* OHLC strip */}
-      <div
-        className="flex items-center gap-4 px-3 py-[7px] font-mono text-[10px]"
-        style={{ borderBottom: `1px solid ${E.border}` }}
-        aria-hidden="true"
-      >
+      {/* OHLC row */}
+      <div style={{
+        display: 'flex', gap: 16, padding: '6px 12px',
+        borderBottom: `1px solid ${border}`,
+        fontFamily: MONO, fontSize: 10,
+      }}>
         {[['O','462.18'],['H','471.40'],['L','459.80'],['C','468.55']].map(([l, v]) => (
-          <span key={l} className="flex gap-1">
-            <span style={{ color: E.faint }}>{l}</span>
-            <span style={{ color: E.bull, fontWeight: 600 }}>{v}</span>
+          <span key={l} style={{ display: 'flex', gap: 4 }}>
+            <span style={{ color: 'rgba(255,255,255,0.2)' }}>{l}</span>
+            <span style={{ color: BULL, fontWeight: 600 }}>{v}</span>
           </span>
         ))}
-        <span className="ml-auto text-[10px]" style={{ color: E.faint }}>Bar 142 / 1258</span>
+        <span style={{ marginLeft: 'auto', color: 'rgba(255,255,255,0.15)', fontSize: 10 }}>142 / 1258</span>
       </div>
 
       {/* Score + chart */}
-      <div className="grid grid-cols-[88px_1fr]">
+      <div style={{ display: 'grid', gridTemplateColumns: '80px 1fr' }}>
 
-        {/* Score column */}
-        <div
-          className="px-[10px] py-[14px] flex flex-col gap-[11px]"
-          style={{ borderRight: `1px solid ${E.border}` }}
-          aria-hidden="true"
-        >
+        {/* Score sidebar */}
+        <div style={{
+          padding: '14px 10px',
+          borderRight: `1px solid ${border}`,
+          display: 'flex', flexDirection: 'column', gap: 12,
+        }}>
           {[
-            { label: 'Accuracy', value: '71%',   big: true  },
-            { label: 'Correct',  value: '22/31', big: false },
-          ].map(({ label, value, big }) => (
-            <div key={label} className="flex flex-col gap-[2px]">
-              <span className="font-mono text-[8px] font-semibold uppercase tracking-[0.07em]" style={{ color: E.faint }}>{label}</span>
-              <span
-                className="font-mono font-semibold"
-                style={{ fontSize: big ? 22 : 13, color: big ? E.bull : E.muted }}
-              >
-                {value}
-              </span>
+            { label: 'ACC',  val: '71%',   big: true, color: BULL },
+            { label: 'HIT',  val: '22/31', big: false, color: 'rgba(255,255,255,0.45)' },
+          ].map(({ label, val, big, color }) => (
+            <div key={label}>
+              <div style={{ fontFamily: MONO, fontSize: 8, color: 'rgba(255,255,255,0.2)',
+                            textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 2 }}>
+                {label}
+              </div>
+              <div style={{ fontFamily: MONO, fontWeight: 700, fontSize: big ? 20 : 12, color }}>
+                {val}
+              </div>
             </div>
           ))}
-
-          <div className="h-px" style={{ background: E.border }} />
-
+          <div style={{ height: 1, background: border }} />
           {[
-            { label: 'Bull calls', value: '▲ 74%', color: E.bull },
-            { label: 'Bear calls', value: '▼ 64%', color: E.bear },
-          ].map(({ label, value, color }) => (
-            <div key={label} className="flex flex-col gap-[2px]">
-              <span className="font-mono text-[8px] font-semibold uppercase tracking-[0.07em]" style={{ color: E.faint }}>{label}</span>
-              <span className="font-mono text-[13px] font-semibold" style={{ color }}>{value}</span>
+            { label: '▲', val: '74%', color: BULL },
+            { label: '▼', val: '64%', color: BEAR },
+          ].map(({ label, val, color }) => (
+            <div key={label} style={{ fontFamily: MONO, fontSize: 12, fontWeight: 600, color }}>
+              {label} {val}
             </div>
           ))}
-
-          <div className="h-px" style={{ background: E.border }} />
-
-          <div className="flex flex-col gap-[2px]">
-            <span className="font-mono text-[8px] font-semibold uppercase tracking-[0.07em]" style={{ color: E.faint }}>Streak</span>
-            <span className="font-mono text-[13px] font-semibold" style={{ color: '#C8941A' }}>6 ✦</span>
+          <div style={{ height: 1, background: border }} />
+          <div style={{ fontFamily: MONO, fontSize: 12, fontWeight: 600, color: '#C8941A' }}>
+            6 ✦
           </div>
         </div>
 
-        {/* Chart column */}
-        <div className="relative min-h-[168px] flex flex-col" aria-hidden="true">
+        {/* Chart area */}
+        <div style={{ position: 'relative', minHeight: 180, display: 'flex', flexDirection: 'column' }}>
           {/* Price lines */}
-          <div className="absolute inset-0 pointer-events-none">
+          <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }}>
             {[
-              { label: 'TP 475.00',    top: '15%', color: E.bull,  borderColor: 'rgba(34,197,94,0.3)'  },
-              { label: 'Entry 462.18', top: '46%', color: E.muted, borderColor: 'rgba(158,142,122,0.3)' },
-              { label: 'SL 455.00',   top: '72%', color: E.bear,  borderColor: 'rgba(239,68,68,0.3)'  },
-            ].map(({ label, top, color, borderColor }) => (
-              <div key={label} className="absolute left-0 right-0 flex justify-end items-center" style={{ top }}>
-                <span className="font-mono text-[8px] mr-1" style={{ color }}>{label}</span>
-                <div className="absolute inset-x-0 border-t border-dashed" style={{ borderColor }} />
+              { label: 'TP   475.00', top: '14%', color: BULL,   dash: 'rgba(34,197,94,0.3)' },
+              { label: 'ENT  462.18', top: '45%', color: 'rgba(255,255,255,0.3)', dash: 'rgba(255,255,255,0.15)' },
+              { label: 'SL   455.00', top: '71%', color: BEAR,   dash: 'rgba(239,68,68,0.3)' },
+            ].map(({ label, top, color, dash }) => (
+              <div key={label} style={{
+                position: 'absolute', left: 0, right: 0, top,
+                display: 'flex', alignItems: 'center', justifyContent: 'flex-end',
+              }}>
+                <div style={{
+                  position: 'absolute', left: 0, right: 0,
+                  borderTop: `1px dashed ${dash}`,
+                }} />
+                <span style={{
+                  fontFamily: MONO, fontSize: 8, color,
+                  marginRight: 4, position: 'relative', zIndex: 1,
+                  background: SURF, paddingLeft: 2,
+                }}>
+                  {label}
+                </span>
               </div>
             ))}
           </div>
 
           {/* Candles */}
-          <div className="flex-1 flex items-end gap-[3px] px-2 pb-2 pt-[10px]">
-            {CANDLE_SHAPES.map((c, i) => {
-              const isForming = i === CANDLE_SHAPES.length - 2;
-              const isGhost   = i === CANDLE_SHAPES.length - 1;
-              const color     = c.dir === 'up' ? E.bull : E.bear;
+          <div style={{
+            flex: 1, display: 'flex', alignItems: 'flex-end',
+            gap: 3, padding: '10px 8px 8px',
+          }}>
+            {CANDLES.map((c, i) => {
+              const forming = i === CANDLES.length - 2;
+              const ghost   = i === CANDLES.length - 1;
+              const col     = c.dir === 'up' ? BULL : BEAR;
               return (
-                <div
-                  key={i}
-                  className="flex flex-col items-center flex-1 max-w-[14px]"
-                  style={isGhost ? { opacity: 0.15, filter: 'blur(1px)' } : {}}
-                >
-                  <div style={{ width: 1, height: c.wk1, background: color }} />
-                  {isForming ? (
-                    <div
-                      key={`f-${tick}`}
-                      style={{
+                <div key={i} style={{
+                  display: 'flex', flexDirection: 'column', alignItems: 'center',
+                  flex: 1, maxWidth: 14,
+                  opacity: ghost ? 0.12 : 1,
+                  filter: ghost ? 'blur(1px)' : 'none',
+                }}>
+                  <div style={{ width: 1, height: c.wk1, background: col }} />
+                  {forming
+                    ? <div key={`f${tick}`} style={{
                         width: '100%', maxWidth: 12, borderRadius: 1,
-                        background: color, height: 2,
-                        animation: 'empFormCandle 2.2s ease-out forwards',
-                        ['--th' as string]: `${c.bd}px`,
-                      }}
-                    />
-                  ) : (
-                    <div style={{ width: '100%', maxWidth: 12, borderRadius: 1, background: color, height: c.bd }} />
-                  )}
-                  <div style={{ width: 1, height: c.wk2, background: color }} />
+                        background: col, height: 2,
+                        animation: `candleForm 2s ease-out forwards`,
+                        ['--ch' as string]: `${c.bd}px`,
+                      }} />
+                    : <div style={{ width: '100%', maxWidth: 12, borderRadius: 1, background: col, height: c.bd }} />
+                  }
+                  <div style={{ width: 1, height: c.wk2, background: col }} />
                 </div>
               );
             })}
@@ -205,36 +177,34 @@ export default function AnimatedChart() {
       </div>
 
       {/* Footer */}
-      <div
-        className="flex items-center gap-3 px-3 py-[7px]"
-        style={{ borderTop: `1px solid ${E.border}` }}
-        aria-hidden="true"
-      >
-        {[['→','reveal'],['B','bull'],['L','bear'],['E','trade']].map(([key, label]) => (
-          <span key={key} className="flex items-center gap-1 text-[10px]" style={{ color: E.faint }}>
-            <kbd
-              className="font-mono text-[9px] rounded px-[5px] py-[1px]"
-              style={{ color: E.muted, background: E.raised, border: `1px solid ${E.border}`, borderBottomWidth: 2 }}
-            >
-              {key}
+      <div style={{
+        display: 'flex', alignItems: 'center', gap: 12,
+        padding: '7px 12px',
+        borderTop: `1px solid ${border}`,
+      }}>
+        {[['→','reveal'],['B','bull'],['L','bear'],['E','trade']].map(([k, l]) => (
+          <span key={k} style={{ display: 'flex', alignItems: 'center', gap: 4,
+                                  fontFamily: MONO, fontSize: 10, color: 'rgba(255,255,255,0.2)' }}>
+            <kbd style={{
+              fontFamily: MONO, fontSize: 9,
+              color: 'rgba(255,255,255,0.35)',
+              background: BG, border: '1px solid rgba(255,255,255,0.1)',
+              borderBottomWidth: 2, borderRadius: 3, padding: '1px 5px',
+            }}>
+              {k}
             </kbd>
-            {label}
+            {l}
           </span>
         ))}
-        <span
-          className="ml-auto font-mono text-[10px] font-semibold transition-colors duration-300"
-          style={{ color: verdict.bull ? E.bull : E.bear }}
-        >
-          {verdict.label}
+        <span style={{
+          marginLeft: 'auto', fontFamily: MONO, fontSize: 10, fontWeight: 600,
+          color: verdict === 'bull' ? BULL : BEAR,
+        }}>
+          {verdict === 'bull' ? '▲  Bull call' : '▼  Bear call'}
         </span>
       </div>
 
-      <style>{`
-        @keyframes empFormCandle {
-          from { height: 2px; }
-          to   { height: var(--th); }
-        }
-      `}</style>
+      <style>{`@keyframes candleForm { from{height:2px} to{height:var(--ch)} }`}</style>
     </div>
   );
 }

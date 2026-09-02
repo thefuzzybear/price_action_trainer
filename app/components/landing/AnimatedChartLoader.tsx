@@ -7,7 +7,11 @@ import dynamic from 'next/dynamic';
 const AnimatedChart = dynamic(() => import('./AnimatedChart'), {
   ssr: false,
   loading: () => (
-    <div className="w-full max-w-[480px] h-[320px] rounded-[10px] bg-[#111114] border border-white/[0.08] animate-pulse" />
+    <div style={{
+      width: '100%', maxWidth: 480, height: 320,
+      borderRadius: 8, background: '#111118',
+      border: '1px solid rgba(255,255,255,0.07)',
+    }} />
   ),
 });
 
