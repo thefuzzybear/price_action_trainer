@@ -158,8 +158,7 @@ export default function TrainerPage() {
       seriesMarkersRef.current = null;
 
       const chart = LC.createChart(chartContainerRef.current!, {
-        width:  chartContainerRef.current!.clientWidth,
-        height: chartContainerRef.current!.clientHeight,
+        autoSize: true,
         layout: { background: { color: '#0d1117' }, textColor: '#e6edf3' },
         grid:   { vertLines: { color: '#161b22' }, horzLines: { color: '#161b22' } },
         crosshair: { mode: 1 },
@@ -196,16 +195,6 @@ export default function TrainerPage() {
         const d = param.seriesData.get(candleRef.current);
         if (d) setOhlc({ o: d.open, h: d.high, l: d.low, c: d.close, chg: ((d.close - d.open) / d.open) * 100 });
       });
-
-      const ro = new ResizeObserver(() => {
-        if (chartRef.current && chartContainerRef.current) {
-          chartRef.current.applyOptions({
-            width:  chartContainerRef.current.clientWidth,
-            height: chartContainerRef.current.clientHeight,
-          });
-        }
-      });
-      ro.observe(chartContainerRef.current!);
     });
   }, []);
 
