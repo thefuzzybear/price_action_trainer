@@ -3,12 +3,12 @@ import type React from 'react';
 import ChartBackground from './components/landing/ChartBackgroundLoader';
 
 export const metadata: Metadata = {
-  title: 'Empyrean — Price Action Trainer',
+  title: 'Empyrean — A Community for Price Action Traders',
   description:
-    'A price action training tool that tracks your directional accuracy across 200+ decisions per session. Each call is locked before the bar reveals — so you actually learn something.',
+    'Empyrean is a community for traders learning to read price action properly. A practice trainer, weekly leaderboard, Discord, webinars, and writing — built around the idea that deliberate practice beats passive watching.',
   openGraph: {
-    title: 'Empyrean Price Action Trainer',
-    description: 'Commit before the reveal. 200 decisions per session.',
+    title: 'Empyrean — Price Action Trading Community',
+    description: 'A community for traders learning to read charts properly. Trainer, Discord, leaderboard, webinars.',
     url: 'https://price-action-trainer.vercel.app',
     type: 'website',
   },
@@ -110,18 +110,20 @@ const DATASETS = [
 ] as const;
 
 const FAQS = [
-  { q: 'Is it free?',
-    a: "Yes, completely. It runs in your browser and you don't need an account to use it. If you create one, your sessions are saved so you can pick up where you left off across devices, and your results count toward the leaderboard." },
+  { q: 'What is Empyrean exactly?',
+    a: "It's a price action trading community I started because I wanted a better way to practice reading charts myself. The trainer is the practice tool — it forces you to commit a directional call before each bar reveals, which is what creates a real feedback signal. The Discord, blog, and webinars are the community layer on top of that." },
+  { q: 'Is the trainer free?',
+    a: "Yes, completely. You don't need an account to use it. Creating one saves your session progress so you can pick up where you left off, and it'll count your results toward the leaderboard when that goes live." },
   { q: 'How is this different from paper trading?',
-    a: "Paper trading in real time gives you roughly one bar per trading day on a daily chart. That's one decision. Here you get 200-plus per session. The bigger difference is that you have to commit your call before seeing the outcome — real paper trading lets you stay vague about what you expected, which means you never really get a feedback signal. Your brain just fills in the story after the fact." },
+    a: "Paper trading in real time gives you one bar per trading day. Here you get 200-plus decisions per session. The bigger difference is that you have to commit your call before seeing the outcome — paper trading lets you stay vague about what you expected, which means you never really get a feedback signal. Your brain fills in the story after the fact." },
+  { q: 'What will the Discord be like?',
+    a: "Chart discussion, session reviews, talking through price action concepts as we're learning them. Not signals, not course content. More like a small group of people doing the same work and comparing notes. It's opening soon — if you want to be notified, start an account so we have a way to reach you." },
+  { q: 'What are the webinars?',
+    a: "Live sessions where we walk through real chart structure, common setups, and how to review your own reading. Not scripted presentations — more like working through things together in real time. These are in planning and will be announced via the community." },
   { q: 'What is blind mode?',
-    a: "Blind mode hides the ticker symbol. It sounds small but it makes a real difference — if you know you're looking at NVDA in late 2023, you're going to read that chart differently than if you just see an unlabelled series. It forces you to work with what's actually in front of you." },
-  { q: 'What does noise injection do?',
-    a: "It adds tiny random adjustments to each bar's OHLC values. The chart still behaves like the original dataset but looks slightly different every time. Mainly useful if you've been through a dataset before and don't want to accidentally remember specific sequences." },
-  { q: 'Can I review my trades after a session?',
-    a: 'Yes. The session summary lists every trade you mapped with the entry, TP, SL, exit price, R:R, and outcome. You can click into any trade and it takes you back to the bar where you entered — then you step forward from there and watch how it actually played out.' },
+    a: "Blind mode hides the ticker symbol. If you know you're looking at NVDA in late 2023, you're going to read that chart differently than if you just see an unlabelled series. It forces you to work with what's actually in front of you." },
   { q: 'How will the leaderboard work?',
-    a: "We're ranking by weekly directional accuracy, but only counting sessions where you made at least 30 calls. One lucky session shouldn't be enough to top the board. The rankings reset every Monday at midnight UTC." },
+    a: "Weekly directional accuracy, counting only sessions where you made at least 30 calls. One lucky session shouldn't be enough to top the board. The rankings will reset every Monday at midnight UTC." },
 ] as const;
 
 // ─── Page ──────────────────────────────────────────────────────────────────
@@ -165,7 +167,7 @@ export default function LandingPage() {
             </span>
           </a>
           <div style={{ display: 'flex', alignItems: 'center', gap: 28 }}>
-            {[['#method','Method'],['#datasets','Datasets'],['#blog','Blog'],['#faq','FAQ'],['/blog/','All articles']].map(([h,l]) => (
+            {[['#community','Community'],['#trainer','Trainer'],['#blog','Writing'],['/blog/','All articles'],['#faq','FAQ']].map(([h,l]) => (
               <a key={h} href={h} style={{ fontSize: 12, color: C.muted, textDecoration: 'none' }}>
                 {l}
               </a>
@@ -199,7 +201,7 @@ export default function LandingPage() {
               letterSpacing: '0.18em', textTransform: 'uppercase',
               color: C.faint, marginBottom: 20,
             }}>
-              Empyrean · Price Action Training
+              Empyrean · Price Action Trading Community
             </div>
 
             <h1 style={{
@@ -208,13 +210,14 @@ export default function LandingPage() {
               fontWeight: 400, letterSpacing: '-0.02em', lineHeight: 1.12,
               color: C.text, marginBottom: 20,
             }}>
-              Most chart practice builds hindsight, not skill.
+              A community for traders who want to actually get better at reading price.
             </h1>
 
             <p style={{ fontSize: 15, lineHeight: 1.8, color: C.muted, marginBottom: 32 }}>
-              The problem is you never have to commit before the outcome is visible.
-              This trainer changes that — every call is locked before the bar reveals,
-              and your accuracy is tracked across 200-plus decisions per session.
+              Empyrean started as a personal practice project and turned into something
+              more — a place to train seriously, compare notes, and work through the
+              parts of price action that take time to understand. The trainer is the
+              practice ground. Discord is where the conversation happens.
             </p>
 
             <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 32 }}>
@@ -224,19 +227,19 @@ export default function LandingPage() {
                 background: C.maroon, color: '#F5F0E8',
                 borderRadius: 5, padding: '11px 24px', textDecoration: 'none',
               }}>
-                Start a session
+                Open the trainer
                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
                   <path d="M1.5 6h9M6.5 1.5L11 6l-4.5 4.5" stroke="currentColor"
                         strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </a>
-              <a href="#method" style={{
+              <a href="#community" style={{
                 fontSize: 13, color: C.muted, textDecoration: 'none',
                 display: 'inline-flex', alignItems: 'center',
                 border: `1px solid ${C.glassBorder}`,
                 borderRadius: 5, padding: '10px 18px',
               }}>
-                How it works
+                About the community
               </a>
             </div>
 
@@ -278,8 +281,8 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* ── METHOD ───────────────────────────────────────────────────── */}
-        <section id="method" style={{
+        {/* ── WHAT EMPYREAN IS ─────────────────────────────────────────── */}
+        <section id="community" style={{
           padding: `120px ${PX}`,
           display: 'flex', justifyContent: 'flex-end',
         }}>
@@ -289,19 +292,102 @@ export default function LandingPage() {
               letterSpacing: '0.18em', textTransform: 'uppercase',
               color: C.faint, marginBottom: 32,
             }}>
-              How a session works
+              What Empyrean is
             </p>
 
-            {/* Opening statement */}
+            <p style={{
+              fontFamily: SERIF, fontSize: 'clamp(1rem, 2vw, 1.35rem)',
+              fontWeight: 400, lineHeight: 1.6, color: C.text,
+              marginBottom: 28,
+            }}>
+              Honestly, it started because I wanted a better way to practice reading
+              charts myself and I couldn't find a tool that forced the commitment
+              before the reveal. So I built one.
+            </p>
+            <p style={{ fontSize: 14, lineHeight: 1.8, color: C.muted, marginBottom: 28 }}>
+              It's grown into something I want to keep building on: a small community
+              of people who take price action seriously, share what they're learning,
+              and are honest about how hard it is to actually get good at this. Not
+              a course, not a signals group. Just people doing the reps.
+            </p>
+            <p style={{ fontSize: 14, lineHeight: 1.8, color: C.muted, marginBottom: 40 }}>
+              Right now that means the trainer, this site, some writing, and a Discord
+              where a handful of us compare sessions and talk through setups. A weekly
+              leaderboard and live webinars are coming. The pace is deliberate.
+            </p>
+
+            {/* What's here / what's coming */}
+            <div style={{
+              display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 1,
+              background: C.glassBorder,
+              border: `1px solid ${C.glassBorder}`,
+              borderRadius: 6, overflow: 'hidden',
+            }}>
+              {[
+                { label: 'Available now', items: ['Price action trainer', 'Session tracking', '500+ datasets', 'Blog & guides'] },
+                { label: 'Coming soon',   items: ['Discord community', 'Weekly leaderboard', 'Live webinars', 'Member sessions'] },
+              ].map(({ label, items }) => (
+                <div key={label} style={{ padding: '20px 20px', background: 'rgba(245,240,232,0.92)' }}>
+                  <p style={{
+                    fontFamily: MONO, fontSize: 9, fontWeight: 600,
+                    textTransform: 'uppercase', letterSpacing: '0.1em',
+                    color: C.faint, marginBottom: 14,
+                  }}>
+                    {label}
+                  </p>
+                  {items.map(item => (
+                    <p key={item} style={{ fontSize: 13, color: C.muted, lineHeight: 1.6, marginBottom: 6 }}>
+                      {item}
+                    </p>
+                  ))}
+                </div>
+              ))}
+            </div>
+
+            <div style={{ marginTop: 32, display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+              <a href="/app/" style={{
+                display: 'inline-flex', alignItems: 'center', gap: 8,
+                fontSize: 13, fontWeight: 600,
+                background: C.maroon, color: '#F5F0E8',
+                borderRadius: 5, padding: '10px 20px', textDecoration: 'none',
+              }}>
+                Start training
+              </a>
+              <a href="#faq" style={{
+                fontSize: 13, color: C.muted, textDecoration: 'none',
+                display: 'inline-flex', alignItems: 'center',
+                border: `1px solid ${C.glassBorder}`,
+                borderRadius: 5, padding: '9px 16px',
+              }}>
+                More questions
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* ── THE TRAINER ───────────────────────────────────────────────── */}
+        <section id="trainer" style={{
+          padding: `120px ${PX}`,
+          display: 'flex', justifyContent: 'flex-start',
+        }}>
+          <div style={{ ...panel({ padding: '48px 48px', maxWidth: 600, width: '100%' }) }}>
+            <p style={{
+              fontFamily: MONO, fontSize: 9, fontWeight: 600,
+              letterSpacing: '0.18em', textTransform: 'uppercase',
+              color: C.faint, marginBottom: 32,
+            }}>
+              The trainer — how a session works
+            </p>
+
             <p style={{
               fontFamily: SERIF, fontSize: 'clamp(1rem, 2vw, 1.35rem)',
               fontWeight: 400, lineHeight: 1.6, color: C.text,
               marginBottom: 40,
             }}>
-              Watching charts feels like practice because it's time-consuming and it requires
-              attention. But you can rationalise any move in hindsight without ever
-              having predicted it — there's no feedback signal unless you're forced to commit
-              first. That's what this does.
+              Watching charts feels like practice because it takes time and attention.
+              But you can rationalise any move in hindsight without ever having
+              predicted it — there's no feedback unless you commit first.
+              That's what this does.
             </p>
 
             <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -392,7 +478,7 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* ── LEADERBOARD EMPTY STATE ───────────────────────────────────── */}
+        {/* ── COMMUNITY — Discord, leaderboard, webinars ───────────────── */}
         <section style={{
           padding: `80px ${PX}`,
           display: 'flex', justifyContent: 'center',
@@ -403,19 +489,73 @@ export default function LandingPage() {
               letterSpacing: '0.18em', textTransform: 'uppercase',
               color: C.faint, marginBottom: 24,
             }}>
-              Community rankings
+              Community
             </p>
             <p style={{
               fontFamily: SERIF, fontSize: 'clamp(1rem, 2vw, 1.3rem)',
-              lineHeight: 1.55, color: C.text, marginBottom: 40,
+              lineHeight: 1.55, color: C.text, marginBottom: 36,
               fontWeight: 400,
             }}>
-              We're adding a weekly leaderboard ranked by directional accuracy.
-              Only sessions with 30 or more calls count — so one lucky run
-              doesn't put you at the top.
+              The Discord is where we talk through what we're seeing on charts,
+              share session results, and flag setups worth looking at. It's early
+              days — which is actually a good time to be in.
             </p>
 
-            {/* Mock table headers */}
+            {/* Three community pillars */}
+            <div style={{
+              display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))',
+              gap: 1, background: C.glassBorder,
+              border: `1px solid ${C.glassBorder}`,
+              borderRadius: 6, overflow: 'hidden', marginBottom: 36,
+            }}>
+              {[
+                {
+                  icon: '💬',
+                  label: 'Discord',
+                  status: 'Opening soon',
+                  desc: 'Chart discussion, session reviews, and price action talk with people doing the same work.',
+                },
+                {
+                  icon: '📊',
+                  label: 'Leaderboard',
+                  status: 'Coming soon',
+                  desc: 'Weekly rankings by directional accuracy. 30-call minimum so one lucky session doesn\'t count.',
+                },
+                {
+                  icon: '🎙',
+                  label: 'Webinars',
+                  status: 'Coming soon',
+                  desc: 'Live sessions walking through real chart structure, common setups, and how to review your own reading.',
+                },
+              ].map(({ icon, label, status, desc }) => (
+                <div key={label} style={{ padding: '22px 18px', background: 'rgba(245,240,232,0.92)' }}>
+                  <div style={{ fontSize: 20, marginBottom: 10 }}>{icon}</div>
+                  <p style={{
+                    fontFamily: MONO, fontSize: 11, fontWeight: 600,
+                    color: C.text, marginBottom: 4,
+                  }}>
+                    {label}
+                  </p>
+                  <p style={{
+                    fontFamily: MONO, fontSize: 9, fontWeight: 600,
+                    textTransform: 'uppercase', letterSpacing: '0.1em',
+                    color: C.maroon, marginBottom: 10,
+                  }}>
+                    {status}
+                  </p>
+                  <p style={{ fontSize: 12, lineHeight: 1.65, color: C.muted }}>{desc}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* Leaderboard preview — empty state */}
+            <p style={{
+              fontFamily: MONO, fontSize: 9, fontWeight: 600,
+              textTransform: 'uppercase', letterSpacing: '0.1em',
+              color: C.faint, marginBottom: 10,
+            }}>
+              Weekly rankings — placeholder
+            </p>
             <div style={{
               display: 'grid',
               gridTemplateColumns: '40px 1fr 80px 64px 64px 72px',
@@ -424,14 +564,12 @@ export default function LandingPage() {
               borderBottom: `1px solid ${C.glassBorder}`,
               fontFamily: MONO, fontSize: 9, fontWeight: 600,
               textTransform: 'uppercase', letterSpacing: '0.09em',
-              color: C.faint, marginBottom: 0,
+              color: C.faint,
             }}>
               {['#','Trader','Accuracy','Sessions','Streak','R:R'].map(h => (
                 <span key={h}>{h}</span>
               ))}
             </div>
-
-            {/* Ghost placeholder rows */}
             {[1,2,3].map((n, i) => (
               <div key={n} style={{
                 display: 'grid',
@@ -439,7 +577,7 @@ export default function LandingPage() {
                 padding: '13px 0',
                 borderBottom: `1px solid ${C.glassBorder}`,
                 alignItems: 'center',
-                opacity: 0.22 - i * 0.05,
+                opacity: 0.18 - i * 0.04,
               }}>
                 <span style={{ fontFamily: MONO, fontSize: 12, color: C.faint }}>{n}</span>
                 <span style={{ height: 10, width: 100 - i * 20, background: C.faint, borderRadius: 2, display: 'block' }} />
@@ -450,17 +588,17 @@ export default function LandingPage() {
               </div>
             ))}
 
-            <div style={{ marginTop: 36, display: 'flex', alignItems: 'center', gap: 20, flexWrap: 'wrap' }}>
+            <div style={{ marginTop: 32, display: 'flex', alignItems: 'center', gap: 20, flexWrap: 'wrap' }}>
               <a href="/app/" style={{
                 display: 'inline-flex', alignItems: 'center', gap: 8,
                 fontSize: 13, fontWeight: 600,
                 background: C.maroon, color: '#F5F0E8',
                 borderRadius: 5, padding: '10px 20px', textDecoration: 'none',
               }}>
-                Train now — be first on the board
+                Start training
               </a>
               <span style={{ fontFamily: MONO, fontSize: 10, color: C.faint }}>
-                Resets Monday UTC · 30+ calls to qualify
+                Leaderboard resets Monday UTC · 30+ calls to qualify
               </span>
             </div>
           </div>
@@ -639,7 +777,6 @@ export default function LandingPage() {
         </section>
 
         {/* ── BOTTOM CTA ───────────────────────────────────────────────── */}
-        {/* Takes up a full viewport height so the chart is very visible around the CTA */}
         <section style={{
           minHeight: '90vh',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -653,27 +790,38 @@ export default function LandingPage() {
               fontWeight: 400, letterSpacing: '-0.02em', lineHeight: 1.1,
               color: C.text, marginBottom: 20,
             }}>
-              Pick a dataset and start reading.
+              Come learn price action with us.
             </h2>
             <p style={{
               fontSize: 15, lineHeight: 1.75, color: C.muted,
               marginBottom: 36,
             }}>
-              No download, no sign-up needed. Your first session will tell you something
-              real about how you read price — probably something you hadn't noticed before.
+              The trainer is free and needs no account. If you want to be part of the
+              community — Discord, leaderboard, webinars when they launch — create an
+              account so you're in from the start.
             </p>
-            <a href="/app/" style={{
-              display: 'inline-flex', alignItems: 'center', gap: 10,
-              fontSize: 15, fontWeight: 600,
-              background: C.maroon, color: '#F5F0E8',
-              borderRadius: 6, padding: '14px 36px', textDecoration: 'none',
-            }}>
-              Open the trainer
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                <path d="M2 7h10M7.5 2L13 7l-5.5 5" stroke="currentColor"
-                      strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </a>
+            <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
+              <a href="/app/" style={{
+                display: 'inline-flex', alignItems: 'center', gap: 10,
+                fontSize: 15, fontWeight: 600,
+                background: C.maroon, color: '#F5F0E8',
+                borderRadius: 6, padding: '14px 32px', textDecoration: 'none',
+              }}>
+                Open the trainer
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <path d="M2 7h10M7.5 2L13 7l-5.5 5" stroke="currentColor"
+                        strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </a>
+              <a href="#community" style={{
+                display: 'inline-flex', alignItems: 'center',
+                fontSize: 13, color: C.muted,
+                border: `1px solid ${C.glassBorder}`,
+                borderRadius: 6, padding: '13px 24px', textDecoration: 'none',
+              }}>
+                About the community
+              </a>
+            </div>
           </div>
         </section>
 
